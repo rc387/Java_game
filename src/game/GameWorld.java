@@ -4,7 +4,7 @@ import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 import java.awt.*;
 import javax.swing.JFrame;
-
+import java.io.IOException;
 public class GameWorld {
     public GameWorld() {
         World world = new World();
