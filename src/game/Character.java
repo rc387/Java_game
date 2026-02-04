@@ -6,7 +6,7 @@ public class Character extends DynamicBody {
     private static final Shape CharacterShape = new BoxShape(1,2);
 
     private static final BodyImage image =
-            new BodyImage("data/student.png", 4);
+            new BodyImage("data/Fighter/Idle(1).png", 4);
 
 
 
@@ -18,6 +18,11 @@ public class Character extends DynamicBody {
 
 
     }
-
+    public void setGravityScale(float g) {
+        this.setGravityScale(g);
+    }
+    public float getGravityScale() {
+        return this.getGravityScale();
+    }
 
 }

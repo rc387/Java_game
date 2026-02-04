@@ -16,6 +16,9 @@ public class GameWorld extends World {
 
         UserView view = new UserView(this, 640, 565);
 
+        Character player = new Character(this);
+        player.setPosition(new Vec2(-15, -10.5f));
+
         Shape platformShape = new BoxShape(3, 5);
         StaticBody platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(-10.5f, -13.25f));
@@ -32,8 +35,6 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(38, -1.5f));
         platform.addImage(new BodyImage("data/platform.png", 9));
 
-        Character player = new Character(this);
-        player.setPosition(new Vec2(0, 5));
 
         platformShape = new BoxShape(1, 0.5f);
         platform = new StaticBody(this, platformShape);
@@ -41,7 +42,7 @@ public class GameWorld extends World {
         platform.addImage(new BodyImage("data/background.jpg", 35));
 
 
-
+        setGravity(0f);
 
         final JFrame frame = new JFrame("Game world");
         frame.add(view);
