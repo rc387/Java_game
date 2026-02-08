@@ -15,7 +15,7 @@ import city.cs.engine.BodyImage;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 import javax.swing.Timer;
 public class GameWorld extends World {
     public GameWorld() {
