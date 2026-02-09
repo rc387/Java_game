@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import city.cs.engine.DynamicBody;
 import city.cs.engine.AttachedImage;
 import city.cs.engine.BodyImage;
@@ -19,32 +18,33 @@ import java.util.Scanner;
 import javax.swing.Timer;
 public class GameWorld extends World {
     public GameWorld() {
-
+        DebugViewer v = new DebugViewer(this, 640, 565);
         UserView view = new UserView(this, 640, 565);
         Character player = new Character(this);
-        player.setPosition(new Vec2(-15, -7f));
+        player.setPosition(new Vec2(-7.25f, 2f));
         player.setLinearVelocity(new Vec2(0, 0));
 
-        Shape platformShape = new BoxShape(7.5f, 1);
+        Shape platformShape = new BoxShape(5.75f, 1);
         StaticBody platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(-10.5f, -13.5f));
+        platform.setPosition(new Vec2(-2.75f, -4.5f));
         platform.addImage(new BodyImage("data/platform(1).png", 11.5f));
 
         platformShape = new BoxShape(7.5f, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(20, -13.25f));
+        platform.setPosition(new Vec2(20, -14f));
         platform.addImage(new BodyImage("data/platform(1).png", 11.5f));
 
         platformShape = new BoxShape(6, 0.5f);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(38, -1.5f));
+        platform.setPosition(new Vec2(38, -10.5f));
         platform.addImage(new BodyImage("data/platform(1).png", 9));
 
 
         platformShape = new BoxShape(1, 0.5f);
         platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(0, -3f));
-        platform.addImage(new BodyImage("data/background.jpg", 35));
+        platform.addImage(new BodyImage("data/newBackground.jpg", 40f));
+
 
         setGravity(9.8f);
 
@@ -57,6 +57,7 @@ public class GameWorld extends World {
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
+        view.setBackground(Color.black);
         final int[] frameCount = {0};
         final Timer[] runTimer = {null};
         BodyImage[] runFrames = new BodyImage[]{
@@ -107,7 +108,6 @@ public class GameWorld extends World {
                 player.removeAllImages();
                 player.addImage( new BodyImage("data/Fighter/Jump(3.2).png", 5.5f));
                }
-
 
             else if (e.getKeyCode() == KeyEvent.VK_S) {
                 player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
@@ -182,6 +182,7 @@ public class GameWorld extends World {
                 else if (moveLeft[0]) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
+                view.setCentre(player.getPosition());
             }
 
             @Override
