@@ -20,14 +20,10 @@ import javax.swing.Timer;
 public class GameWorld extends World {
     public GameWorld() {
 
-
         UserView view = new UserView(this, 640, 565);
         Character player = new Character(this);
         player.setPosition(new Vec2(-15, -7f));
         player.setLinearVelocity(new Vec2(0, 0));
-
-
-
 
         Shape platformShape = new BoxShape(7.5f, 1);
         StaticBody platform = new StaticBody(this, platformShape);
@@ -74,8 +70,19 @@ public class GameWorld extends World {
                 new BodyImage("data/Fighter/Run(8).png", 5.5f),
         };
 
-        final boolean[] moveRight = {false};
+        BodyImage[] leftFrames = new BodyImage[]{
+                new BodyImage("data/Fighter/RunLeft(1).png", 5.5f),
+                new BodyImage("data/Fighter/RunLeft(2).png", 5.5f),
+                new BodyImage("data/Fighter/RunLeft(3).png", 5.5f),
+                new BodyImage("data/Fighter/RunLeft(4).png", 5.5f),
+                new BodyImage("data/Fighter/RunLeft(5).png", 5.5f),
+                new BodyImage("data/Fighter/RunLeft(6).png", 5.5f),
+                new BodyImage("data/Fighter/RunLeft(7).png", 5.5f),
+                new BodyImage("data/Fighter/RunLeft(8).png", 5.5f),
+        };
 
+        final boolean[] moveRight = {false};
+        final boolean[] moveLeft = {false};
         final boolean[] canJump = { true };
         player.addCollisionListener(new PlayerCollision(canJump));
 
@@ -87,7 +94,7 @@ public class GameWorld extends World {
                 moveRight[0] = true;
                 if (runTimer[0] == null) { // only start timer if not already running
                     frameCount[0] = 0;
-                    runTimer[0] = new Timer(100, ev -> {
+                    runTimer[0] = new Timer(75, ev -> {
                         player.removeAllImages();
                         player.addImage(runFrames[frameCount[0] % runFrames.length]);
                         frameCount[0] = (frameCount[0] + 1) % runFrames.length;
@@ -112,6 +119,18 @@ public class GameWorld extends World {
                 player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                 player.removeAllImages();
                 player.addImage(new BodyImage("data/Fighter/Attack_3(2).png", 5.5f));
+            }
+            else if (e.getKeyCode() == KeyEvent.VK_A) {
+                moveLeft[0] = true;
+                if (runTimer[0] == null) {
+                    frameCount[0] = 0;
+                    runTimer[0] = new Timer(75, ev -> {
+                        player.removeAllImages();
+                        player.addImage(leftFrames[frameCount[0] % leftFrames.length]);
+                        frameCount[0] = (frameCount[0] + 1) % leftFrames.length;
+                    });
+                    runTimer[0].start();
+                }
             }
             }
 
@@ -139,6 +158,16 @@ public class GameWorld extends World {
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                 }
+                else if (e.getKeyCode() == KeyEvent.VK_A) {
+                    moveLeft[0] = false;
+                    if (runTimer[0] != null) {
+                        runTimer[0].stop();
+                        runTimer[0] = null;
+                    }
+                    player.removeAllImages();
+                    player.addImage(new BodyImage("data/Fighter/Idle(1).png", 5.5f));
+                    player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));
+                }
             }
 
         });
@@ -148,9 +177,10 @@ public class GameWorld extends World {
             @Override
             public void preStep(StepEvent e) {
                 if (moveRight[0]) {
-                    player.setLinearVelocity(
-                            new Vec2(10, player.getLinearVelocity().y)
-                    );
+                    player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
+                }
+                else if (moveLeft[0]) {
+                    player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
             }
 
