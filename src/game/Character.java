@@ -12,14 +12,13 @@ public class Character extends DynamicBody {
     private static final Shape CharacterShape = new BoxShape(1,2.5f);
     private static final BodyImage image = new BodyImage("data/Fighter/Idle(1).png", 5.5f);
 
-
     public Character(World world) {
         super(world, CharacterShape);
         addImage(image);
         setFixedRotation(true);
+        setAngle(0f);
     }
 
-    private void setFixedRotation(boolean b) {
-    }
+    private void setFixedRotation(boolean b) {}
 }
 

@@ -14,41 +14,57 @@ import city.cs.engine.BodyImage;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import java.util.Scanner;
-
 import javax.swing.Timer;
+
 public class GameWorld extends World {
     public GameWorld() {
-        DebugViewer v = new DebugViewer(this, 640, 565);
-        UserView view = new UserView(this, 640, 565);
+        GameWorldBackground view = new GameWorldBackground(this,640,565);
+
         Character player = new Character(this);
         player.setPosition(new Vec2(-7.25f, 2f));
         player.setLinearVelocity(new Vec2(0, 0));
+        player.setAngularVelocity(0f);
+        player.setAngle(0f);
 
-        Shape platformShape = new BoxShape(5.75f, 1);
+
+        Enemy npcGangsta = new Enemy(this, 44,69);
+        npcGangsta.setPosition(new Vec2(68f, -14f));
+        npcGangsta.setLinearVelocity(new Vec2(0, 0));
+        npcGangsta.setAngularVelocity(0f);
+        npcGangsta.setAngle(0f);
+
+        Shape platformShape = new BoxShape(7f, 1);
         StaticBody platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(-2.75f, -4.5f));
+
         platform.addImage(new BodyImage("data/platform(1).png", 11.5f));
 
-        platformShape = new BoxShape(7.5f, 1);
+        platformShape = new BoxShape(7f, 1);
+        platform = new StaticBody(this, platformShape);
+        platform.setPosition(new Vec2(20, -4f));
+        platform.addImage(new BodyImage("data/platform(1).png", 11.5f));
+
+        platformShape = new BoxShape(7f, 1);
         platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(20, -14f));
         platform.addImage(new BodyImage("data/platform(1).png", 11.5f));
 
-        platformShape = new BoxShape(6, 0.5f);
+        platformShape = new BoxShape(5.5f, 0.5f);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(38, -10.5f));
+        platform.setPosition(new Vec2(35, -10.5f));
         platform.addImage(new BodyImage("data/platform(1).png", 9));
 
-
-        platformShape = new BoxShape(1, 0.5f);
+        platformShape = new BoxShape(7.5f, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(0, -3f));
-        platform.addImage(new BodyImage("data/newBackground.jpg", 40f));
+        platform.setPosition(new Vec2(50, -14f));
+        platform.addImage(new BodyImage("data/platform(1).png", 11.5f));
 
+        platformShape = new BoxShape(7.5f, 1);
+        platform = new StaticBody(this, platformShape);
+        platform.setPosition(new Vec2(63.25f, -14f));
+        platform.addImage(new BodyImage("data/platform(2).png", 11.5f));
 
         setGravity(9.8f);
-
-
 
         final JFrame frame = new JFrame("Game world");
         frame.add(view);
@@ -57,8 +73,8 @@ public class GameWorld extends World {
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
-        view.setBackground(Color.black);
-        final int[] frameCount = {0};
+        frame.setBackground(Color.BLACK);
+        final int[] frameCounter = {0};
         final Timer[] runTimer = {null};
         BodyImage[] runFrames = new BodyImage[]{
                 new BodyImage("data/Fighter/Run(1).png", 5.5f),
@@ -90,18 +106,19 @@ public class GameWorld extends World {
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                player.setAngularVelocity(0f);
             if (e.getKeyCode() == KeyEvent.VK_D) {
                 moveRight[0] = true;
-                if (runTimer[0] == null) { // only start timer if not already running
-                    frameCount[0] = 0;
-                    runTimer[0] = new Timer(75, ev -> {
+                if (runTimer[0] == null) {
+                    frameCounter[0] = 0;
+                    runTimer[0] = new Timer(75, _ -> {
                         player.removeAllImages();
-                        player.addImage(runFrames[frameCount[0] % runFrames.length]);
-                        frameCount[0] = (frameCount[0] + 1) % runFrames.length;
+                        player.addImage(runFrames[frameCounter[0] % runFrames.length]);
+                        frameCounter[0] = (frameCounter[0] + 1) % runFrames.length;
+                        System.out.println(player.getPosition());
                     });
                     runTimer[0].start();
                 } }
+
             else if (e.getKeyCode() == KeyEvent.VK_W && canJump[0]) {
                 canJump[0] = false;
                 player.applyImpulse(new Vec2(0f, 90f));
@@ -120,20 +137,20 @@ public class GameWorld extends World {
                 player.removeAllImages();
                 player.addImage(new BodyImage("data/Fighter/Attack_3(2).png", 5.5f));
             }
+
             else if (e.getKeyCode() == KeyEvent.VK_A) {
                 moveLeft[0] = true;
                 if (runTimer[0] == null) {
-                    frameCount[0] = 0;
+                    frameCounter[0] = 0;
                     runTimer[0] = new Timer(75, ev -> {
                         player.removeAllImages();
-                        player.addImage(leftFrames[frameCount[0] % leftFrames.length]);
-                        frameCount[0] = (frameCount[0] + 1) % leftFrames.length;
+                        player.addImage(leftFrames[frameCounter[0] % leftFrames.length]);
+                        frameCounter[0] = (frameCounter[0] + 1) % leftFrames.length;
                     });
                     runTimer[0].start();
                 }
             }
             }
-
 
             public void keyReleased(KeyEvent e) {
                 if  (e.getKeyCode() == KeyEvent.VK_D) {
@@ -145,19 +162,22 @@ public class GameWorld extends World {
                     player.removeAllImages();
                     player.addImage(new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));}
-                else if (e.getKeyCode() == KeyEvent.VK_W) {
 
+                else if (e.getKeyCode() == KeyEvent.VK_W) {
                     player.removeAllImages();
                     player.addImage(new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                 }
+
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                 }
+
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                 }
+
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
                     moveLeft[0] = false;
                     if (runTimer[0] != null) {
@@ -165,15 +185,13 @@ public class GameWorld extends World {
                         runTimer[0] = null;
                     }
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Fighter/Idle(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Fighter/LeftIdle(1).png", 5.5f));
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));
                 }
             }
-
         });
 
         this.addStepListener(new StepListener() {
-
             @Override
             public void preStep(StepEvent e) {
                 if (moveRight[0]) {
@@ -182,7 +200,12 @@ public class GameWorld extends World {
                 else if (moveLeft[0]) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
+                npcGangsta.update();
                 view.setCentre(player.getPosition());
+                player.setAngle(0f);
+                player.setAngularVelocity(0f);
+                npcGangsta.setAngle(0f);
+                npcGangsta.setAngularVelocity(0f);
             }
 
             @Override
@@ -190,14 +213,12 @@ public class GameWorld extends World {
         });
 
         this.start();
-
     }
-    public static void main(String[] args) {
 
+    private void setSimulationSettings(SimulationSettings simulationSettings) {
+    }
+
+    static void main(String[] args) {
         new GameWorld();
-
     }
-
-
-
 }

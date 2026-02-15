@@ -11,14 +11,10 @@ public PlayerCollision(boolean[] player) {
     this.canJump = player;
 }
 
-
-
     @Override
     public void collide(CollisionEvent e) {
         if (e.getOtherBody() instanceof StaticBody){
-
             canJump[0] = true;
-
         }
     }
 }
