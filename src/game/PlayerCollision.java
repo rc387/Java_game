@@ -5,16 +5,30 @@ import city.cs.engine.CollisionListener;
 import city.cs.engine.StaticBody;
 
 public class PlayerCollision implements CollisionListener {
-    private boolean[] canJump;
+    private boolean canJump = false;
+    private boolean canDamage = false;
 
-public PlayerCollision(boolean[] player) {
-    this.canJump = player;
-}
+    public boolean canJump() {
+        return canJump;
+    }
+    public void setCanJump(boolean value) {
+        canJump = value;
+    }
+
+    public boolean canDamage() {
+        return canDamage;
+    }
+    public void setCanDamage(boolean value) { canDamage = value; }
 
     @Override
     public void collide(CollisionEvent e) {
-        if (e.getOtherBody() instanceof StaticBody){
-            canJump[0] = true;
+        if (e.getOtherBody() instanceof StaticBody) {
+            canJump = true;
+        }
+        if (e.getOtherBody() instanceof Enemy enemy && canDamage) {
+            enemy.loseLife();
+            canDamage = false;
+            enemy.destroy();
         }
     }
 }

@@ -1,9 +1,6 @@
     package game;
 
-    import city.cs.engine.BodyImage;
-    import city.cs.engine.BoxShape;
-    import city.cs.engine.Shape;
-    import city.cs.engine.World;
+    import city.cs.engine.*;
 
     import org.jbox2d.common.Vec2;
     import javax.swing.Timer;
@@ -15,6 +12,7 @@
         private int frameCounter = 0;
         private final float leftBound;
         private final float rightBound;
+        private int lives = 1 ;
 
         public Enemy(World world, float leftBound, float rightBound) {
             super(world);
@@ -27,6 +25,17 @@
 
 
         }
+
+
+        public int getlives() {
+            return lives;
+        }
+
+        public void loseLife(){
+            lives--;
+        }
+
+
 
         BodyImage[] walkFrames = new BodyImage[]{
                 new BodyImage("data/Gangsters_2/Walk(1).png", 5.5f),
@@ -55,6 +64,7 @@
         private int animationTick = 0;
 
         public void update() {
+
             float x = getPosition().x;
 
 
@@ -79,7 +89,6 @@
             }
             frameCounter = (frameCounter + 1) % walkFrames.length;
         }
-
 
         private void setFixedRotation(boolean b) {}
 

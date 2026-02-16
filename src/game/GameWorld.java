@@ -15,6 +15,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import java.util.Scanner;
 import javax.swing.Timer;
+import city.cs.engine.Fixture;
 
 public class GameWorld extends World {
     public GameWorld() {
@@ -51,7 +52,7 @@ public class GameWorld extends World {
 
         platformShape = new BoxShape(5.5f, 0.5f);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(35, -10.5f));
+        platform.setPosition(new Vec2(32.5f, -10.5f));
         platform.addImage(new BodyImage("data/platform(1).png", 9));
 
         platformShape = new BoxShape(7.5f, 1);
@@ -98,11 +99,15 @@ public class GameWorld extends World {
                 new BodyImage("data/Fighter/RunLeft(8).png", 5.5f),
         };
 
+
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
         final boolean[] canJump = { true };
-        player.addCollisionListener(new PlayerCollision(canJump));
-
+        final boolean[] canDamage = { false };
+        final int[] enemy_lives = {1};
+        int character_lives = 3;
+        PlayerCollision listener = new PlayerCollision();
+        player.addCollisionListener(listener);
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -114,13 +119,12 @@ public class GameWorld extends World {
                         player.removeAllImages();
                         player.addImage(runFrames[frameCounter[0] % runFrames.length]);
                         frameCounter[0] = (frameCounter[0] + 1) % runFrames.length;
-                        System.out.println(player.getPosition());
                     });
                     runTimer[0].start();
                 } }
 
-            else if (e.getKeyCode() == KeyEvent.VK_W && canJump[0]) {
-                canJump[0] = false;
+            else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
+                listener.setCanJump(false);
                 player.applyImpulse(new Vec2(0f, 90f));
                 player.removeAllImages();
                 player.addImage( new BodyImage("data/Fighter/Jump(3.2).png", 5.5f));
@@ -133,6 +137,7 @@ public class GameWorld extends World {
                 }
 
             else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                listener.setCanDamage(true);
                 player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                 player.removeAllImages();
                 player.addImage(new BodyImage("data/Fighter/Attack_3(2).png", 5.5f));
@@ -174,6 +179,7 @@ public class GameWorld extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    canDamage[0] = false;
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                 }
@@ -190,6 +196,7 @@ public class GameWorld extends World {
                 }
             }
         });
+
 
         this.addStepListener(new StepListener() {
             @Override
@@ -213,9 +220,6 @@ public class GameWorld extends World {
         });
 
         this.start();
-    }
-
-    private void setSimulationSettings(SimulationSettings simulationSettings) {
     }
 
     static void main(String[] args) {
