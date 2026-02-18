@@ -19,12 +19,14 @@ public class GameWorldBackground extends UserView {
                 RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR
         );
-        g.drawImage(
-            background,0,-30,getWidth(), getHeight(),null
-    );
+        g.drawImage(background,0,-30,getWidth(), getHeight(),null);
     }
     @Override
     public void setBackground(Color bgColor) {
         super.setBackground(Color.black);
+    }
+    @Override
+    protected void paintForeground(Graphics2D g) {
+        Character.hearts(g);
     }
 }

@@ -18,7 +18,7 @@
             super(world);
             this.leftBound = leftBound;
             this.rightBound = rightBound;
-
+            removeAllImages();
             addImage(image);
             setFixedRotation(true);
             setAngle(0f);
