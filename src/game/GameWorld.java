@@ -200,7 +200,12 @@ public class GameWorld extends World {
         platformShape = new BoxShape(12f, 1);
         platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(285f, -14f));
-        platform.addImage(new BodyImage("data/platform(2).png", 16f));
+        platform.addImage(new BodyImage("data/platform(2).png", 11.5f));
+
+        Flag flagimage = new Flag(this);
+        flagimage.setPosition(new Vec2(290f, -10f));
+        flagimage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
+
 
         setGravity(9.8f);
 
@@ -245,7 +250,7 @@ public class GameWorld extends World {
             @Override
             public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_D) {
-                moveRight[0] = true;
+                moveRight[0] = !(player.getPosition().x > 270);
                 if (runTimer[0] == null) {
                     frameCounter[0] = 0;
                     runTimer[0] = new Timer(75, _ -> {
@@ -257,6 +262,10 @@ public class GameWorld extends World {
                 } }
 
             else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
+                if(player.getPosition().x > 270){
+                    player.setLinearVelocity(new Vec2(0f, 0f));
+                    player.applyImpulse(new Vec2(0f, 0f));
+                }
                 listener.setCanJump(false);
                 player.applyImpulse(new Vec2(0f, 110f));
                 player.removeAllImages();
@@ -264,6 +273,9 @@ public class GameWorld extends World {
                }
 
             else if (e.getKeyCode() == KeyEvent.VK_S) {
+                if(player.getPosition().x > 270){
+                    player.setLinearVelocity(new Vec2(0f, 0f));
+                }
                 listener.setShield(true);
                 player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                 player.removeAllImages();
@@ -271,6 +283,9 @@ public class GameWorld extends World {
                 }
 
             else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                if(player.getPosition().x > 270){
+                    player.setLinearVelocity(new Vec2(0f, 0f));
+                }
                 listener.setCanDamage(true);
                 player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                 player.removeAllImages();
@@ -279,6 +294,9 @@ public class GameWorld extends World {
 
             else if (e.getKeyCode() == KeyEvent.VK_A) {
                 moveLeft[0] = true;
+                if(player.getPosition().x > 270){
+                    player.setLinearVelocity(new Vec2(0f, 0f));
+                }
                 if (runTimer[0] == null) {
                     frameCounter[0] = 0;
                     runTimer[0] = new Timer(75, ev -> {
@@ -336,10 +354,10 @@ public class GameWorld extends World {
         this.addStepListener(new StepListener() {
             @Override
             public void preStep(StepEvent e) {
-                if (moveRight[0]) {
+                if (moveRight[0] && !(player.getPosition().x >270)) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }
-                else if (moveLeft[0]) {
+                else if (moveLeft[0] && !(player.getPosition().x >270)) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
                 npcGangsta.update(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);

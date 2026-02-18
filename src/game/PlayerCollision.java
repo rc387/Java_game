@@ -11,6 +11,7 @@ public class PlayerCollision implements CollisionListener {
     private boolean canDie =  false;
     private boolean canTakeDamage = true;
     private Character player;
+    private boolean finish = false;
 
     public boolean canJump() {
         return canJump;
@@ -46,6 +47,14 @@ public class PlayerCollision implements CollisionListener {
 
     public void setCanTakeDamage(boolean value) {
         this.canTakeDamage = value;
+    }
+
+    public boolean isFinish() {
+        return finish;
+    }
+
+    public void setFinish(boolean value) {
+        this.finish = value;
     }
 
     @Override

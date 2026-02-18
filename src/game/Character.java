@@ -32,7 +32,7 @@ public class Character extends DynamicBody  {
     }
 
     public static void shieldLife(){
-        lives = lives +0;
+        lives = lives;
     }
 
     private void setFixedRotation(boolean b) {}
@@ -56,6 +56,7 @@ public class Character extends DynamicBody  {
         }
         frameCounter =  (frameCounter + 1) % DeadFrames.length;
     }
+
 
 }
 
