@@ -24,10 +24,10 @@ public class Character extends DynamicBody  {
         return lives;
     }
 
-    public static void loselife(Character player) {
+    public  void loselife() {
         lives--;
         if (lives <= 0) {
-            player.playerDeath();
+        playerDeath();
         }
     }
 
@@ -53,10 +53,11 @@ public class Character extends DynamicBody  {
         removeAllImages();
         if(lives == 0){
             addImage(DeadFrames[frameCounter % DeadFrames.length]);
+            frameCounter =  (frameCounter + 1) % DeadFrames.length;
+            destroy();
         }
-        frameCounter =  (frameCounter + 1) % DeadFrames.length;
-    }
 
+    }
 
 }
 

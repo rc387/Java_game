@@ -2,16 +2,37 @@ package game;
 
 import city.cs.engine.UserView;
 import city.cs.engine.World;
-
+import org.jbox2d.common.Vec2;
 import javax.swing.*;
 import java.awt.*;
 
 public class GameWorldBackground extends UserView {
-    private Image background;
+    private final Image background;
+    private  int timeRemaining = 90;
+    private Timer levelTimer;
+
+
     public GameWorldBackground(World w, int width, int height) {
         super(w, width, height);
         background = new ImageIcon("data/background(1).jpg").getImage();
+        levelTimer = new Timer(1000, e -> {
+            if (timeRemaining >= 0) {
+                timeRemaining--;
+            } else {
+                levelTimer.stop();
+                ((Timer)e.getSource()).stop();
+
+
+            }
+            repaint();
+        });
+        levelTimer.start();}
+
+
+    public int getTimeRemaining() {
+        return timeRemaining;
     }
+
 
 
     protected void paintBackground(Graphics2D g) {
@@ -28,5 +49,9 @@ public class GameWorldBackground extends UserView {
     @Override
     protected void paintForeground(Graphics2D g) {
         Character.hearts(g);
+        super.paintForeground(g);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("Time: " + getTimeRemaining(), 550, 30);
     }
 }

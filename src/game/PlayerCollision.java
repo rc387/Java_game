@@ -4,6 +4,8 @@ import city.cs.engine.CollisionEvent;
 import city.cs.engine.CollisionListener;
 import city.cs.engine.StaticBody;
 
+import javax.swing.*;
+
 public class PlayerCollision implements CollisionListener {
     private boolean canJump = false;
     private boolean canDamage = false;
@@ -12,6 +14,11 @@ public class PlayerCollision implements CollisionListener {
     private boolean canTakeDamage = true;
     private Character player;
     private boolean finish = false;
+    private Timer destroyTimer;
+
+    public PlayerCollision(Character player) {
+        this.player = player;
+    }
 
     public boolean canJump() {
         return canJump;
@@ -66,7 +73,7 @@ public class PlayerCollision implements CollisionListener {
             enemy.destroy();
             canDamage = false;
         } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage ) {
-            Character.loselife(player);
+            player.loselife();
             canTakeDamage = false;
 
             new java.util.Timer().schedule(
@@ -79,11 +86,16 @@ public class PlayerCollision implements CollisionListener {
         } else if (e.getOtherBody() instanceof Enemy && shield) {
             Character.shieldLife();
         } if (e.getOtherBody() instanceof DeathShape) {
-            Character.loselife(player);
-            Character.loselife(player);
-            Character.loselife(player);
+            player.loselife();
+            player.loselife();
+            player.loselife();
+            player.playerDeath();
+            destroyTimer = new Timer(1000, f -> {
+                player.destroy();
+            });
+            destroyTimer.start();}
+
         }
 
     }
-
-}
+    

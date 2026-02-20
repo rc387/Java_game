@@ -3,21 +3,18 @@ import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 import java.awt.*;
-import javax.swing.JFrame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import city.cs.engine.DynamicBody;
-import city.cs.engine.AttachedImage;
+
 import city.cs.engine.BodyImage;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import java.util.Scanner;
-import javax.swing.Timer;
-import city.cs.engine.Fixture;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameWorld extends World {
+    private  int timeRemaining = 90;
+    private Timer levelTimer;
+    private Timer destroyTimer;
     public GameWorld() {
         GameWorldBackground view = new GameWorldBackground(this,640,565);
 
@@ -26,7 +23,6 @@ public class GameWorld extends World {
         player.setLinearVelocity(new Vec2(0, 0));
         player.setAngularVelocity(0f);
         player.setAngle(0f);
-
 
         Enemy npcGangsta = new Enemy(this, 44,69);
         npcGangsta.setPosition(new Vec2(68f, -14f));
@@ -219,6 +215,7 @@ public class GameWorld extends World {
         frame.setBackground(Color.BLACK);
         final int[] frameCounter = {0};
         final Timer[] runTimer = {null};
+
         BodyImage[] runFrames = new BodyImage[]{
                 new BodyImage("data/Fighter/Run(1).png", 5.5f),
                 new BodyImage("data/Fighter/Run(2).png", 5.5f),
@@ -244,7 +241,7 @@ public class GameWorld extends World {
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
         final boolean[] canDamage = { false };
-        PlayerCollision listener = new PlayerCollision();
+        PlayerCollision listener = new PlayerCollision(player);
         player.addCollisionListener(listener);
         frame.addKeyListener(new KeyAdapter() {
             @Override
@@ -349,7 +346,24 @@ public class GameWorld extends World {
                 }
             }
         });
-
+        levelTimer = new Timer(1000, e -> {
+            if (timeRemaining >= 0) {
+                timeRemaining--;
+            } else {
+                levelTimer.stop();
+                ((Timer)e.getSource()).stop();
+                player.loselife();
+                player.loselife();
+                player.loselife();
+                player.playerDeath();
+                player.setLinearVelocity(new Vec2(0f,0f));
+                destroyTimer = new Timer(1000, f -> {
+                    player.destroy();
+                });destroyTimer.start();
+            }
+            view.repaint();
+        });
+        levelTimer.start();
 
         this.addStepListener(new StepListener() {
             @Override
