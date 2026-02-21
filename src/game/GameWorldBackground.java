@@ -1,8 +1,8 @@
 package game;
 
+import city.cs.engine.SoundClip;
 import city.cs.engine.UserView;
 import city.cs.engine.World;
-import org.jbox2d.common.Vec2;
 import javax.swing.*;
 import java.awt.*;
 
@@ -45,6 +45,7 @@ public class GameWorldBackground extends UserView {
     @Override
     public void setBackground(Color bgColor) {
         super.setBackground(Color.black);
+        Character.setSoundClip();
     }
     @Override
     protected void paintForeground(Graphics2D g) {

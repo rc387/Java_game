@@ -3,7 +3,7 @@
     import city.cs.engine.*;
 
     import org.jbox2d.common.Vec2;
-    import javax.swing.Timer;
+
 
     public class Enemy extends Character {
         private static final Shape CharacterShape = new BoxShape(1,2.5f);

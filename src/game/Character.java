@@ -12,6 +12,7 @@ public class Character extends DynamicBody  {
     private static final Image heart = new ImageIcon("data/PNG/Bronze/Bronze_11.png").getImage();
     private static int lives = 3;
     private int frameCounter = 0;
+    private static SoundClip soundClip;
 
     public Character(World world) {
         super(world, CharacterShape);
@@ -55,9 +56,22 @@ public class Character extends DynamicBody  {
             addImage(DeadFrames[frameCounter % DeadFrames.length]);
             frameCounter =  (frameCounter + 1) % DeadFrames.length;
             destroy();
+            soundClip.stop();
         }
 
     }
 
+    public SoundClip getSoundClip() {
+        return soundClip;
+    }
+
+    public static   void setSoundClip() {
+        try {
+            soundClip = new SoundClip("data/7-dessert.wav");
+            soundClip.loop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
