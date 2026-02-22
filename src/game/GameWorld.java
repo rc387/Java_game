@@ -289,7 +289,9 @@ public class GameWorld extends World {
                     });
                     runTimer[0].start();
                 }
-            }
+            } if(player.getPosition().x > 270){ // Used to stop music when player reaches end of the level.
+                    player.finish();
+                }
             }
 
             public void keyReleased(KeyEvent e) {
@@ -349,6 +351,7 @@ public class GameWorld extends World {
             }
         });
         levelTimer.start();
+
 
         this.addStepListener(new StepListener() {
             @Override

@@ -47,6 +47,10 @@ public class Character extends DynamicBody  {
 
     }
 
+    public void finish(){
+        soundClip.stop();
+    }
+
     public static void setSoundClip() {
         try {
             soundClip = new SoundClip("data/7-dessert.wav"); // Used to initialise the background music.
