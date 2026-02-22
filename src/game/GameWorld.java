@@ -202,7 +202,7 @@ public class GameWorld extends World {
         final int[] frameCounter = {0}; // Initialises the array of integers used for frameCounter.
         final Timer[] runTimer = {null}; // Initialises the array of integers used for runTimer.
 
-        BodyImage[] runFrames = new BodyImage[]{
+        BodyImage[] runFrames = new BodyImage[]{ // Use of AI: idea of using array to store images.
                 new BodyImage("data/Fighter/Run(1).png", 5.5f),
                 new BodyImage("data/Fighter/Run(2).png", 5.5f),
                 new BodyImage("data/Fighter/Run(3).png", 5.5f),

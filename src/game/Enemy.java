@@ -66,7 +66,7 @@
             animationTick++; // Used to control the speed of the animation.
             if (animationTick % 10 == 0) { // Used to that animate is only called 6 times per second.
                 animate();
-            }
+            }// Use of AI: animationTick, to control the speed of the animation using modulus.
         }
 
         public void animate() {
