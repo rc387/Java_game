@@ -11,8 +11,7 @@ public class PlayerCollision implements CollisionListener {
     private boolean canDamage = false;
     private boolean shield = false;
     private boolean canTakeDamage = true;
-    private Character player;
-    private boolean finish = false;
+    private final Character player;
     private Timer destroyTimer;
 
     public PlayerCollision(Character player) {
@@ -56,9 +55,7 @@ public class PlayerCollision implements CollisionListener {
             player.loselife(); // Allows the player image to disappear upon collision.
             player.loselife();
             player.playerDeath();
-            destroyTimer = new Timer(1000, f -> {
-                player.destroy();
-            });
+            destroyTimer = new Timer(1000, f -> player.destroy());
             destroyTimer.start();}
 
         }
