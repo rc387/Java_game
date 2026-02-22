@@ -10,7 +10,6 @@ public class Character extends DynamicBody  {
     private static final BodyImage image = new BodyImage("data/Fighter/Idle(1).png", 5.5f);
     private static final Image heart = new ImageIcon("data/PNG/Bronze/Bronze_11.png").getImage();
     private static int lives = 3;
-    private int frameCounter = 0;
     private static SoundClip soundClip;
 
     public Character(World world) {
@@ -28,7 +27,7 @@ public class Character extends DynamicBody  {
     }
 
     public static void shieldLife(){
-        lives = lives; // Used to keep the lives value to same in case a collision caused a life to be deducted erroneously.
+        // Used to keep the lives value to same in case a collision caused a life to be deducted erroneously.
     }
 
     private void setFixedRotation(boolean b) {}
@@ -46,10 +45,6 @@ public class Character extends DynamicBody  {
             soundClip.stop();
         }
 
-    }
-
-    public SoundClip getSoundClip() {
-        return soundClip;
     }
 
     public static void setSoundClip() {

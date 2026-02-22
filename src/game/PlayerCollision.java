@@ -10,7 +10,9 @@ public class PlayerCollision implements CollisionListener {
     private boolean canJump = false;
     private boolean canDamage = false;
     private boolean shield = false;
+    private boolean canTakeDamage = true;
     private Character player;
+    private boolean finish = false;
     private Timer destroyTimer;
 
     public PlayerCollision(Character player) {
@@ -31,6 +33,10 @@ public class PlayerCollision implements CollisionListener {
         shield = value;
     }
 
+    public void setCanTakeDamage(boolean value) {
+        this.canTakeDamage = value;
+    }
+
     @Override
     public void collide(CollisionEvent e) {
         if (e.getOtherBody() instanceof StaticBody) {
@@ -41,6 +47,7 @@ public class PlayerCollision implements CollisionListener {
             canDamage = false; // Used to make sure the enemy only takes damage once upon collision.
         } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage ) { // Used to allow the player is take damage when collision occurs.
             player.loselife();
+            canTakeDamage = false; // Used to make sure the player only takes damage once upon collision.
 
         } else if (e.getOtherBody() instanceof Enemy && shield) {
             Character.shieldLife();

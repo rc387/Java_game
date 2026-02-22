@@ -184,6 +184,11 @@ public class GameWorld extends World {
         flagimage.setPosition(new Vec2(290, -10));
         flagimage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
 
+        Shape GoldCoin = new BoxShape(2,10); // Initialises the object GoldCoin.
+        StaticBody GoldCoinBody = new StaticBody(this, GoldCoin); // Used to indicate end of level.
+        GoldCoinBody.setPosition(new Vec2(300, 2.5f));
+        GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
+
         setGravity(9.8f);
 
         final JFrame frame = new JFrame("Game world");
