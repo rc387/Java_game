@@ -11,3 +11,4 @@ public class Flag extends StaticBody {
         super(world, flagShape);
     }
 }
+// Author: Jonathan Ross

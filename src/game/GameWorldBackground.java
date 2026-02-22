@@ -53,3 +53,4 @@ public class GameWorldBackground extends UserView {
         g.drawString("W = jump, A = left, S = shield, D = right, Enter = attack",200,30);
     }
 }
+// Author: Jonathan Ross

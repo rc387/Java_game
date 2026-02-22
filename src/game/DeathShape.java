@@ -6,3 +6,4 @@ public class DeathShape extends StaticBody {
         super(world, deathShape);
     }
 }
+// Author: Jonathan Ross

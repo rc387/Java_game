@@ -57,15 +57,11 @@
         private int animationTick = 0;
 
         public void update() {
-
             float x = getPosition().x;
-
-
             if (x > rightBound) direction = -1;
             if (x < leftBound) direction = 1;
 
             setLinearVelocity(new Vec2(3 * direction, 0));
-
 
             animationTick++; // Used to control the speed of the animation.
             if (animationTick % 10 == 0) { // Used to that animate is only called 6 times per second.
@@ -85,5 +81,5 @@
 
         private void setFixedRotation(boolean b) {}
     }
-
+// Author: Jonathan Ross
 
