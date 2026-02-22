@@ -2,7 +2,6 @@ package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import city.cs.engine.DynamicBody;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,11 +20,7 @@ public class Character extends DynamicBody  {
         setAngle(0f);
     }
 
-    public int getLives() {
-        return lives;
-    }
-
-    public  void loselife() {
+    public void loselife() { // Used to deduct a life when method is called.
         lives--;
         if (lives <= 0) {
         playerDeath();
@@ -33,28 +28,20 @@ public class Character extends DynamicBody  {
     }
 
     public static void shieldLife(){
-        lives = lives;
+        lives = lives; // Used to keep the lives value to same in case a collision caused a life to be deducted erroneously.
     }
 
     private void setFixedRotation(boolean b) {}
 
     public static void hearts(Graphics2D g) {
         for(int i = 0; i < lives; i++){
-            g.drawImage(heart,i*50,i*1,50,50,null);
+            g.drawImage(heart,i*50, i,50,50,null);
         }
     }
 
-    BodyImage[] DeadFrames = new BodyImage[]{
-            new BodyImage("data/Fighter/Dead(1).png", 5.5f),
-            new BodyImage("data/Fighter/Dead(2).png", 5.5f),
-            new BodyImage("data/Fighter/Dead(3).png", 5.5f),
-    };
-
-    public void playerDeath(){
+    public void playerDeath(){ // Used to destroy the player.
         removeAllImages();
         if(lives == 0){
-            addImage(DeadFrames[frameCounter % DeadFrames.length]);
-            frameCounter =  (frameCounter + 1) % DeadFrames.length;
             destroy();
             soundClip.stop();
         }
@@ -65,9 +52,9 @@ public class Character extends DynamicBody  {
         return soundClip;
     }
 
-    public static   void setSoundClip() {
+    public static void setSoundClip() {
         try {
-            soundClip = new SoundClip("data/7-dessert.wav");
+            soundClip = new SoundClip("data/7-dessert.wav"); // Used to initialise the background music.
             soundClip.loop();
         } catch (Exception e) {
             e.printStackTrace();

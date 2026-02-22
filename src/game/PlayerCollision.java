@@ -10,10 +10,7 @@ public class PlayerCollision implements CollisionListener {
     private boolean canJump = false;
     private boolean canDamage = false;
     private boolean shield = false;
-    private boolean canDie =  false;
-    private boolean canTakeDamage = true;
     private Character player;
-    private boolean finish = false;
     private Timer destroyTimer;
 
     public PlayerCollision(Character player) {
@@ -27,67 +24,29 @@ public class PlayerCollision implements CollisionListener {
         canJump = value;
     }
 
-    public boolean canDamage() {
-        return canDamage;
-    }
     public void setCanDamage(boolean value) { canDamage = value; }
 
-    public boolean isShield() {
-        return shield;
-    }
 
     public void setShield(boolean value) {
         shield = value;
     }
 
-    public boolean isCanDie() {
-        return canDie;
-    }
-
-    public void setCanDie(boolean value) {
-        this.canDie = value;
-    }
-
-    public boolean isCanTakeDamage() {
-        return canTakeDamage;
-    }
-
-    public void setCanTakeDamage(boolean value) {
-        this.canTakeDamage = value;
-    }
-
-    public boolean isFinish() {
-        return finish;
-    }
-
-    public void setFinish(boolean value) {
-        this.finish = value;
-    }
-
     @Override
     public void collide(CollisionEvent e) {
         if (e.getOtherBody() instanceof StaticBody) {
-            canJump = true;
-        } else if (e.getOtherBody() instanceof Enemy enemy && canDamage) {
+            canJump = true; // Allows the player to only jump whilst being in contact with a platform.
+        } else if (e.getOtherBody() instanceof Enemy enemy && canDamage) { // Used to allow the enemy is take damage when collision occurs.
             enemy.loseLife();
-            enemy.destroy();
-            canDamage = false;
-        } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage ) {
+            enemy.destroy(); // Enemies in the 1st level only have 1 life so are just destroyed.
+            canDamage = false; // Used to make sure the enemy only takes damage once upon collision.
+        } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage ) { // Used to allow the player is take damage when collision occurs.
             player.loselife();
-            canTakeDamage = false;
 
-            new java.util.Timer().schedule(
-                    new java.util.TimerTask(){
-                        @Override
-                        public void run() {
-                            canTakeDamage = true;
-                        }
-                    }, 800);
         } else if (e.getOtherBody() instanceof Enemy && shield) {
             Character.shieldLife();
         } if (e.getOtherBody() instanceof DeathShape) {
-            player.loselife();
-            player.loselife();
+            player.loselife(); // Called 3 times to clear all the hearts from the screen.
+            player.loselife(); // Allows the player image to disappear upon collision.
             player.loselife();
             player.playerDeath();
             destroyTimer = new Timer(1000, f -> {

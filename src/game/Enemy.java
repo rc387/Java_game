@@ -26,16 +26,9 @@
 
         }
 
-
-        public int getlives() {
-            return lives;
-        }
-
         public void loseLife(){
             lives--;
         }
-
-
 
         BodyImage[] walkFrames = new BodyImage[]{
                 new BodyImage("data/Gangsters_2/Walk(1).png", 5.5f),
@@ -74,8 +67,8 @@
             setLinearVelocity(new Vec2(3 * direction, 0));
 
 
-            animationTick++;
-            if (animationTick % 10 == 0) {
+            animationTick++; // Used to control the speed of the animation.
+            if (animationTick % 10 == 0) { // Used to that animate is only called 6 times per second.
                 animate();
             }
         }
@@ -91,7 +84,6 @@
         }
 
         private void setFixedRotation(boolean b) {}
-
     }
 
 

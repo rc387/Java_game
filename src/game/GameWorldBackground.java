@@ -1,6 +1,5 @@
 package game;
 
-import city.cs.engine.SoundClip;
 import city.cs.engine.UserView;
 import city.cs.engine.World;
 import javax.swing.*;
@@ -11,11 +10,10 @@ public class GameWorldBackground extends UserView {
     private  int timeRemaining = 90;
     private Timer levelTimer;
 
-
     public GameWorldBackground(World w, int width, int height) {
         super(w, width, height);
         background = new ImageIcon("data/background(1).jpg").getImage();
-        levelTimer = new Timer(1000, e -> {
+        levelTimer = new Timer(1000, e -> { // Timer that's visible on screen.
             if (timeRemaining >= 0) {
                 timeRemaining--;
             } else {
@@ -28,12 +26,9 @@ public class GameWorldBackground extends UserView {
         });
         levelTimer.start();}
 
-
     public int getTimeRemaining() {
         return timeRemaining;
     }
-
-
 
     protected void paintBackground(Graphics2D g) {
         g.setRenderingHint(
@@ -45,7 +40,7 @@ public class GameWorldBackground extends UserView {
     @Override
     public void setBackground(Color bgColor) {
         super.setBackground(Color.black);
-        Character.setSoundClip();
+        Character.setSoundClip(); // Used to keep the background music playing whilst the program is running.
     }
     @Override
     protected void paintForeground(Graphics2D g) {
@@ -54,5 +49,7 @@ public class GameWorldBackground extends UserView {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("Time: " + getTimeRemaining(), 550, 30);
+        g.setFont(new Font("Arial", Font.BOLD, 12));
+        g.drawString("W = jump, A = left, S = shield, D = right, Enter = attack",200,30);
     }
 }
