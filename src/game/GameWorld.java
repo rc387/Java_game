@@ -230,7 +230,7 @@ public class GameWorld extends World {
         PlayerCollision listener = new PlayerCollision(player); // Initialises the object listener.
         player.addCollisionListener(listener); // Used to allow the player's collisions to have an effect with other objects in game.
         frame.addKeyListener(new KeyAdapter() { //Used to allow key inputs to affect the player image.
-            @Override
+
             public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_D) {
                 moveRight[0] = !(player.getPosition().x > 270); // Used to make moveRight false when player reaches the end of the level.
@@ -265,7 +265,7 @@ public class GameWorld extends World {
                 player.addImage(new BodyImage("data/Fighter/Shield(1).png", 5.5f));
                 }
 
-            else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 if(player.getPosition().x > 270){
                     player.setLinearVelocity(new Vec2(0f, 0f));
                 }
@@ -291,8 +291,18 @@ public class GameWorld extends World {
                 }
             } if(player.getPosition().x > 270){ // Used to stop music when player reaches end of the level.
                     player.finish();
-                }
+            } else if (e.getKeyCode() == KeyEvent.VK_M) {
+                    player.finish();
+            } else if (e.getKeyCode() == KeyEvent.VK_U) {
+                    Character.setSoundClip();
             }
+                    if(player.getPosition().x > 270){
+                    new Level2();
+                    frame.getContentPane().removeAll();
+                    frame.setVisible(false);
+                    player.finish();}
+
+                }
 
             public void keyReleased(KeyEvent e) {
                 if  (e.getKeyCode() == KeyEvent.VK_D) {
@@ -316,7 +326,7 @@ public class GameWorld extends World {
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     canDamage[0] = false;
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
@@ -354,7 +364,6 @@ public class GameWorld extends World {
 
 
         this.addStepListener(new StepListener() {
-            @Override
             public void preStep(StepEvent e) { // Used to handle all horizontal movement for a dynamic object.
                 if (moveRight[0] && !(player.getPosition().x >270)) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
@@ -379,6 +388,7 @@ public class GameWorld extends World {
                 npcGangsta14.update(); npcGangsta14.setAngle(0f); npcGangsta14.setAngularVelocity(0f);
                 npcGangsta15.update(); npcGangsta15.setAngle(0f); npcGangsta15.setAngularVelocity(0f);
                 view.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
+
             }
 
             @Override
