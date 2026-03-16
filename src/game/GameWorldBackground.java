@@ -49,9 +49,9 @@ public class GameWorldBackground extends UserView {
         super.paintForeground(g);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Time: " + getTimeRemaining(), 480, 20);
+        g.drawString("Time: " + getTimeRemaining(), 560, 20);
         g.setFont(new Font("Arial", Font.BOLD, 12));
-        g.drawString("W = jump, A = left, S = shield, D = right, Space = attack",160,20);
+        g.drawString("W = jump, A = left, S = shield, D = right, Space = attack",190,20);
     }
 }
 // Author: Jonathan Ross

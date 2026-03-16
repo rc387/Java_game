@@ -59,5 +59,14 @@ public class Character extends DynamicBody  {
             e.printStackTrace();
         }
     }
+
+    public static void setSoundClip_Level2() {
+        try {
+            soundClip = new SoundClip("data/11-gt-force.wav");
+            soundClip.loop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 // Author: Jonathan Ross

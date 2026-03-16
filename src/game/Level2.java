@@ -165,7 +165,7 @@ public class Level2 extends World {
                 } else if (e.getKeyCode() == KeyEvent.VK_M) {
                     player.finish();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    Character.setSoundClip();
+                    Character.setSoundClip_Level2();
                 }
                 if(player.getPosition().x > 270){
                     new Level2();
