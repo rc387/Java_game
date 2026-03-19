@@ -215,7 +215,8 @@ public class Level2 extends World {
                 new BodyImage("data/Samurai/RunLeft(7).png", 5.5f),
                 new BodyImage("data/Samurai/RunLeft(8).png", 5.5f),
         };
-
+        player.gainLife();
+        player.setSoundClip_Level2();
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
         final boolean[] canDamage = { false };
@@ -282,17 +283,17 @@ public class Level2 extends World {
                         runTimer[0].start();
                     }
                 } if(player.getPosition().x > 270){
-                    player.finish();
+                    player.finish_Level2();
                 } else if (e.getKeyCode() == KeyEvent.VK_M) {
-                    player.finish();
+                    player.finish_Level2();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    Character.setSoundClip_Level2();
+                    player.setSoundClip_Level2();
                 }
                 if(player.getPosition().x > 270){
                     new Level3();
                     frames.getContentPane().removeAll();
                     frames.setVisible(false);
-                    player.finish();}
+                    player.finish_Level2();}
 
             }
 

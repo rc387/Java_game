@@ -160,17 +160,17 @@ public class Level3 extends World {
                         runTimer[0].start();
                     }
                 } if(player.getPosition().x > 270){ // Used to stop music when player reaches end of the level.
-                    player.finish();
+                    player.finish_Level3();
                 } else if (e.getKeyCode() == KeyEvent.VK_M) {
-                    player.finish();
+                    player.finish_Level3();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    Character.setSoundClip_Level2();
+                    player.setSoundClip_Level2();
                 }
                 if(player.getPosition().x > 270){
                     new Level3();
                     frames.getContentPane().removeAll();
                     frames.setVisible(false);
-                    player.finish();}
+                    player.finish_Level3();}
 
             }
 

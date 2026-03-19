@@ -11,6 +11,7 @@ public class Character extends DynamicBody  {
     private static final Image heart = new ImageIcon("data/PNG/Bronze/Bronze_11.png").getImage();
     private static int lives = 3;
     private static SoundClip soundClip;
+    private static SoundClip Level2SoundClip;
 
     public Character(World world) {
         super(world, CharacterShape);
@@ -24,6 +25,11 @@ public class Character extends DynamicBody  {
         if (lives <= 0) {
         playerDeath();
         }
+    }
+
+    public void gainLife(){
+        if (lives < 3){
+        lives++;}
     }
 
     public static void shieldLife(){
@@ -42,20 +48,25 @@ public class Character extends DynamicBody  {
         removeAllImages();
         if(lives == 0){
             destroy();
-            soundClip.stop();
+            soundClip.close();
         }
 
     }
 
     public void finish(){
-        soundClip.stop();
+        soundClip.close();
     }
 
-    public void nextLevel(){
-        soundClip.play();
+    public void finish_Level2(){
+        Level2SoundClip.close();
     }
 
-    public static void setSoundClip() {
+    public void finish_Level3(){
+
+    }
+
+
+    public void setSoundClip() {
         try {
             soundClip = new SoundClip("data/7-dessert.wav"); // Used to initialise the background music.
             soundClip.loop();
@@ -64,10 +75,10 @@ public class Character extends DynamicBody  {
         }
     }
 
-    public static void setSoundClip_Level2() {
+    public void setSoundClip_Level2() {
         try {
-            soundClip = new SoundClip("data/11-gt-force.wav");
-            soundClip.loop();
+            Level2SoundClip = new SoundClip("data/11-gt-force.wav");
+            Level2SoundClip.loop();
         } catch (Exception e) {
             e.printStackTrace();
         }

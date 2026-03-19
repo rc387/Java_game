@@ -41,7 +41,6 @@ public class GameWorldBackground extends UserView {
     @Override
     public void setBackground(Color bgColor) {
         super.setBackground(Color.black);
-        Character.setSoundClip(); // Used to keep the background music playing whilst the program is running.
     }
     @Override
     protected void paintForeground(Graphics2D g) {

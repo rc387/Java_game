@@ -16,7 +16,7 @@ public class GameWorld extends World {
         GameWorldBackground view = new GameWorldBackground(this,640,565); //Initialises the width and height of object view.
 
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(279f, 2));
+        player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Enemy npcGangsta = new Enemy(this, 44,69); // Initialises the leftBound & rightBound of the object npcGangsta.
@@ -161,7 +161,7 @@ public class GameWorld extends World {
 
         platformShape = new BoxShape(12, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(285, -14));
+        platform.setPosition(new Vec2(287, -14));
         platform.addImage(new BodyImage("data/platform(2).png", 11.5f));
 
         Flag flagimage = new Flag(this); // Initialises the object flagimage.
@@ -202,7 +202,7 @@ public class GameWorld extends World {
                 new BodyImage("data/Fighter/RunLeft(7).png", 5.5f),
                 new BodyImage("data/Fighter/RunLeft(8).png", 5.5f),
         }; // Initialises the array of images used for the animation of the player running in the left direction.
-
+        player.setSoundClip();
         final boolean[] moveRight = {false}; // Boolean flag used to determine if the player can move right or not.
         final boolean[] moveLeft = {false}; // Boolean flag used to determine if the player can move left or not.
         final boolean[] canDamage = { false }; // Boolean flag used to determine if the player can move damage an enemy or not.
@@ -273,7 +273,7 @@ public class GameWorld extends World {
             } else if (e.getKeyCode() == KeyEvent.VK_M) {
                     player.finish();
             } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    Character.setSoundClip();
+                    player.setSoundClip();
             }
                     if(player.getPosition().x > 270){
                     new Level2();
