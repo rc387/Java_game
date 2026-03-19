@@ -16,16 +16,12 @@ public class GameWorld extends World {
         GameWorldBackground view = new GameWorldBackground(this,640,565); //Initialises the width and height of object view.
 
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(-7.25f, 2));
-        player.setLinearVelocity(new Vec2(0, 0));
-        player.setAngularVelocity(0);
-        player.setAngle(0);
+        player.setPosition(new Vec2(279f, 2));
+        player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Enemy npcGangsta = new Enemy(this, 44,69); // Initialises the leftBound & rightBound of the object npcGangsta.
         npcGangsta.setPosition(new Vec2(68, -14));
-        npcGangsta.setLinearVelocity(new Vec2(0, 0));
-        npcGangsta.setAngularVelocity(0);
-        npcGangsta.setAngle(0);
+        npcGangsta.setLinearVelocity(new Vec2(0, 0)); npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0);
 
         DeathShape deathShape = new DeathShape(this); // Initialises the object deathShape.
         deathShape.setPosition(new Vec2(-1, -100));
@@ -66,12 +62,10 @@ public class GameWorld extends World {
         platform.addImage(new BodyImage("data/platform(1).png", 10));
 
         Enemy npcGangsta1 = new Enemy(this, 73, 77); // Bounds are used to define the X position the npc can't go beyond.
-        npcGangsta1.setPosition(new Vec2(74, -6));
-        npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
+        npcGangsta1.setPosition(new Vec2(74, -6)); npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
 
         Enemy npcGangsta2 = new Enemy(this, 78.5f, 82.5f);
-        npcGangsta2.setPosition(new Vec2(82, -6));
-        npcGangsta2.setAngularVelocity(0); npcGangsta2.setAngle(0);
+        npcGangsta2.setPosition(new Vec2(82, -6)); npcGangsta2.setAngularVelocity(0); npcGangsta2.setAngle(0);
 
         platformShape = new BoxShape(5, 0.5f);
         platform = new StaticBody(this, platformShape);
@@ -79,8 +73,7 @@ public class GameWorld extends World {
         platform.addImage(new BodyImage("data/platform(1).png", 8));
 
         Enemy npcGangsta3 = new Enemy(this, 88, 96.5f);
-        npcGangsta3.setPosition(new Vec2(92, -1));
-        npcGangsta3.setAngularVelocity(0); npcGangsta3.setAngle(0);
+        npcGangsta3.setPosition(new Vec2(92, -1)); npcGangsta3.setAngularVelocity(0); npcGangsta3.setAngle(0);
 
         platformShape = new BoxShape(7, 1);
         platform = new StaticBody(this, platformShape);
@@ -88,12 +81,10 @@ public class GameWorld extends World {
         platform.addImage(new BodyImage("data/platform(2).png", 11));
 
         Enemy npcGangsta4 = new Enemy(this, 102, 106);
-        npcGangsta4.setPosition(new Vec2(106, -10));
-        npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0);
+        npcGangsta4.setPosition(new Vec2(106, -10)); npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0);
 
         Enemy npcGangsta5 =  new Enemy(this, 110.5f, 114.5f);
-        npcGangsta5.setPosition(new Vec2(114, -10));
-        npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0);
+        npcGangsta5.setPosition(new Vec2(114, -10)); npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0);
 
         platformShape = new BoxShape(6, 1);
         platform = new StaticBody(this, platformShape);
@@ -106,16 +97,13 @@ public class GameWorld extends World {
         platform.addImage(new BodyImage("data/platform(2).png", 12));
 
         Enemy npcGangsta6 = new Enemy(this, 142, 144.5f);
-        npcGangsta6.setPosition(new Vec2(146, -12));
-        npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0);
+        npcGangsta6.setPosition(new Vec2(146, -12)); npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0);
 
         Enemy npcGangsta7 = new Enemy(this, 147.5f, 150);
-        npcGangsta7.setPosition(new Vec2(150.5f, -12));
-        npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
+        npcGangsta7.setPosition(new Vec2(150.5f, -12)); npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
 
         Enemy npcGangsta8 = new Enemy(this, 152, 154.5f);
-        npcGangsta8.setPosition(new Vec2(155.5f, -12));
-        npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0);
+        npcGangsta8.setPosition(new Vec2(155.5f, -12)); npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0);
 
         platformShape = new BoxShape(5, 0.5f);
         platform = new StaticBody(this, platformShape);
@@ -128,8 +116,7 @@ public class GameWorld extends World {
         platform.addImage(new BodyImage("data/platform(1).png", 8));
 
         Enemy npcGangsta9 = new Enemy(this, 178, 183.5f);
-        npcGangsta9.setPosition(new Vec2(182, -2));
-        npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0);
+        npcGangsta9.setPosition(new Vec2(182, -2)); npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0);
 
         platformShape = new BoxShape(7, 1);
         platform = new StaticBody(this, platformShape);
@@ -137,12 +124,10 @@ public class GameWorld extends World {
         platform.addImage(new BodyImage("data/platform(2).png", 11));
 
         Enemy npcGangsta10 = new Enemy(this, 192, 198);
-        npcGangsta10.setPosition(new Vec2(196, -12));
-        npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0);
+        npcGangsta10.setPosition(new Vec2(196, -12)); npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0);
 
         Enemy npcGangsta11 = new Enemy(this, 200, 206);
-        npcGangsta11.setPosition(new Vec2(204, -12));
-        npcGangsta11.setAngularVelocity(0); npcGangsta11.setAngle(0);
+        npcGangsta11.setPosition(new Vec2(204, -12)); npcGangsta11.setAngularVelocity(0); npcGangsta11.setAngle(0);
 
         platformShape = new BoxShape(6, 1);
         platform = new StaticBody(this, platformShape);
@@ -155,8 +140,7 @@ public class GameWorld extends World {
         platform.addImage(new BodyImage("data/platform(1).png", 8));
 
         Enemy npcGangsta12 = new Enemy(this, 231, 239);
-        npcGangsta12.setPosition(new Vec2(235, -2));
-        npcGangsta12.setAngularVelocity(0); npcGangsta12.setAngle(0);
+        npcGangsta12.setPosition(new Vec2(235, -2)); npcGangsta12.setAngularVelocity(0); npcGangsta12.setAngle(0);
 
         platformShape = new BoxShape(9, 1);
         platform = new StaticBody(this, platformShape);
@@ -191,14 +175,9 @@ public class GameWorld extends World {
 
         setGravity(9.8f);
 
-        final JFrame frame = new JFrame("Game world");
-        frame.add(view);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationByPlatform(true);
-        frame.setResizable(false);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setBackground(Color.BLACK);
+        final JFrame frame = new JFrame("Level 1");
+        frame.add(view); frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frame.setLocationByPlatform(true);
+        frame.setResizable(false); frame.pack(); frame.setVisible(true); frame.setBackground(Color.BLACK);
         final int[] frameCounter = {0}; // Initialises the array of integers used for frameCounter.
         final Timer[] runTimer = {null}; // Initialises the array of integers used for runTimer.
 
@@ -265,7 +244,7 @@ public class GameWorld extends World {
                 player.addImage(new BodyImage("data/Fighter/Shield(1).png", 5.5f));
                 }
 
-            else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 if(player.getPosition().x > 270){
                     player.setLinearVelocity(new Vec2(0f, 0f));
                 }
@@ -326,7 +305,7 @@ public class GameWorld extends World {
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     canDamage[0] = false;
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
@@ -396,7 +375,6 @@ public class GameWorld extends World {
         });
         this.start();
     }
-
     static void main(String[] args) {
         new GameWorld();
     }
