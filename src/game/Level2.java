@@ -10,7 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Level2 extends World {
-    private int timeRemaining = 75;
+    private int timeRemaining = 90;
     private Timer levelTimer;
     private Timer destroyTimer;
     public Level2()
@@ -31,6 +31,10 @@ public class Level2 extends World {
         platform.setPosition(new Vec2(-2.75f, -4.5f));
         platform.addImage(new BodyImage("data/platform_level2.png", 11.5f));
 
+        Enemy npcGangsta1 = new Enemy(this, 15, 19);
+        npcGangsta1.setPosition(new Vec2(16, -4));
+        npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
+
         Enemy npcGangsta = new Enemy(this, 20,28.5f);
         npcGangsta.setPosition(new Vec2(24, -4));
         npcGangsta.setLinearVelocity(new Vec2(0, 0)); npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0);
@@ -44,10 +48,6 @@ public class Level2 extends World {
         dynamicPlatform.setPosition(new Vec2(35, -5f));
         dynamicPlatform.setLinearVelocity(new Vec2(0, 0));
         dynamicPlatform.setAngularVelocity(0); dynamicPlatform.setAngle(0);
-
-        Enemy npcGangsta1 = new Enemy(this, 15, 19);
-        npcGangsta1.setPosition(new Vec2(16, -4));
-        npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
 
         platformShape = new BoxShape(7, 1);
         platform = new StaticBody(this, platformShape);
@@ -83,17 +83,17 @@ public class Level2 extends World {
 
         platformShape = new BoxShape(9, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(115, -14f));
+        platform.setPosition(new Vec2(115, 30f));
         platform.addImage(new BodyImage("data/platform_level2.png", 13f));
 
         Enemy npcGangsta5 = new Enemy(this, 107, 110);
-        npcGangsta5.setPosition(new Vec2(108, -12f)); npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0);
+        npcGangsta5.setPosition(new Vec2(108, 32f)); npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0);
 
         Enemy npcGangsta6 = new Enemy(this, 112, 116);
-        npcGangsta6.setPosition(new Vec2(114, -12f)); npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0);
+        npcGangsta6.setPosition(new Vec2(114, 32f)); npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0);
 
         Enemy npcGangsta7 = new Enemy(this, 118, 122);
-        npcGangsta7.setPosition(new Vec2(120, -12f)); npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
+        npcGangsta7.setPosition(new Vec2(120, 32f)); npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
 
         platformShape = new BoxShape(5, 0.5f);
         platform = new StaticBody(this, platformShape);
@@ -110,7 +110,7 @@ public class Level2 extends World {
 
         platformShape = new BoxShape(8, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(165, -12f));
+        platform.setPosition(new Vec2(165, -13f));
         platform.addImage(new BodyImage("data/platform_level2.png", 12f));
 
         Enemy npcGangsta9 = new Enemy(this, 158, 162);
@@ -147,20 +147,20 @@ public class Level2 extends World {
         platform.setPosition(new Vec2(240, -14f));
         platform.addImage(new BodyImage("data/platform_level2.png", 14f));
 
-        Enemy npcGangsta13 = new Enemy(this, 231, 234);
-        npcGangsta13.setPosition(new Vec2(232, -12f));
+        Enemy npcGangsta13 = new Enemy(this, 232, 233.75f);
+        npcGangsta13.setPosition(new Vec2(236, -12f));
         npcGangsta13.setAngularVelocity(0); npcGangsta13.setAngle(0);
 
-        Enemy npcGangsta14 = new Enemy(this, 236, 240);
-        npcGangsta14.setPosition(new Vec2(238, -12f));
+        Enemy npcGangsta14 = new Enemy(this, 236, 237.75f);
+        npcGangsta14.setPosition(new Vec2(239.3f, -12f));
         npcGangsta14.setAngularVelocity(0); npcGangsta14.setAngle(0);
 
-        Enemy npcGangsta15 = new Enemy(this, 241, 245);
-        npcGangsta15.setPosition(new Vec2(243, -12f));
+        Enemy npcGangsta15 = new Enemy(this, 240.85f, 242.5f);
+        npcGangsta15.setPosition(new Vec2(242.6f, -12f));
         npcGangsta15.setAngularVelocity(0); npcGangsta15.setAngle(0);
 
-        Enemy npcGangsta16 = new Enemy(this, 246, 249);
-        npcGangsta16.setPosition(new Vec2(247, -12f));
+        Enemy npcGangsta16 = new Enemy(this, 245.1f, 246.85f);
+        npcGangsta16.setPosition(new Vec2(246, -12f));
         npcGangsta16.setAngularVelocity(0); npcGangsta16.setAngle(0);
 
         platformShape = new BoxShape(6, 1);
@@ -188,6 +188,10 @@ public class Level2 extends World {
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
 
         DeathShape deathShape = new DeathShape(this); deathShape.setPosition(new Vec2(-1, -100));
+
+        Shape stopper = new BoxShape(0.2f,1.2f);
+        StaticBody stopperBody = new StaticBody(this, stopper);
+        stopperBody.setPosition(new Vec2(288, -13f));
 
         setGravity(9.8f);
 
@@ -226,7 +230,7 @@ public class Level2 extends World {
 
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveRight[0] = !(player.getPosition().x > 270);
+                    moveRight[0] = !(player.getPosition().x > 285);
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, _ -> {
@@ -238,7 +242,7 @@ public class Level2 extends World {
                     } }
 
                 else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
-                    if(player.getPosition().x > 270){
+                    if(player.getPosition().x > 285){
                         player.setLinearVelocity(new Vec2(0f, 0f));
                         player.applyImpulse(new Vec2(0f, 0f));
                     }
@@ -249,7 +253,7 @@ public class Level2 extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
-                    if(player.getPosition().x > 270){
+                    if(player.getPosition().x > 285){
                         player.setLinearVelocity(new Vec2(0f, 0f));
                     }
                     listener.setShield(true);
@@ -259,7 +263,7 @@ public class Level2 extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(player.getPosition().x > 270){
+                    if(player.getPosition().x > 285){
                         player.setLinearVelocity(new Vec2(0f, 0f));
                     }
                     listener.setCanDamage(true);
@@ -270,7 +274,7 @@ public class Level2 extends World {
 
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
                     moveLeft[0] = true;
-                    if(player.getPosition().x > 270){
+                    if(player.getPosition().x > 285){
                         player.setLinearVelocity(new Vec2(0f, 0f));
                     }
                     if (runTimer[0] == null) {
@@ -282,14 +286,14 @@ public class Level2 extends World {
                         });
                         runTimer[0].start();
                     }
-                } if(player.getPosition().x > 270){
+                } if(player.getPosition().x > 285){
                     player.finish_Level2();
                 } else if (e.getKeyCode() == KeyEvent.VK_M) {
                     player.finish_Level2();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     player.setSoundClip_Level2();
                 }
-                if(player.getPosition().x > 270){
+                if(player.getPosition().x > 285){
                     new Level3();
                     frames.getContentPane().removeAll();
                     frames.setVisible(false);
@@ -338,8 +342,12 @@ public class Level2 extends World {
             }
         });
         levelTimer = new Timer(1000, e -> {
-            if (timeRemaining >= 0) {
+            if (timeRemaining >= 0 && (player.getPosition().x < 285)) {
                 timeRemaining--;
+            } else if (player.getPosition().x > 285) {
+                levelTimer.stop();((Timer)e.getSource()).stop();
+                moveRight[0] = false; moveLeft[0] = false; canDamage[0] = false;
+                player.setLinearVelocity(new Vec2(0f,0f));
             } else {
                 levelTimer.stop();
                 ((Timer)e.getSource()).stop();
@@ -356,10 +364,10 @@ public class Level2 extends World {
 
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
-                if (moveRight[0] && !(player.getPosition().x >270)) {
+                if (moveRight[0] && !(player.getPosition().x >285)) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }
-                else if (moveLeft[0] && !(player.getPosition().x >270)) {
+                else if (moveLeft[0] && !(player.getPosition().x >285)) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
                 npcGangsta.update_Level2(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);

@@ -100,10 +100,10 @@ public class GameWorld extends World {
         npcGangsta6.setPosition(new Vec2(146, -12)); npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0);
 
         Enemy npcGangsta7 = new Enemy(this, 147.5f, 150);
-        npcGangsta7.setPosition(new Vec2(150.5f, -12)); npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
+        npcGangsta7.setPosition(new Vec2(151.5f, -12)); npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
 
         Enemy npcGangsta8 = new Enemy(this, 152, 154.5f);
-        npcGangsta8.setPosition(new Vec2(155.5f, -12)); npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0);
+        npcGangsta8.setPosition(new Vec2(156, -12)); npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0);
 
         platformShape = new BoxShape(5, 0.5f);
         platform = new StaticBody(this, platformShape);
@@ -172,6 +172,10 @@ public class GameWorld extends World {
         StaticBody GoldCoinBody = new StaticBody(this, GoldCoin); // Used to indicate end of level.
         GoldCoinBody.setPosition(new Vec2(300, 2.5f));
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
+
+        Shape stopper = new BoxShape(0.2f,1.2f);
+        StaticBody stopperBody = new StaticBody(this, stopper);
+        stopperBody.setPosition(new Vec2(280, -13f));
 
         setGravity(9.8f);
 
@@ -323,15 +327,19 @@ public class GameWorld extends World {
                 }
             }
         });
+
         levelTimer = new Timer(1000, e -> { // Mimics the same timer in Background class.
-            if (timeRemaining >= 0) {
+            if (timeRemaining >= 0 && (player.getPosition().x < 270)) {
                 timeRemaining--;
+            } else if (player.getPosition().x > 270) {
+                levelTimer.stop();((Timer)e.getSource()).stop();
+                moveRight[0] = false; moveLeft[0] = false; canDamage[0] = false;
+                player.setLinearVelocity(new Vec2(0f,0f));
             } else {
                 levelTimer.stop(); // This timer actually affects the player if 0.
                 ((Timer)e.getSource()).stop();
                 player.loselife(); // Calls the method loselife in the Character class.
-                player.loselife();
-                player.loselife();
+                player.loselife(); player.loselife(); moveRight[0] = false; moveLeft[0] = false; canDamage[0] = false;
                 player.playerDeath(); // Calls the method playerDeath in the Character class.
                 player.setLinearVelocity(new Vec2(0f,0f));
                 destroyTimer = new Timer(1000, f -> { // Used to allow the playerDeath animation to end before destroying the player.
@@ -344,6 +352,8 @@ public class GameWorld extends World {
 
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) { // Used to handle all horizontal movement for a dynamic object.
+                System.out.println(timeRemaining);
+                System.out.println(player.getPosition().x);
                 if (moveRight[0] && !(player.getPosition().x >270)) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }

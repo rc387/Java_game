@@ -13,6 +13,7 @@
         private final float leftBound;
         private final float rightBound;
         private int lives = 1 ;
+        private int enemy_no = 17;
 
         public Enemy(World world, float leftBound, float rightBound) {
             super(world);
@@ -120,7 +121,21 @@
             frameCounter = (frameCounter + 1) % walkFrames2.length;
         }
 
+        public void enemy_counter_l2(){
+            enemy_no--;
+
+        }
+
+
         private void setFixedRotation(boolean b) {}
+
+        public int getEnemy_no() {
+            return enemy_no;
+        }
+
+        public void setEnemy_no(int enemy_no) {
+            this.enemy_no = enemy_no;
+        }
     }
 // Author: Jonathan Ross
 
