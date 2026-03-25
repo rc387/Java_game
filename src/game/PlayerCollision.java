@@ -38,8 +38,10 @@ public class PlayerCollision implements CollisionListener {
 
     @Override
     public void collide(CollisionEvent e) {
-        if (e.getOtherBody() instanceof StaticBody) {
+        if (e.getOtherBody() instanceof StaticBody ) {
             canJump = true; // Allows the player to only jump whilst being in contact with a platform.
+        } else if (e.getOtherBody() instanceof Dynamic_Platform) {
+            canJump = true;
         } else if (e.getOtherBody() instanceof Enemy enemy && canDamage) { // Used to allow the enemy is take damage when collision occurs.
             enemy.loseLife();
             enemy.destroy(); // Enemies in the 1st level only have 1 life so are just destroyed.

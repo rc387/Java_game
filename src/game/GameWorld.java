@@ -16,7 +16,7 @@ public class GameWorld extends World {
         GameWorldBackground view = new GameWorldBackground(this,640,565); //Initialises the width and height of object view.
 
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(290f, 2));
+        player.setPosition(new Vec2(285f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Enemy npcGangsta = new Enemy(this, 44,69); // Initialises the leftBound & rightBound of the object npcGangsta.
@@ -255,7 +255,13 @@ public class GameWorld extends World {
                 listener.setCanDamage(true);
                 player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                 player.removeAllImages();
-                player.addImage(new BodyImage("data/Fighter/Attack_3(2).png", 5.5f));
+                if (moveRight[0]){
+                player.addImage(new BodyImage("data/Fighter/Attack_3(2).png", 5.5f));}
+                else if (moveLeft[0]){
+                    player.addImage((new BodyImage("data/Fighter/LeftAttack_3(2).png", 5.5f)));
+                }else {
+                    player.addImage(new BodyImage("data/Fighter/Attack_3(2).png", 5.5f));
+                }
             }
 
             else if (e.getKeyCode() == KeyEvent.VK_A) {

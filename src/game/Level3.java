@@ -27,22 +27,22 @@ public class Level3 extends World {
         frames.setVisible(true);
         frames.setBackground(Color.BLACK);
 
-        Character player = new Character(this); // Initialises the object player.
+        Character player = new Character(this);
         player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0));
         player.setAngularVelocity(0);
         player.setAngle(0);
 
-        Enemy_Level2 npcGangsta = new Enemy_Level2(this, 44,69); // Initialises the leftBound & rightBound of the object npcGangsta.
+        Enemy_Level2 npcGangsta = new Enemy_Level2(this, 44,69);
         npcGangsta.setPosition(new Vec2(68, -14));
         npcGangsta.setLinearVelocity(new Vec2(0, 0));
         npcGangsta.setAngularVelocity(0);
         npcGangsta.setAngle(0);
 
-        DeathShape deathShape = new DeathShape(this); // Initialises the object deathShape.
+        DeathShape deathShape = new DeathShape(this);
         deathShape.setPosition(new Vec2(-1, -100));
 
-        Shape platformShape = new BoxShape(7, 1); // Initialises the object platformShape.
+        Shape platformShape = new BoxShape(7, 1);
         StaticBody platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(-2.75f, -4.5f));
         platform.addImage(new BodyImage("data/Level2_platform.v1.png", 11.5f));
@@ -52,63 +52,64 @@ public class Level3 extends World {
         platform.setPosition(new Vec2(20, -4));
         platform.addImage(new BodyImage("data/Level2_platform.v1.png", 11.5f));
 
-        Enemy_Level2 npcGangsta1 = new Enemy_Level2(this, 73, 77); // Bounds are used to define the X position the npc can't go beyond.
+        Enemy_Level2 npcGangsta1 = new Enemy_Level2(this, 73, 77);
         npcGangsta1.setPosition(new Vec2(74, -6));
         npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
 
 
 
-        Flag flagimage = new Flag(this); // Initialises the object flagimage.
+        Flag flagimage = new Flag(this);
         flagimage.setPosition(new Vec2(290, -10));
         flagimage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
 
-        Shape GoldCoin = new BoxShape(2,10); // Initialises the object GoldCoin.
-        StaticBody GoldCoinBody = new StaticBody(this, GoldCoin); // Used to indicate end of level.
+        Shape GoldCoin = new BoxShape(2,10);
+        StaticBody GoldCoinBody = new StaticBody(this, GoldCoin);
         GoldCoinBody.setPosition(new Vec2(300, 2.5f));
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
 
         setGravity(9.8f);
 
-        final int[] frameCounter = {0}; // Initialises the array of integers used for frameCounter.
-        final Timer[] runTimer = {null}; // Initialises the array of integers used for runTimer.
+        final int[] frameCounter = {0};
+        final Timer[] runTimer = {null};
 
         BodyImage[] runFrames = new BodyImage[]{ // Use of AI:idea of using array to store images.
-                new BodyImage("data/Samurai/Run(1).png", 5.5f),
-                new BodyImage("data/Samurai/Run(2).png", 5.5f),
-                new BodyImage("data/Samurai/Run(3).png", 5.5f),
-                new BodyImage("data/Samurai/Run(4).png", 5.5f),
-                new BodyImage("data/Samurai/Run(5).png", 5.5f),
-                new BodyImage("data/Samurai/Run(6).png", 5.5f),
-                new BodyImage("data/Samurai/Run(7).png", 5.5f),
-                new BodyImage("data/Samurai/Run(8).png", 5.5f),
-        }; // Initialises the array of images used for the animation of the player running in the right direction.
+                new BodyImage("data/Shinobi/Run(1).png", 5.5f),
+                new BodyImage("data/Shinobi/Run(2).png", 5.5f),
+                new BodyImage("data/Shinobi/Run(3).png", 5.5f),
+                new BodyImage("data/Shinobi/Run(4).png", 5.5f),
+                new BodyImage("data/Shinobi/Run(5).png", 5.5f),
+                new BodyImage("data/Shinobi/Run(6).png", 5.5f),
+                new BodyImage("data/Shinobi/Run(7).png", 5.5f),
+                new BodyImage("data/Shinobi/Run(8).png", 5.5f),
+        };
 
         BodyImage[] leftFrames = new BodyImage[]{
-                new BodyImage("data/Samurai/RunLeft(1).png", 5.5f),
-                new BodyImage("data/Samurai/RunLeft(2).png", 5.5f),
-                new BodyImage("data/Samurai/RunLeft(3).png", 5.5f),
-                new BodyImage("data/Samurai/RunLeft(4).png", 5.5f),
-                new BodyImage("data/Samurai/RunLeft(5).png", 5.5f),
-                new BodyImage("data/Samurai/RunLeft(6).png", 5.5f),
-                new BodyImage("data/Samurai/RunLeft(7).png", 5.5f),
-                new BodyImage("data/Samurai/RunLeft(8).png", 5.5f),
-        }; // Initialises the array of images used for the animation of the player running in the left direction.
-
-        final boolean[] moveRight = {false}; // Boolean flag used to determine if the player can move right or not.
-        final boolean[] moveLeft = {false}; // Boolean flag used to determine if the player can move left or not.
-        final boolean[] canDamage = { false }; // Boolean flag used to determine if the player can move damage an enemy or not.
-        PlayerCollision listener = new PlayerCollision(player); // Initialises the object listener.
-        player.addCollisionListener(listener); // Used to allow the player's collisions to have an effect with other objects in game.
-        frames.addKeyListener(new KeyAdapter() { //Used to allow key inputs to affect the player image.
+                new BodyImage("data/Shinobi/LeftRun(1).png", 5.5f),
+                new BodyImage("data/Shinobi/LeftRun(2).png", 5.5f),
+                new BodyImage("data/Shinobi/LeftRun(3).png", 5.5f),
+                new BodyImage("data/Shinobi/LeftRun(4).png", 5.5f),
+                new BodyImage("data/Shinobi/LeftRun(5).png", 5.5f),
+                new BodyImage("data/Shinobi/LeftRun(6).png", 5.5f),
+                new BodyImage("data/Shinobi/LeftRun(7).png", 5.5f),
+                new BodyImage("data/Shinobi/LeftRun(8).png", 5.5f),
+        };
+        player.gainLife();
+        player.setSoundClip_Level3();
+        final boolean[] moveRight = {false};
+        final boolean[] moveLeft = {false};
+        final boolean[] canDamage = { false };
+        PlayerCollision listener = new PlayerCollision(player);
+        player.addCollisionListener(listener);
+        frames.addKeyListener(new KeyAdapter() {
 
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveRight[0] = !(player.getPosition().x > 270); // Used to make moveRight false when player reaches the end of the level.
-                    if (runTimer[0] == null) { // Used to keep the animation running whilst the D key is pressed.
+                    moveRight[0] = !(player.getPosition().x > 270);
+                    if (runTimer[0] == null) {
                         frameCounter[0] = 0;
-                        runTimer[0] = new Timer(75, _ -> { // Used to make the animation speed look presentable.
-                            player.removeAllImages(); // Used to remove idle image of player.
-                            player.addImage(runFrames[frameCounter[0] % runFrames.length]); // Add the right run frames.
+                        runTimer[0] = new Timer(75, _ -> {
+                            player.removeAllImages();
+                            player.addImage(runFrames[frameCounter[0] % runFrames.length]);
                             frameCounter[0] = (frameCounter[0] + 1) % runFrames.length;
                         });
                         runTimer[0].start();
@@ -119,10 +120,10 @@ public class Level3 extends World {
                         player.setLinearVelocity(new Vec2(0f, 0f));
                         player.applyImpulse(new Vec2(0f, 0f));
                     }
-                    listener.setCanJump(false); // Used to prevent the player from jumping whilst already in the air.
-                    player.applyImpulse(new Vec2(0f, 110f)); // Impulse is used as it's only applied once when the W key is pressed.
+                    listener.setCanJump(false);
+                    player.applyImpulse(new Vec2(0f, 110f));
                     player.removeAllImages();
-                    player.addImage( new BodyImage("data/Samurai/Jump(1).png", 5.5f));
+                    player.addImage( new BodyImage("data/Shinobi/Jump(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
@@ -135,14 +136,14 @@ public class Level3 extends World {
                     player.addImage(new BodyImage("data/Shinobi/Shield(1).png", 5.5f));
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if(player.getPosition().x > 270){
                         player.setLinearVelocity(new Vec2(0f, 0f));
                     }
                     listener.setCanDamage(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Samurai/Attack_1(5).png", 5.5f));
+                    player.addImage(new BodyImage("data/Shinobi/Attack_1(4).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
@@ -159,12 +160,12 @@ public class Level3 extends World {
                         });
                         runTimer[0].start();
                     }
-                } if(player.getPosition().x > 270){ // Used to stop music when player reaches end of the level.
+                } if(player.getPosition().x > 270){
                     player.finish_Level3();
                 } else if (e.getKeyCode() == KeyEvent.VK_M) {
                     player.finish_Level3();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    player.setSoundClip_Level2();
+                    player.setSoundClip_Level3();
                 }
                 if(player.getPosition().x > 270){
                     new Level3();
@@ -176,13 +177,13 @@ public class Level3 extends World {
 
             public void keyReleased(KeyEvent e) {
                 if  (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveRight[0]= false; // Used to make sure player doesn't keep moving when the D key is released.
+                    moveRight[0]= false;
                     if (runTimer[0] != null) {
                         runTimer[0].stop();
-                        runTimer[0] = null; // Used to reset the runTimer value from Timer back to null so the animation can restart.
+                        runTimer[0] = null;
                     }
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f)); // Idle image is returned.
+                    player.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));}
 
                 else if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -209,23 +210,23 @@ public class Level3 extends World {
                         runTimer[0] = null;
                     }
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Shinobi/LeftIdle(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));
                 }
             }
         });
-        levelTimer = new Timer(1000, e -> { // Mimics the same timer in Background class.
+        levelTimer = new Timer(1000, e -> {
             if (timeRemaining >= 0) {
                 timeRemaining--;
             } else {
-                levelTimer.stop(); // This timer actually affects the player if 0.
+                levelTimer.stop();
                 ((Timer)e.getSource()).stop();
-                player.loselife(); // Calls the method loselife in the Character class.
                 player.loselife();
                 player.loselife();
-                player.playerDeath(); // Calls the method playerDeath in the Character class.
+                player.loselife();
+                player.playerDeath();
                 player.setLinearVelocity(new Vec2(0f,0f));
-                destroyTimer = new Timer(1000, f -> { // Used to allow the playerDeath animation to end before destroying the player.
+                destroyTimer = new Timer(1000, f -> {
                     player.destroy();
                 });destroyTimer.start();
             }
@@ -234,7 +235,7 @@ public class Level3 extends World {
 
 
         this.addStepListener(new StepListener() {
-            public void preStep(StepEvent e) { // Used to handle all horizontal movement for a dynamic object.
+            public void preStep(StepEvent e) {
                 if (moveRight[0] && !(player.getPosition().x >270)) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }

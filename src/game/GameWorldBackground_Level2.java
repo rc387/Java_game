@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class GameWorldBackground_Level2 extends UserView {
     private final Image background;
-    private  int timeRemaining = 95;
+    private  int timeRemaining = 150;
     private Timer levelTimer;
     public GameWorldBackground_Level2(World w, int width, int height) {
         super(w, width, height);
@@ -47,7 +47,7 @@ public class GameWorldBackground_Level2 extends UserView {
         super.paintForeground(g);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Time: " + getTimeRemaining(), 560, 20);
+        g.drawString("Time: " + getTimeRemaining(), 545, 20);
         g.setFont(new Font("Arial", Font.BOLD, 12));
         g.drawString("W = jump, A = left, S = shield, D = right, Enter = attack",190,20);
     }

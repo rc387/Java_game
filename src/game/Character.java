@@ -12,6 +12,7 @@ public class Character extends DynamicBody  {
     private static int lives = 3;
     private static SoundClip soundClip;
     private static SoundClip Level2SoundClip;
+    private static SoundClip Level3SoundClip;
 
     public Character(World world) {
         super(world, CharacterShape);
@@ -48,6 +49,8 @@ public class Character extends DynamicBody  {
         removeAllImages();
         if(lives == 0){
             destroy();
+            Level3SoundClip.close();
+            Level2SoundClip.close();
             soundClip.close();
         }
 
@@ -62,7 +65,7 @@ public class Character extends DynamicBody  {
     }
 
     public void finish_Level3(){
-
+        Level3SoundClip.close();
     }
 
 
@@ -80,6 +83,15 @@ public class Character extends DynamicBody  {
             Level2SoundClip = new SoundClip("data/11-gt-force.wav");
             Level2SoundClip.loop();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setSoundClip_Level3() {
+        try {
+            Level3SoundClip = new SoundClip("4-gotham-at-night.wav");
+            Level3SoundClip.loop();
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

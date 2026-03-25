@@ -10,7 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Level2 extends World {
-    private int timeRemaining = 95;
+    private int timeRemaining = 150;
     private Timer levelTimer;
     private Timer destroyTimer;
     public Level2()
@@ -23,7 +23,7 @@ public class Level2 extends World {
         frames.setBackground(Color.BLACK);
 
         Character player = new Character(this);
-        player.setPosition(new Vec2(-7.25f, 2));
+        player.setPosition(new Vec2(280f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Shape platformShape = new BoxShape(7, 1);
@@ -269,7 +269,13 @@ public class Level2 extends World {
                     listener.setCanDamage(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Samurai/Attack_1(5).png", 5.5f));
+                    if (moveRight[0]){
+                        player.addImage(new BodyImage("data/Samurai/Attack_1(5).png", 5.5f));}
+                    else if (moveLeft[0]){
+                        player.addImage((new BodyImage("data/Samurai/LeftAttack_1(5).png", 5.5f)));
+                    }else {
+                        player.addImage(new BodyImage("data/Samurai/Attack_1(5).png", 5.5f));
+                    }
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
