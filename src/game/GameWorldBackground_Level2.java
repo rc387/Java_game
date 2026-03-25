@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class GameWorldBackground_Level2 extends UserView {
     private final Image background;
-    private  int timeRemaining = 90;
+    private  int timeRemaining = 95;
     private Timer levelTimer;
     public GameWorldBackground_Level2(World w, int width, int height) {
         super(w, width, height);

@@ -33,7 +33,7 @@ public class Level3 extends World {
         player.setAngularVelocity(0);
         player.setAngle(0);
 
-        Enemy npcGangsta = new Enemy(this, 44,69); // Initialises the leftBound & rightBound of the object npcGangsta.
+        Enemy_Level2 npcGangsta = new Enemy_Level2(this, 44,69); // Initialises the leftBound & rightBound of the object npcGangsta.
         npcGangsta.setPosition(new Vec2(68, -14));
         npcGangsta.setLinearVelocity(new Vec2(0, 0));
         npcGangsta.setAngularVelocity(0);
@@ -42,7 +42,7 @@ public class Level3 extends World {
         DeathShape deathShape = new DeathShape(this); // Initialises the object deathShape.
         deathShape.setPosition(new Vec2(-1, -100));
 
-        city.cs.engine.Shape platformShape = new BoxShape(7, 1); // Initialises the object platformShape.
+        Shape platformShape = new BoxShape(7, 1); // Initialises the object platformShape.
         StaticBody platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(-2.75f, -4.5f));
         platform.addImage(new BodyImage("data/Level2_platform.v1.png", 11.5f));
@@ -52,7 +52,7 @@ public class Level3 extends World {
         platform.setPosition(new Vec2(20, -4));
         platform.addImage(new BodyImage("data/Level2_platform.v1.png", 11.5f));
 
-        Enemy npcGangsta1 = new Enemy(this, 73, 77); // Bounds are used to define the X position the npc can't go beyond.
+        Enemy_Level2 npcGangsta1 = new Enemy_Level2(this, 73, 77); // Bounds are used to define the X position the npc can't go beyond.
         npcGangsta1.setPosition(new Vec2(74, -6));
         npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
 
@@ -132,7 +132,7 @@ public class Level3 extends World {
                     listener.setShield(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Samurai/Shield(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Shinobi/Shield(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -182,24 +182,24 @@ public class Level3 extends World {
                         runTimer[0] = null; // Used to reset the runTimer value from Timer back to null so the animation can restart.
                     }
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Samurai/Idle(1).png", 5.5f)); // Idle image is returned.
+                    player.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f)); // Idle image is returned.
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));}
 
                 else if (e.getKeyCode() == KeyEvent.VK_W) {
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Samurai/Idle(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
                     listener.setShield(false);
                     player.removeAllImages();
-                    player.addImage( new BodyImage("data/Samurai/Idle(1).png", 5.5f));
+                    player.addImage( new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     canDamage[0] = false;
                     player.removeAllImages();
-                    player.addImage( new BodyImage("data/Samurai/Idle(1).png", 5.5f));
+                    player.addImage( new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
@@ -209,7 +209,7 @@ public class Level3 extends World {
                         runTimer[0] = null;
                     }
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Samurai/LeftIdle(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Shinobi/LeftIdle(1).png", 5.5f));
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));
                 }
             }

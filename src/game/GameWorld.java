@@ -352,8 +352,6 @@ public class GameWorld extends World {
 
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) { // Used to handle all horizontal movement for a dynamic object.
-                System.out.println(timeRemaining);
-                System.out.println(player.getPosition().x);
                 if (moveRight[0] && !(player.getPosition().x >270)) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }
