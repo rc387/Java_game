@@ -15,7 +15,7 @@ public class Level2 extends World {
     private Timer destroyTimer;
     public Level2()
     {
-        GameWorldBackground_Level2 views = new GameWorldBackground_Level2(this,640,565);
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level2.jpg").getImage());
 
         final JFrame frames = new JFrame("Level 2");
         frames.add(views); frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frames.setLocationByPlatform(true);

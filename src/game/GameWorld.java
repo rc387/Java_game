@@ -9,11 +9,11 @@ import java.awt.event.KeyEvent;
 import city.cs.engine.BodyImage;
 
 public class GameWorld extends World {
-    private int timeRemaining = 90;
+    private int timeRemaining = 150;
     private Timer levelTimer;
     private Timer destroyTimer;
     public GameWorld() {
-        GameWorldBackground view = new GameWorldBackground(this,640,565); //Initialises the width and height of object view.
+        GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage()); //Initialises the width and height of object view.
 
         Character player = new Character(this); // Initialises the object player.
         player.setPosition(new Vec2(285f, 2));
@@ -173,9 +173,9 @@ public class GameWorld extends World {
         GoldCoinBody.setPosition(new Vec2(300, 2.5f));
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
 
-        Shape stopper = new BoxShape(0.2f,1.2f);
+        Shape stopper = new BoxShape(0.2f,0.5f);
         StaticBody stopperBody = new StaticBody(this, stopper);
-        stopperBody.setPosition(new Vec2(280, -13f));
+        stopperBody.setPosition(new Vec2(280, -13.9f));
 
         setGravity(9.8f);
 

@@ -52,6 +52,9 @@ public class PlayerCollision implements CollisionListener {
             player.loselife();
             canTakeDamage = false; // Used to make sure the player only takes damage once upon collision.
 
+        } else if (e.getOtherBody() instanceof Enemy_Level2 && !shield && !canDamage) {
+            player.loselife();
+            canTakeDamage = false;
         } else if (e.getOtherBody() instanceof Enemy && shield) {
             Character.shieldLife();
         } if (e.getOtherBody() instanceof DeathShape) {

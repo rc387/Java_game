@@ -10,11 +10,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Level3 extends World {
-    private int timeRemaining = 90;
+    private int timeRemaining = 150;
     private Timer levelTimer;
     private Timer destroyTimer;
     public Level3(){
-        GameWorldBackground_Level2 views = new GameWorldBackground_Level2(this,640,565);
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level3.jpg").getImage());
 
         final JFrame frames = new JFrame("Level3");
         frames.add(views);

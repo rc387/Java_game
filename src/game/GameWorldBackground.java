@@ -8,11 +8,12 @@ import java.awt.event.KeyEvent;
 
 public class GameWorldBackground extends UserView {
     private final Image background;
-    private  int timeRemaining = 90;
+    private int timeRemaining = 150;
     private Timer levelTimer;
 
-    public GameWorldBackground(World w, int width, int height) {
+    public GameWorldBackground(World w, int width, int height, Image background) {
         super(w, width, height);
+        this.background = background;
         background = new ImageIcon("data/background(1).jpg").getImage();
         levelTimer = new Timer(1000, e -> { // Timer that's visible on screen.
             if (timeRemaining >= 0) {
@@ -36,7 +37,7 @@ public class GameWorldBackground extends UserView {
                 RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR
         );
-        g.drawImage(background,0,-30,getWidth(), getHeight(),null);
+        g.drawImage(background,0,0,getWidth(), getHeight(),null);
     }
     @Override
     public void setBackground(Color bgColor) {
@@ -48,7 +49,7 @@ public class GameWorldBackground extends UserView {
         super.paintForeground(g);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Time: " + getTimeRemaining(), 560, 20);
+        g.drawString("Time: " + getTimeRemaining(), 545, 20);
         g.setFont(new Font("Arial", Font.BOLD, 12));
         g.drawString("W = jump, A = left, S = shield, D = right, Enter = attack",190,20);
     }
