@@ -10,7 +10,7 @@ public class Dynamic_Platform extends DynamicBody {
     private int direction = 1;
     private final float ceilingBound;
     private final float floorBound;
-    public Dynamic_Platform(World w, float ceilingBound, float floorBound) {
+    public Dynamic_Platform(World w, float ceilingBound, float floorBound, BodyImage image_1) {
         super(w, PlatformShape);
         this.ceilingBound = ceilingBound;
         this.floorBound = floorBound;

@@ -89,7 +89,7 @@ public class Character extends DynamicBody  {
 
     public void setSoundClip_Level3() {
         try {
-            Level3SoundClip = new SoundClip("4-gotham-at-night.wav");
+            Level3SoundClip = new SoundClip("data/4-gotham-at-night.wav");
             Level3SoundClip.loop();
         }catch (Exception e){
             e.printStackTrace();

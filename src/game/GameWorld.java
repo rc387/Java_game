@@ -16,10 +16,10 @@ public class GameWorld extends World {
         GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage()); //Initialises the width and height of object view.
 
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(285f, 2));
+        player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
-        Enemy npcGangsta = new Enemy(this, 44,69); // Initialises the leftBound & rightBound of the object npcGangsta.
+        Enemy npcGangsta = new Enemy(this, 44,69,1); // Initialises the leftBound & rightBound of the object npcGangsta.
         npcGangsta.setPosition(new Vec2(68, -14));
         npcGangsta.setLinearVelocity(new Vec2(0, 0)); npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0);
 
@@ -61,10 +61,10 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(78, -7.5f));
         platform.addImage(new BodyImage("data/platform(1).png", 10));
 
-        Enemy npcGangsta1 = new Enemy(this, 73, 77); // Bounds are used to define the X position the npc can't go beyond.
+        Enemy npcGangsta1 = new Enemy(this, 73, 77,1); // Bounds are used to define the X position the npc can't go beyond.
         npcGangsta1.setPosition(new Vec2(74, -6)); npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
 
-        Enemy npcGangsta2 = new Enemy(this, 78.5f, 82.5f);
+        Enemy npcGangsta2 = new Enemy(this, 78.5f, 82.5f,1);
         npcGangsta2.setPosition(new Vec2(82, -6)); npcGangsta2.setAngularVelocity(0); npcGangsta2.setAngle(0);
 
         platformShape = new BoxShape(5, 0.5f);
@@ -72,7 +72,7 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(92, -3));
         platform.addImage(new BodyImage("data/platform(1).png", 8));
 
-        Enemy npcGangsta3 = new Enemy(this, 88, 96.5f);
+        Enemy npcGangsta3 = new Enemy(this, 88, 96.5f,1);
         npcGangsta3.setPosition(new Vec2(92, -1)); npcGangsta3.setAngularVelocity(0); npcGangsta3.setAngle(0);
 
         platformShape = new BoxShape(7, 1);
@@ -80,10 +80,10 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(110, -12));
         platform.addImage(new BodyImage("data/platform(2).png", 11));
 
-        Enemy npcGangsta4 = new Enemy(this, 102, 106);
+        Enemy npcGangsta4 = new Enemy(this, 102, 106,1);
         npcGangsta4.setPosition(new Vec2(106, -10)); npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0);
 
-        Enemy npcGangsta5 =  new Enemy(this, 110.5f, 114.5f);
+        Enemy npcGangsta5 =  new Enemy(this, 110.5f, 114.5f,1);
         npcGangsta5.setPosition(new Vec2(114, -10)); npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0);
 
         platformShape = new BoxShape(6, 1);
@@ -96,13 +96,13 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(150, -14));
         platform.addImage(new BodyImage("data/platform(2).png", 12));
 
-        Enemy npcGangsta6 = new Enemy(this, 142, 144.5f);
+        Enemy npcGangsta6 = new Enemy(this, 142, 144.5f,1);
         npcGangsta6.setPosition(new Vec2(146, -12)); npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0);
 
-        Enemy npcGangsta7 = new Enemy(this, 147.5f, 150);
+        Enemy npcGangsta7 = new Enemy(this, 147.5f, 150,1);
         npcGangsta7.setPosition(new Vec2(151.5f, -12)); npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
 
-        Enemy npcGangsta8 = new Enemy(this, 152, 154.5f);
+        Enemy npcGangsta8 = new Enemy(this, 152, 154.5f,1);
         npcGangsta8.setPosition(new Vec2(156, -12)); npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0);
 
         platformShape = new BoxShape(5, 0.5f);
@@ -115,7 +115,7 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(182, -4));
         platform.addImage(new BodyImage("data/platform(1).png", 8));
 
-        Enemy npcGangsta9 = new Enemy(this, 178, 183.5f);
+        Enemy npcGangsta9 = new Enemy(this, 178, 183.5f,1);
         npcGangsta9.setPosition(new Vec2(182, -2)); npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0);
 
         platformShape = new BoxShape(7, 1);
@@ -123,10 +123,10 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(200, -14));
         platform.addImage(new BodyImage("data/platform(2).png", 11));
 
-        Enemy npcGangsta10 = new Enemy(this, 192, 198);
+        Enemy npcGangsta10 = new Enemy(this, 192, 198,1);
         npcGangsta10.setPosition(new Vec2(196, -12)); npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0);
 
-        Enemy npcGangsta11 = new Enemy(this, 200, 206);
+        Enemy npcGangsta11 = new Enemy(this, 200, 206,1);
         npcGangsta11.setPosition(new Vec2(204, -12)); npcGangsta11.setAngularVelocity(0); npcGangsta11.setAngle(0);
 
         platformShape = new BoxShape(6, 1);
@@ -139,7 +139,7 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(235, -4));
         platform.addImage(new BodyImage("data/platform(1).png", 8));
 
-        Enemy npcGangsta12 = new Enemy(this, 231, 239);
+        Enemy npcGangsta12 = new Enemy(this, 231, 239,1);
         npcGangsta12.setPosition(new Vec2(235, -2)); npcGangsta12.setAngularVelocity(0); npcGangsta12.setAngle(0);
 
         platformShape = new BoxShape(9, 1);
@@ -147,15 +147,15 @@ public class GameWorld extends World {
         platform.setPosition(new Vec2(255, -14));
         platform.addImage(new BodyImage("data/platform(2).png", 13));
 
-        Enemy npcGangsta13 = new Enemy(this, 247, 249.5f);
+        Enemy npcGangsta13 = new Enemy(this, 247, 249.5f,1);
         npcGangsta13.setPosition(new Vec2(251, -12));
         npcGangsta13.setAngularVelocity(0); npcGangsta13.setAngle(0);
 
-        Enemy npcGangsta14 = new Enemy(this, 252, 254.5f);
+        Enemy npcGangsta14 = new Enemy(this, 252, 254.5f,1);
         npcGangsta14.setPosition(new Vec2(255, -12));
         npcGangsta14.setAngularVelocity(0); npcGangsta14.setAngle(0);
 
-        Enemy npcGangsta15 = new Enemy(this, 257.5f, 260);
+        Enemy npcGangsta15 = new Enemy(this, 257.5f, 260,1);
         npcGangsta15.setPosition(new Vec2(260, -12));
         npcGangsta15.setAngularVelocity(0); npcGangsta15.setAngle(0);
 

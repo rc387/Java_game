@@ -43,16 +43,13 @@ public class PlayerCollision implements CollisionListener {
         } else if (e.getOtherBody() instanceof Dynamic_Platform) {
             canJump = true;
         } else if (e.getOtherBody() instanceof Enemy enemy && canDamage) { // Used to allow the enemy is take damage when collision occurs.
-            enemy.loseLife();
-            enemy.destroy(); // Enemies in the 1st level only have 1 life so are just destroyed.
-            canDamage = false; // Used to make sure the enemy only takes damage once upon collision.
-        } else if (e.getOtherBody() instanceof Enemy_Level2 enemy && canDamage) {
             enemy.lose_Life();
+            canDamage = false; // Used to make sure the enemy only takes damage once upon collision.
         } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage ) { // Used to allow the player is take damage when collision occurs.
             player.loselife();
             canTakeDamage = false; // Used to make sure the player only takes damage once upon collision.
 
-        } else if (e.getOtherBody() instanceof Enemy_Level2 && !shield && !canDamage) {
+        } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage) {
             player.loselife();
             canTakeDamage = false;
         } else if (e.getOtherBody() instanceof Enemy && shield) {
