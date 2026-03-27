@@ -10,7 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Level2 extends World {
-    private int timeRemaining = 150;
+    private int timeRemaining = 180;
     private Timer levelTimer;
     private Timer destroyTimer;
     public Level2()
@@ -23,7 +23,7 @@ public class Level2 extends World {
         frames.setBackground(Color.BLACK);
 
         Character player = new Character(this);
-        player.setPosition(new Vec2(200f, 2));
+        player.setPosition(new Vec2(220f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Shape platformShape = new BoxShape(7, 1);
@@ -44,7 +44,7 @@ public class Level2 extends World {
         platform.setPosition(new Vec2(20, -4.5f));
         platform.addImage(new BodyImage("data/platform_level2.png", 11.5f));
 
-        Dynamic_Platform dynamicPlatform = new Dynamic_Platform(this,40 ,-20,new BodyImage("data/platform_level2.png"));
+        Dynamic_Platform dynamicPlatform = new Dynamic_Platform(this,40 ,-20,new BodyImage("data/platform_level2.png",10));
         dynamicPlatform.setPosition(new Vec2(35, -5f));
         dynamicPlatform.setLinearVelocity(new Vec2(0, 0));
         dynamicPlatform.setAngularVelocity(0); dynamicPlatform.setAngle(0);
@@ -76,7 +76,7 @@ public class Level2 extends World {
         npcGangsta4.setPosition(new Vec2(79, 0f));
         npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0);
 
-        Dynamic_Platform dynamicPlatform2 = new Dynamic_Platform(this, 40 ,-20,new BodyImage("data/platform_level2.png"));
+        Dynamic_Platform dynamicPlatform2 = new Dynamic_Platform(this, 40 ,-20,new BodyImage("data/platform_level2.png",10));
         dynamicPlatform2.setPosition(new Vec2(95, -2f));
         dynamicPlatform2.setLinearVelocity(new Vec2(0, 20));
         dynamicPlatform2.setAngularVelocity(0); dynamicPlatform2.setAngle(0);
@@ -119,7 +119,7 @@ public class Level2 extends World {
         Enemy npcGangsta10 = new Enemy(this, 165, 170,2);
         npcGangsta10.setPosition(new Vec2(168, -10f)); npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0);
 
-        Dynamic_Platform dynamicPlatform3 = new Dynamic_Platform(this,40,-20,new BodyImage("data/platform_level2.png"));
+        Dynamic_Platform dynamicPlatform3 = new Dynamic_Platform(this,40,-20,new BodyImage("data/platform_level2.png",10f));
         dynamicPlatform3.setPosition(new Vec2(182, -12f));
         dynamicPlatform3.setLinearVelocity(new Vec2(0, 20));
         dynamicPlatform3.setAngularVelocity(0);dynamicPlatform3.setAngle(0);

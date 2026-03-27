@@ -10,7 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Level4 extends World {
-    private int timeRemaining = 150;
+    private int timeRemaining = 180;
     private Timer levelTimer;
     private Timer destroyTimer;
     public Level4(){

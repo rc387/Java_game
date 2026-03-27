@@ -49,7 +49,6 @@ public class Character extends DynamicBody  {
         removeAllImages();
         if(lives == 0){
             destroy();
-            Level3SoundClip.close();
             Level2SoundClip.close();
             soundClip.close();
         }

@@ -9,14 +9,14 @@ import java.awt.event.KeyEvent;
 import city.cs.engine.BodyImage;
 
 public class GameWorld extends World {
-    private int timeRemaining = 150;
+    private int timeRemaining = 180;
     private Timer levelTimer;
     private Timer destroyTimer;
     public GameWorld() {
         GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage()); //Initialises the width and height of object view.
 
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(-7.25f, 2));
+        player.setPosition(new Vec2(285f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Enemy npcGangsta = new Enemy(this, 44,69,1); // Initialises the leftBound & rightBound of the object npcGangsta.

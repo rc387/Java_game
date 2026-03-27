@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 public class GameWorldBackground extends UserView {
     private final Image background;
-    private int timeRemaining = 150;
+    private int timeRemaining = 180;
     private Timer levelTimer;
 
     public GameWorldBackground(World w, int width, int height, Image background) {

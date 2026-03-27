@@ -182,8 +182,8 @@ public class Enemy extends Character {
         float x = getPosition().x;
         if (x > rightBound) direction = -1;
         if (x < leftBound) direction = 1;
-        if (lives == 1 && x > rightBound) direction = -0.1f;
-        if (lives == 1 && x < leftBound) direction = 0.1f;
+        if (lives < 3 && x > rightBound) direction = -0.1f;
+        if (lives < 3 && x < leftBound) direction = 0.1f;
 
         setLinearVelocity(new Vec2(3 * direction, 0));
 
