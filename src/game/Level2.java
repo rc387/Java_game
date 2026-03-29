@@ -23,7 +23,7 @@ public class Level2 extends World {
         frames.setBackground(Color.BLACK);
 
         Character player = new Character(this);
-        player.setPosition(new Vec2(220f, 2));
+        player.setPosition(new Vec2(280f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Shape platformShape = new BoxShape(7, 1);

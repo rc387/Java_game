@@ -12,6 +12,8 @@ public class Enemy extends Character {
     private final float leftBound;
     private final float rightBound;
     private int lives = 2;
+    private Boolean canAttack = false;
+    private int attackTimer = 0;
 
     public Enemy(World world, float leftBound, float rightBound, int lives) {
         super(world);
@@ -155,11 +157,15 @@ public class Enemy extends Character {
         if (lives == 1 && x < leftBound) direction = 0.1f;
 
         setLinearVelocity(new Vec2(3 * direction, 0));
-
         animationTick++; // Used to control the speed of the animation.
-        if (animationTick % 10 == 0) { // Used to that animate is only called 6 times per second.
+        if (direction == 1 || direction == -1) {
+            if (animationTick % 10 == 0) { // Use of AI:animationTick, to control the speed of the animation using modulus.
             animate_Level2();
-        }// Use of AI:animationTick, to control the speed of the animation using modulus.
+        }}else{
+            if (animationTick % 5 == 0) {
+                animate_Level2();
+            }
+        }
     }
 
     public void animate_Level2(){
@@ -180,17 +186,27 @@ public class Enemy extends Character {
 
     public void update_Level3(){
         float x = getPosition().x;
+        attackTimer++;
+        canAttack = attackTimer % 28 == 0;
         if (x > rightBound) direction = -1;
         if (x < leftBound) direction = 1;
         if (lives < 3 && x > rightBound) direction = -0.1f;
         if (lives < 3 && x < leftBound) direction = 0.1f;
+        if (x > rightBound && canAttack) direction = -0.9f;
+        if (x < leftBound && canAttack) direction = 0.9f;
 
         setLinearVelocity(new Vec2(3 * direction, 0));
-
-        animationTick++;
-        if (animationTick % 10 == 0) {
-            animate_Level3();
-        }// Use of AI:animationTick, to control the speed of the animation using modulus.
+        animationTick++; // Used to control the speed of the animation.
+        if (direction == 1 || direction == -1) {
+            if (animationTick % 10 == 0) { // Use of AI:animationTick, to control the speed of the animation using modulus.
+                animate_Level3();
+            }} else if (direction == 0.1f || direction == -0.1f) {
+                if (animationTick % 5 == 0) {
+                    animate_Level3();
+                }}else if (direction == 0.9f ||  direction == -0.9f) {
+                    if (animationTick % 7 == 0) {
+                        animate_Level3();
+                    }}
     }
 
     public void animate_Level3(){
@@ -199,12 +215,18 @@ public class Enemy extends Character {
             addImage(leftWalkFrames3[frameCounter % leftWalkFrames3.length]);
         } else if (direction == 1) {
             addImage(walkFrames3[frameCounter % walkFrames3.length]);
-        }else if(direction == -0.1f) {
+        } else if(direction == -0.1f) {
             frameCounter = (frameCounter + 1) % hurtFrames3.length;
             addImage(hurtFrames3[frameCounter % hurtFrames3.length]);
         } else if (direction == 0.1f) {
             frameCounter = (frameCounter + 1) % leftHurtFrames3.length;
             addImage(leftHurtFrames3[frameCounter % leftHurtFrames3.length]);
+        } else if (direction == -0.9f) {
+            frameCounter = (frameCounter + 1) % attackFrames.length;
+            addImage(attackFrames[frameCounter % attackFrames.length]);
+        } else if (direction == 0.9f) {
+            frameCounter = (frameCounter + 1) % LeftAttackFrames.length;
+            addImage(LeftAttackFrames[frameCounter % LeftAttackFrames.length]);
         }
         frameCounter = (frameCounter + 1) % walkFrames3.length;
     }
