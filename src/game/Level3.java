@@ -81,7 +81,7 @@ public class Level3 extends World {
         npcGangsta4.setPosition(new Vec2(79.5f, -1f));
         npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0); npcGangsta4.addCollisionListener(npcGangsta);
 
-        Enemy npcGangsta5 = new Enemy(this, 86f, 90f,3);
+        Enemy npcGangsta5 = new Enemy(this, 85f, 89f,3);
         npcGangsta5.setPosition(new Vec2(85f, -1f));
         npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0); npcGangsta5.addCollisionListener(npcGangsta);
 
@@ -108,8 +108,8 @@ public class Level3 extends World {
         platform.setPosition(new Vec2(125, -9f));
         platform.addImage(new BodyImage("data/platform_level3.png", 7.5f));
 
-        Enemy npcGangsta8 = new Enemy(this, 117.5f, 125f,3);
-        npcGangsta8.setPosition(new Vec2(121f, -7f));
+        Enemy npcGangsta8 = new Enemy(this, 121.5f, 125f,3);
+        npcGangsta8.setPosition(new Vec2(120f, -7f));
         npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0); npcGangsta8.addCollisionListener(npcGangsta);
 
         platformShape = new BoxShape(4.5f, 0.5f);
@@ -150,7 +150,7 @@ public class Level3 extends World {
 
         platformShape = new BoxShape(3.5f, 0.5f);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(189, -3f));
+        platform.setPosition(new Vec2(185, -3f));
         platform.addImage(new BodyImage("data/platform_level3.png", 6f));
 
         Dynamic_Platform dynamicPlatform4 = new Dynamic_Platform(this, 40, -20,new BodyImage("data/platform_level3.png",10));
@@ -189,9 +189,10 @@ public class Level3 extends World {
         Enemy_attack stave = new Enemy_attack(this);
         stave.setPosition(new Vec2(15f, 100f)); stave.setAngle(0f); stave.setAngularVelocity(0f);
         int x = 30; int y = 175;
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 35; i++) {
+            x = x + 5; y = y + 190;
             stave = new Enemy_attack(this);
-            stave.setPosition(new Vec2(x+ 15, y + 75 ));
+            stave.setPosition(new Vec2(x+ 7.5f, y + 200 ));
         }
 
         Flag flagimage = new Flag(this);
@@ -236,9 +237,6 @@ public class Level3 extends World {
             e.printStackTrace();
         }
 
-        if(player.getPosition().x > 30){
-            views.setZoom(30f);
-        }
 
         player.gainLife();
         final boolean[] moveRight = {false};
@@ -317,7 +315,7 @@ public class Level3 extends World {
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     Level3SoundClip.play();
                 }
-                if(player.getPosition().x > 275){
+                if(player.getPosition().x > 250){
                     new Level4();
                     frames.getContentPane().removeAll();
                     frames.setVisible(false);
@@ -411,19 +409,21 @@ public class Level3 extends World {
                 dynamicPlatform4.update(); dynamicPlatform4.setAngle(0f); dynamicPlatform4.setAngularVelocity(0f);
                 finalStave.setAngle(0f); finalStave.setAngularVelocity(0f);
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
-                views.setZoom(-25f);
+                views.setZoom(10f);
                 if(player.getPosition().x > 30 && player.getPosition().x < 50){
                     views.setZoom(30f);
                 } else if (player.getPosition().x > 152 && player.getPosition().x < 165) {
-
+                    views.setZoom(-23f);
                 } else if (player.getPosition().x > 177 && player.getPosition().x < 197) {
-
+                    views.setZoom(17f);
                 } else if (player.getPosition().x > 214 && player.getPosition().x < 233) {
-
+                    views.setZoom(-41f);
                 } else if (player.getPosition().x > 242 && player.getPosition().x < 252) {
-
-                } else if (player.getPosition().x > 266 && player.getPosition().x < 274) {}
-
+                    views.setZoom(6f);
+                } else if (player.getPosition().x > 266 && player.getPosition().x < 274) {
+                    views.setZoom(33f);
+                }
+                System.out.println(player.getPosition().x);
             }
 
             @Override
