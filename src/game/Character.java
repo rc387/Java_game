@@ -10,9 +10,6 @@ public class Character extends DynamicBody  {
     private static final BodyImage image = new BodyImage("data/Fighter/Idle(1).png", 5.5f);
     private static final Image heart = new ImageIcon("data/PNG/Bronze/Bronze_11.png").getImage();
     private static int lives = 3;
-    private static SoundClip soundClip;
-    private static SoundClip Level2SoundClip;
-    private static SoundClip Level3SoundClip;
 
     public Character(World world) {
         super(world, CharacterShape);
@@ -49,50 +46,11 @@ public class Character extends DynamicBody  {
         removeAllImages();
         if(lives == 0){
             destroy();
-            Level2SoundClip.close();
-            soundClip.close();
+
+
         }
 
     }
 
-    public void finish(){
-        soundClip.close();
-    }
-
-    public void finish_Level2(){
-        Level2SoundClip.close();
-    }
-
-    public void finish_Level3(){
-        Level3SoundClip.close();
-    }
-
-
-    public void setSoundClip() {
-        try {
-            soundClip = new SoundClip("data/7-dessert.wav"); // Used to initialise the background music.
-            soundClip.loop();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setSoundClip_Level2() {
-        try {
-            Level2SoundClip = new SoundClip("data/11-gt-force.wav");
-            Level2SoundClip.loop();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setSoundClip_Level3() {
-        try {
-            Level3SoundClip = new SoundClip("data/4-gotham-at-night.wav");
-            Level3SoundClip.loop();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }
 // Author: Jonathan Ross

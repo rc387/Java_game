@@ -3,7 +3,7 @@ import city.cs.engine.*;
 
 import org.jbox2d.common.Vec2;
 
-public class Enemy extends Character {
+public class Enemy extends Character implements CollisionListener {
     private static final Shape CharacterShape = new BoxShape(1,2.5f);
     private static final BodyImage image = new BodyImage("data/Gangsters_2/Idle(1).png", 5.5f);
     private static final BodyImage hurt_image = new BodyImage("data/Raider_3/Hurt(1).png", 5.5f);
@@ -229,6 +229,14 @@ public class Enemy extends Character {
             addImage(LeftAttackFrames[frameCounter % LeftAttackFrames.length]);
         }
         frameCounter = (frameCounter + 1) % walkFrames3.length;
+    }
+
+    @Override
+        public void collide(CollisionEvent e) {
+            if (e.getOtherBody() instanceof Enemy_attack enemy) {
+                lives--;
+                enemy.destroyed();
+            }
     }
 
     private void setFixedRotation(boolean b) {}

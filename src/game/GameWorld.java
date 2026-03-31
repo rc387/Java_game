@@ -12,11 +12,12 @@ public class GameWorld extends World {
     private int timeRemaining = 180;
     private Timer levelTimer;
     private Timer destroyTimer;
+    private SoundClip soundClip;
     public GameWorld() {
         GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage()); //Initialises the width and height of object view.
 
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(285f, 2));
+        player.setPosition(new Vec2(245f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Enemy npcGangsta = new Enemy(this, 44,69,1); // Initialises the leftBound & rightBound of the object npcGangsta.
@@ -173,10 +174,6 @@ public class GameWorld extends World {
         GoldCoinBody.setPosition(new Vec2(300, 2.5f));
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
 
-        Shape stopper = new BoxShape(0.2f,0.5f);
-        StaticBody stopperBody = new StaticBody(this, stopper);
-        stopperBody.setPosition(new Vec2(280, -13.9f));
-
         setGravity(9.8f);
 
         final JFrame frame = new JFrame("Level 1");
@@ -206,13 +203,22 @@ public class GameWorld extends World {
                 new BodyImage("data/Fighter/RunLeft(7).png", 5.5f),
                 new BodyImage("data/Fighter/RunLeft(8).png", 5.5f),
         }; // Initialises the array of images used for the animation of the player running in the left direction.
-        player.setSoundClip();
+
+            try {
+                soundClip = new SoundClip("data/7-dessert.wav"); // Used to initialise the background music.
+                soundClip.loop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         final boolean[] moveRight = {false}; // Boolean flag used to determine if the player can move right or not.
         final boolean[] moveLeft = {false}; // Boolean flag used to determine if the player can move left or not.
         final boolean[] canDamage = { false }; // Boolean flag used to determine if the player can move damage an enemy or not.
         PlayerCollision listener = new PlayerCollision(player); // Initialises the object listener.
         player.addCollisionListener(listener); // Used to allow the player's collisions to have an effect with other objects in game.
         frame.addKeyListener(new KeyAdapter() { //Used to allow key inputs to affect the player image.
+
+
 
             public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_D) {
@@ -278,18 +284,16 @@ public class GameWorld extends World {
                     });
                     runTimer[0].start();
                 }
-            } if(player.getPosition().x > 270){ // Used to stop music when player reaches end of the level.
-                    player.finish();
-            } else if (e.getKeyCode() == KeyEvent.VK_M) {
-                    player.finish();
+            } if (e.getKeyCode() == KeyEvent.VK_M) {
+                    soundClip.stop();
             } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    player.setSoundClip();
+                    soundClip.play();
             }
                     if(player.getPosition().x > 270){
                     new Level2();
                     frame.getContentPane().removeAll();
                     frame.setVisible(false);
-                    player.finish();}
+                    soundClip.close();}
 
                 }
 

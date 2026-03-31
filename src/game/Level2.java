@@ -13,6 +13,7 @@ public class Level2 extends World {
     private int timeRemaining = 180;
     private Timer levelTimer;
     private Timer destroyTimer;
+    private SoundClip Level2SoundClip;
     public Level2()
     {
         GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level2.jpg").getImage());
@@ -189,9 +190,6 @@ public class Level2 extends World {
 
         DeathShape deathShape = new DeathShape(this); deathShape.setPosition(new Vec2(-1, -100));
 
-        Shape stopper = new BoxShape(0.2f,1.2f);
-        StaticBody stopperBody = new StaticBody(this, stopper);
-        stopperBody.setPosition(new Vec2(288, -13f));
 
         setGravity(9.8f);
 
@@ -219,8 +217,14 @@ public class Level2 extends World {
                 new BodyImage("data/Samurai/RunLeft(7).png", 5.5f),
                 new BodyImage("data/Samurai/RunLeft(8).png", 5.5f),
         };
+        try {
+            Level2SoundClip = new SoundClip("data/11-gt-force.wav");
+            Level2SoundClip.loop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         player.gainLife();
-        player.setSoundClip_Level2();
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
         final boolean[] canDamage = { false };
@@ -292,18 +296,16 @@ public class Level2 extends World {
                         });
                         runTimer[0].start();
                     }
-                } if(player.getPosition().x > 285){
-                    player.finish_Level2();
-                } else if (e.getKeyCode() == KeyEvent.VK_M) {
-                    player.finish_Level2();
+                } if (e.getKeyCode() == KeyEvent.VK_M) {
+                    Level2SoundClip.stop();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    player.setSoundClip_Level2();
+                    Level2SoundClip.play();
                 }
                 if(player.getPosition().x > 285){
                     new Level3();
                     frames.getContentPane().removeAll();
                     frames.setVisible(false);
-                    player.finish_Level2();}
+                    Level2SoundClip.stop();Level2SoundClip.stop();}
 
             }
 

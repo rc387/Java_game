@@ -85,7 +85,6 @@ public class Level4 extends World {
                 new BodyImage("data/Shinobi/LeftRun(8).png", 5.5f),
         };
         player.gainLife();
-        player.setSoundClip_Level3();
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
         final boolean[] canDamage = { false };
@@ -158,17 +157,14 @@ public class Level4 extends World {
                         runTimer[0].start();
                     }
                 } if(player.getPosition().x > 270){
-                    player.finish_Level3();
+
                 } else if (e.getKeyCode() == KeyEvent.VK_M) {
-                    player.finish_Level3();
+
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    player.setSoundClip_Level3();
+
                 }
                 if(player.getPosition().x > 270){
-                    new Level3();
-                    frames.getContentPane().removeAll();
-                    frames.setVisible(false);
-                    player.finish_Level3();}
+                    }
 
             }
 

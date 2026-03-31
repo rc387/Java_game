@@ -13,6 +13,7 @@ public class Level3 extends World {
     private int timeRemaining = 180;
     private Timer levelTimer;
     private Timer destroyTimer;
+    private SoundClip Level3SoundClip;
     public Level3(){
         GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level3.jpg").getImage());
 
@@ -42,11 +43,11 @@ public class Level3 extends World {
         Enemy npcGangsta = new Enemy(this, 15, 18,3);
         npcGangsta.setPosition(new Vec2(16, -2f));
         npcGangsta.setLinearVelocity(new Vec2(0, 0));
-        npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0);
+        npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0); npcGangsta.addCollisionListener(npcGangsta);
 
         Enemy npcGangsta1 = new Enemy(this, 21, 24.5f,3);
         npcGangsta1.setPosition(new Vec2(22, -2f));
-        npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
+        npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0); npcGangsta1.addCollisionListener(npcGangsta);
 
         Dynamic_Platform dynamicPlatform = new Dynamic_Platform(this, 40, -20,new BodyImage("data/platform_level3.png",10));
         dynamicPlatform.setPosition(new Vec2(35, -4f));
@@ -58,17 +59,13 @@ public class Level3 extends World {
         platform.setPosition(new Vec2(55, -12f));
         platform.addImage(new BodyImage("data/platform_level3.png", 12f));
 
-        Enemy npcGangsta2 = new Enemy(this, 48, 50.5f,3);
-        npcGangsta2.setPosition(new Vec2(49, -10f));
-        npcGangsta2.setAngularVelocity(0); npcGangsta2.setAngle(0);
+        Enemy npcGangsta2 = new Enemy(this, 50, 54f,3);
+        npcGangsta2.setPosition(new Vec2(51, -10f));
+        npcGangsta2.setAngularVelocity(0); npcGangsta2.setAngle(0); npcGangsta2.addCollisionListener(npcGangsta);
 
-        Enemy npcGangsta3 = new Enemy(this, 52.5f, 55f,3);
-        npcGangsta3.setPosition(new Vec2(53.5f, -10f));
-        npcGangsta3.setAngularVelocity(0); npcGangsta3.setAngle(0);
-
-        Enemy npcGangsta4 = new Enemy(this, 57f, 60f,3);
-        npcGangsta4.setPosition(new Vec2(58.5f, -10f));
-        npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0);
+        Enemy npcGangsta3 = new Enemy(this, 58f, 62f,3);
+        npcGangsta3.setPosition(new Vec2(59f, -10f));
+        npcGangsta3.setAngularVelocity(0); npcGangsta3.setAngle(0); npcGangsta3.addCollisionListener(npcGangsta);
 
         platformShape = new BoxShape(3.5f, 0.5f);
         platform = new StaticBody(this, platformShape);
@@ -80,13 +77,13 @@ public class Level3 extends World {
         platform.setPosition(new Vec2(83, -3f));
         platform.addImage(new BodyImage("data/platform_level3.png", 10f));
 
-        Enemy npcGangsta5 = new Enemy(this, 78, 81f,3);
-        npcGangsta5.setPosition(new Vec2(79.5f, -1f));
-        npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0);
+        Enemy npcGangsta4 = new Enemy(this, 78, 82f,3);
+        npcGangsta4.setPosition(new Vec2(79.5f, -1f));
+        npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0); npcGangsta4.addCollisionListener(npcGangsta);
 
-        Enemy npcGangsta6 = new Enemy(this, 83.5f, 87f,3);
-        npcGangsta6.setPosition(new Vec2(85f, -1f));
-        npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0);
+        Enemy npcGangsta5 = new Enemy(this, 86f, 90f,3);
+        npcGangsta5.setPosition(new Vec2(85f, -1f));
+        npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0); npcGangsta5.addCollisionListener(npcGangsta);
 
         Dynamic_Platform dynamicPlatform2 = new Dynamic_Platform(this, 40, -20,new BodyImage("data/platform_level3.png",10));
         dynamicPlatform2.setPosition(new Vec2(97, -3f));
@@ -98,44 +95,44 @@ public class Level3 extends World {
         platform.setPosition(new Vec2(113, -14f));
         platform.addImage(new BodyImage("data/platform_level3.png", 13f));
 
-        Enemy npcGangsta7 = new Enemy(this, 105, 109,3);
-        npcGangsta7.setPosition(new Vec2(106f, -12f));
-        npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
+        Enemy npcGangsta6 = new Enemy(this, 105, 109,3);
+        npcGangsta6.setPosition(new Vec2(106f, -12f));
+        npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0); npcGangsta6.addCollisionListener(npcGangsta);
 
-        Enemy npcGangsta8 = new Enemy(this, 111f, 115f,3);
-        npcGangsta8.setPosition(new Vec2(112f, -12f));
-        npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0);
+        Enemy npcGangsta7 = new Enemy(this, 111f, 115f,3);
+        npcGangsta7.setPosition(new Vec2(112f, -12f));
+        npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0); npcGangsta7.addCollisionListener(npcGangsta);
 
         platformShape = new BoxShape(4.5f, 0.5f);
         platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(125, -9f));
         platform.addImage(new BodyImage("data/platform_level3.png", 7.5f));
 
-        Enemy npcGangsta9 = new Enemy(this, 117.5f, 125f,3);
-        npcGangsta9.setPosition(new Vec2(121f, -7f));
-        npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0);
+        Enemy npcGangsta8 = new Enemy(this, 117.5f, 125f,3);
+        npcGangsta8.setPosition(new Vec2(121f, -7f));
+        npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0); npcGangsta8.addCollisionListener(npcGangsta);
 
         platformShape = new BoxShape(4.5f, 0.5f);
         platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(135, -4f));
         platform.addImage(new BodyImage("data/platform_level3.png", 7.5f));
 
-        Enemy npcGangsta10 = new Enemy(this, 134.5f, 140f,3);
-        npcGangsta10.setPosition(new Vec2(134f, -2f));
-        npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0);
+        Enemy npcGangsta9 = new Enemy(this, 134.5f, 140f,3);
+        npcGangsta9.setPosition(new Vec2(134f, -2f));
+        npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0); npcGangsta9.addCollisionListener(npcGangsta);
 
         platformShape = new BoxShape(8, 1);
         platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(143, -13f));
         platform.addImage(new BodyImage("data/platform_level3.png", 12f));
 
-        Enemy npcGangsta11 = new Enemy(this, 138, 140.5f,3);
-        npcGangsta11.setPosition(new Vec2(139f, -11f));
-        npcGangsta11.setAngularVelocity(0); npcGangsta11.setAngle(0);
+        Enemy npcGangsta10 = new Enemy(this, 138, 142f,3);
+        npcGangsta10.setPosition(new Vec2(139f, -11f));
+        npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0); npcGangsta10.addCollisionListener(npcGangsta);
 
-        Enemy npcGangsta12 = new Enemy(this, 142.5f, 145f,3);
-        npcGangsta12.setPosition(new Vec2(145f, -11f));
-        npcGangsta12.setAngularVelocity(0); npcGangsta12.setAngle(0);
+        Enemy npcGangsta11 = new Enemy(this, 144f, 148f,3);
+        npcGangsta11.setPosition(new Vec2(145f, -11f));
+        npcGangsta11.setAngularVelocity(0); npcGangsta11.setAngle(0); npcGangsta11.addCollisionListener(npcGangsta);
 
         Dynamic_Platform dynamicPlatform3 = new Dynamic_Platform(this, 40, -20,new BodyImage("data/platform_level3.png",10));
         dynamicPlatform3.setPosition(new Vec2(160, -13f));
@@ -147,13 +144,9 @@ public class Level3 extends World {
         platform.setPosition(new Vec2(173, -6f));
         platform.addImage(new BodyImage("data/platform_level3.png", 11f));
 
-        Enemy npcGangsta13 = new Enemy(this, 167, 170,3);
-        npcGangsta13.setPosition(new Vec2(168.5f, -4f));
-        npcGangsta13.setAngularVelocity(0); npcGangsta13.setAngle(0);
-
-        Enemy npcGangsta14 = new Enemy(this, 172f, 175.5f,3);
-        npcGangsta14.setPosition(new Vec2(174f, -4f));
-        npcGangsta14.setAngularVelocity(0); npcGangsta14.setAngle(0);
+        Enemy npcGangsta12 = new Enemy(this, 167, 170,3);
+        npcGangsta12.setPosition(new Vec2(168.5f, -4f));
+        npcGangsta12.setAngularVelocity(0); npcGangsta12.setAngle(0); npcGangsta12.addCollisionListener(npcGangsta);
 
         platformShape = new BoxShape(3.5f, 0.5f);
         platform = new StaticBody(this, platformShape);
@@ -167,29 +160,25 @@ public class Level3 extends World {
 
         platformShape = new BoxShape(10, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(210, -14f));
+        platform.setPosition(new Vec2(215, -14f));
         platform.addImage(new BodyImage("data/platform_level3.png", 14f));
 
-        Enemy npcGangsta15 = new Enemy(this, 201.5f, 203.2f,3);
-        npcGangsta15.setPosition(new Vec2(202.5f, -12f));
-        npcGangsta15.setAngularVelocity(0); npcGangsta15.setAngle(0);
+        Enemy npcGangsta13 = new Enemy(this, 206.5f, 208.2f,3);
+        npcGangsta13.setPosition(new Vec2(207.5f, -12f));
+        npcGangsta13.setAngularVelocity(0); npcGangsta13.setAngle(0); npcGangsta13.addCollisionListener(npcGangsta);
 
-        Enemy npcGangsta16 = new Enemy(this, 208.5f, 210.2f,3);
-        npcGangsta16.setPosition(new Vec2(208.5f, -12f));
-        npcGangsta16.setAngularVelocity(0); npcGangsta16.setAngle(0);
-
-        Enemy npcGangsta17 = new Enemy(this, 213.5f, 215.5f,3);
-        npcGangsta17.setPosition(new Vec2(214.5f, -12f));
-        npcGangsta17.setAngularVelocity(0); npcGangsta17.setAngle(0);
+        Enemy npcGangsta14 = new Enemy(this, 218.5f, 220.5f,3);
+        npcGangsta14.setPosition(new Vec2(219.5f, -12f));
+        npcGangsta14.setAngularVelocity(0); npcGangsta14.setAngle(0); npcGangsta14.addCollisionListener(npcGangsta);
 
         platformShape = new BoxShape(6, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(227, -8f));
+        platform.setPosition(new Vec2(232, -8f));
         platform.addImage(new BodyImage("data/platform_level3.png", 10f));
 
         platformShape = new BoxShape(6, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(241, -3f));
+        platform.setPosition(new Vec2(242, -3f));
         platform.addImage(new BodyImage("data/platform_level3.png", 10f));
 
         platformShape = new BoxShape(12, 1);
@@ -197,9 +186,8 @@ public class Level3 extends World {
         platform.setPosition(new Vec2(255, -14f));
         platform.addImage(new BodyImage("data/platform_level3.png", 14f));
 
-        Shape stopper = new BoxShape(0.2f, 0.2f);
-        StaticBody stopperBody = new StaticBody(this, stopper);
-        stopperBody.setPosition(new Vec2(249, -13f));
+        Enemy_attack stave = new Enemy_attack(this);
+        stave.setPosition(new Vec2(15f, 100f));
 
         Flag flagimage = new Flag(this);
         flagimage.setPosition(new Vec2(250, -10));
@@ -236,8 +224,18 @@ public class Level3 extends World {
                 new BodyImage("data/Shinobi/LeftRun(7).png", 5.5f),
                 new BodyImage("data/Shinobi/LeftRun(8).png", 5.5f),
         };
+        try {
+            Level3SoundClip = new SoundClip("data/4-gotham-at-night.wav");
+            Level3SoundClip.loop();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if(player.getPosition().x > 30){
+            views.setZoom(30f);
+        }
+
         player.gainLife();
-        player.setSoundClip_Level3();
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
         final boolean[] canDamage = { false };
@@ -309,18 +307,16 @@ public class Level3 extends World {
                         });
                         runTimer[0].start();
                     }
-                } if(player.getPosition().x > 275){
-                    player.finish_Level3();
-                } else if (e.getKeyCode() == KeyEvent.VK_M) {
-                    player.finish_Level3();
+                } if (e.getKeyCode() == KeyEvent.VK_M) {
+                    Level3SoundClip.stop();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    player.setSoundClip_Level3();
+                    Level3SoundClip.play();
                 }
                 if(player.getPosition().x > 275){
                     new Level4();
                     frames.getContentPane().removeAll();
                     frames.setVisible(false);
-                    player.finish_Level3();}
+                    Level3SoundClip.close();}
 
             }
 
@@ -406,15 +402,15 @@ public class Level3 extends World {
                 npcGangsta12.update_Level3(); npcGangsta12.setAngle(0f); npcGangsta12.setAngularVelocity(0f);
                 npcGangsta13.update_Level3(); npcGangsta13.setAngle(0f); npcGangsta13.setAngularVelocity(0f);
                 npcGangsta14.update_Level3(); npcGangsta14.setAngle(0f); npcGangsta14.setAngularVelocity(0f);
-                npcGangsta15.update_Level3(); npcGangsta15.setAngle(0f); npcGangsta15.setAngularVelocity(0f);
-                npcGangsta16.update_Level3(); npcGangsta16.setAngle(0f); npcGangsta16.setAngularVelocity(0f);
-                npcGangsta17.update_Level3(); npcGangsta17.setAngle(0f); npcGangsta17.setAngularVelocity(0f);
                 dynamicPlatform.update(); dynamicPlatform.setAngle(0f); dynamicPlatform.setAngularVelocity(0f);
                 dynamicPlatform2.update(); dynamicPlatform2.setAngle(0f); dynamicPlatform2.setAngularVelocity(0f);
                 dynamicPlatform3.update(); dynamicPlatform3.setAngle(0f); dynamicPlatform3.setAngularVelocity(0f);
                 dynamicPlatform4.update(); dynamicPlatform4.setAngle(0f); dynamicPlatform4.setAngularVelocity(0f);
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
-
+                views.setZoom(25f);
+                if(player.getPosition().x > 30 && player.getPosition().x < 50){
+                    views.setZoom(30f);
+                }
             }
 
             @Override
