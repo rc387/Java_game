@@ -360,11 +360,8 @@ public class Level2 extends World {
                 levelTimer.stop();
                 ((Timer)e.getSource()).stop();
                 player.loselife(); player.loselife(); player.loselife();
-                player.playerDeath();
+                player.playerDeath(); Level2SoundClip.close();
                 player.setLinearVelocity(new Vec2(0f,0f));
-                destroyTimer = new Timer(1000, f -> {
-                    player.destroy();
-                });destroyTimer.start();
             }
         });
         levelTimer.start();

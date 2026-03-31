@@ -187,7 +187,12 @@ public class Level3 extends World {
         platform.addImage(new BodyImage("data/platform_level3.png", 14f));
 
         Enemy_attack stave = new Enemy_attack(this);
-        stave.setPosition(new Vec2(15f, 100f));
+        stave.setPosition(new Vec2(15f, 100f)); stave.setAngle(0f); stave.setAngularVelocity(0f);
+        int x = 30; int y = 175;
+        for (int i = 0; i < 15; i++) {
+            stave = new Enemy_attack(this);
+            stave.setPosition(new Vec2(x+ 15, y + 75 ));
+        }
 
         Flag flagimage = new Flag(this);
         flagimage.setPosition(new Vec2(250, -10));
@@ -371,14 +376,12 @@ public class Level3 extends World {
                 player.loselife();
                 player.playerDeath();
                 player.setLinearVelocity(new Vec2(0f,0f));
-                destroyTimer = new Timer(1000, f -> {
-                    player.destroy();
-                });destroyTimer.start();
+                Level3SoundClip.close();
             }
         });
         levelTimer.start();
 
-
+        Enemy_attack finalStave = stave;
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
                 if (moveRight[0] && !(player.getPosition().x > 275)) {
@@ -406,11 +409,21 @@ public class Level3 extends World {
                 dynamicPlatform2.update(); dynamicPlatform2.setAngle(0f); dynamicPlatform2.setAngularVelocity(0f);
                 dynamicPlatform3.update(); dynamicPlatform3.setAngle(0f); dynamicPlatform3.setAngularVelocity(0f);
                 dynamicPlatform4.update(); dynamicPlatform4.setAngle(0f); dynamicPlatform4.setAngularVelocity(0f);
+                finalStave.setAngle(0f); finalStave.setAngularVelocity(0f);
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
-                views.setZoom(25f);
+                views.setZoom(-25f);
                 if(player.getPosition().x > 30 && player.getPosition().x < 50){
                     views.setZoom(30f);
-                }
+                } else if (player.getPosition().x > 152 && player.getPosition().x < 165) {
+
+                } else if (player.getPosition().x > 177 && player.getPosition().x < 197) {
+
+                } else if (player.getPosition().x > 214 && player.getPosition().x < 233) {
+
+                } else if (player.getPosition().x > 242 && player.getPosition().x < 252) {
+
+                } else if (player.getPosition().x > 266 && player.getPosition().x < 274) {}
+
             }
 
             @Override

@@ -351,10 +351,7 @@ public class GameWorld extends World {
                 player.loselife(); // Calls the method loselife in the Character class.
                 player.loselife(); player.loselife(); moveRight[0] = false; moveLeft[0] = false; canDamage[0] = false;
                 player.playerDeath(); // Calls the method playerDeath in the Character class.
-                player.setLinearVelocity(new Vec2(0f,0f));
-                destroyTimer = new Timer(1000, f -> { // Used to allow the playerDeath animation to end before destroying the player.
-                    player.destroy();
-                });destroyTimer.start();
+                player.setLinearVelocity(new Vec2(0f,0f)); soundClip.stop();
             }
         });
         levelTimer.start();
