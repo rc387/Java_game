@@ -12,7 +12,8 @@ import java.awt.event.KeyEvent;
 public class Level4 extends World {
     private int timeRemaining = 180;
     private Timer levelTimer;
-    private Character_attack bullet;
+    private SoundClip Level4SoundClip;
+    private Character_attack bullet = null;
     public Level4(){
         GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level4.jpg").getImage());
 
@@ -125,6 +126,12 @@ public class Level4 extends World {
                 new BodyImage("data/Gangsters_3/LeftShot(11).png", 5.5f),
                 new BodyImage("data/Gangsters_3/LeftShot(12).png", 5.5f),
         };
+        try {
+            Level4SoundClip = new SoundClip("data/53-mii-maker-mii-editor-gamepad.wav");
+            Level4SoundClip.loop();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         player.gainLife();
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
@@ -199,7 +206,7 @@ public class Level4 extends World {
                         });
                         runTimer[0].start();
                     }
-                } else if (e.getKeyCode() == KeyEvent.VK_SPACE && canShoot[0]) {
+                } else if (e.getKeyCode() == KeyEvent.VK_SPACE && canShoot[0] && bullet == null) {
                     canShoot[0] = false;
                     bullet = new Character_attack(world);
                     bullet.setPosition(new Vec2(player.getPosition().x + 1, (player.getPosition().y+2 + player.getPosition().y)/2));
@@ -229,11 +236,12 @@ public class Level4 extends World {
                 }if(player.getPosition().x > 270){
 
                 } else if (e.getKeyCode() == KeyEvent.VK_M) {
-
+                    Level4SoundClip.stop();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-
+                    Level4SoundClip.play();
                 }
                 if(player.getPosition().x > 270){
+                    Level4SoundClip.stop();
                     }
 
             }
@@ -281,6 +289,7 @@ public class Level4 extends World {
                     if (runTimer[0] != null) {
                         runTimer[0].stop();
                         runTimer[0] = null;
+                        bullet = null;
                     }
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Gangsters_3/Idle(1).png", 5.5f));
@@ -313,6 +322,12 @@ public class Level4 extends World {
                 }
                 npcGangsta.update_Level4(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
                 npcGangsta1.update_Level4(); npcGangsta1.setAngle(0f); npcGangsta1.setAngularVelocity(0f);
+                if (bullet != null) {
+                    if (bullet.getPosition().x >= player.getPosition().x + 20) {
+                        bullet.destroy();
+                        bullet = null;
+                    }
+                }
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
 
             }
