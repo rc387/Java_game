@@ -14,11 +14,11 @@ public class Dynamic_Platform extends DynamicBody {
         this.ceilingBound = ceilingBound;
         this.floorBound = floorBound;
         addImage(image_1);
-        setFixedRotation(true);
+        setFixedRotation();
         setAngle(0f);
     }
 
-    private void setFixedRotation(boolean b) {
+    private void setFixedRotation() {
     }
 
     public void update() {

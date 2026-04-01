@@ -213,7 +213,6 @@ public class GameWorld extends World {
 
         final boolean[] moveRight = {false}; // Boolean flag used to determine if the player can move right or not.
         final boolean[] moveLeft = {false}; // Boolean flag used to determine if the player can move left or not.
-        final boolean[] canDamage = { false }; // Boolean flag used to determine if the player can move damage an enemy or not.
         PlayerCollision listener = new PlayerCollision(player); // Initialises the object listener.
         player.addCollisionListener(listener); // Used to allow the player's collisions to have an effect with other objects in game.
         frame.addKeyListener(new KeyAdapter() { //Used to allow key inputs to affect the player image.
@@ -320,7 +319,7 @@ public class GameWorld extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    canDamage[0] = false;
+                    listener.setCanDamage(false);
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Fighter/Idle(1).png", 5.5f));
                 }
@@ -342,14 +341,18 @@ public class GameWorld extends World {
             if (timeRemaining >= 0 && (player.getPosition().x < 270)) {
                 timeRemaining--;
             } else if (player.getPosition().x > 270) {
-                levelTimer.stop();((Timer)e.getSource()).stop();
-                moveRight[0] = false; moveLeft[0] = false; canDamage[0] = false;
-                player.setLinearVelocity(new Vec2(0f,0f));
-            } else {
+                levelTimer.stop();
+                ((Timer) e.getSource()).stop();
+                moveRight[0] = false;
+                moveLeft[0] = false;
+                listener.setCanDamage(false);
+                player.setLinearVelocity(new Vec2(0f, 0f));
+            }  else {
                 levelTimer.stop(); // This timer actually affects the player if 0.
                 ((Timer)e.getSource()).stop();
                 player.loselife(); // Calls the method loselife in the Character class.
-                player.loselife(); player.loselife(); moveRight[0] = false; moveLeft[0] = false; canDamage[0] = false;
+                player.loselife(); player.loselife(); moveRight[0] = false; moveLeft[0] = false;
+                listener.setCanDamage(false);
                 player.playerDeath(); // Calls the method playerDeath in the Character class.
                 player.setLinearVelocity(new Vec2(0f,0f)); soundClip.stop();
             }

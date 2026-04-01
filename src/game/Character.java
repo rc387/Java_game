@@ -14,7 +14,7 @@ public class Character extends DynamicBody  {
     public Character(World world) {
         super(world, CharacterShape);
         addImage(image);
-        setFixedRotation(true);
+        setFixedRotation();
         setAngle(0f);
     }
 
@@ -34,7 +34,7 @@ public class Character extends DynamicBody  {
         // Used to keep the lives value to same in case a collision caused a life to be deducted erroneously.
     }
 
-    private void setFixedRotation(boolean b) {}
+    private void setFixedRotation() {}
 
     public static void hearts(Graphics2D g) {
         for(int i = 0; i < lives; i++){

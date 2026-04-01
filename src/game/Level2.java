@@ -12,7 +12,6 @@ import java.awt.event.KeyEvent;
 public class Level2 extends World {
     private int timeRemaining = 180;
     private Timer levelTimer;
-    private Timer destroyTimer;
     private SoundClip Level2SoundClip;
     public Level2()
     {
@@ -227,7 +226,6 @@ public class Level2 extends World {
         player.gainLife();
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
-        final boolean[] canDamage = { false };
         PlayerCollision listener = new PlayerCollision(player);
         player.addCollisionListener(listener);
         frames.addKeyListener(new KeyAdapter() {
@@ -290,7 +288,7 @@ public class Level2 extends World {
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, ev -> {
-                            player.removeAllImages();
+                            player.removeAllImages(); ev.paramString();
                             player.addImage(leftFrames[frameCounter[0] % leftFrames.length]);
                             frameCounter[0] = (frameCounter[0] + 1) % leftFrames.length;
                         });
@@ -332,7 +330,7 @@ public class Level2 extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    canDamage[0] = false;
+                    listener.setCanDamage(false);
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Samurai/Idle(1).png", 5.5f));
                 }
@@ -354,7 +352,7 @@ public class Level2 extends World {
                 timeRemaining--;
             } else if (player.getPosition().x > 285) {
                 levelTimer.stop();((Timer)e.getSource()).stop();
-                moveRight[0] = false; moveLeft[0] = false; canDamage[0] = false;
+                moveRight[0] = false; moveLeft[0] = false; listener.setCanDamage(false);
                 player.setLinearVelocity(new Vec2(0f,0f));
             } else {
                 levelTimer.stop();

@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 public class Level4 extends World {
     private int timeRemaining = 180;
     private Timer levelTimer;
-    private Timer destroyTimer;
+    private Character_attack bullet;
     public Level4(){
         GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level4.jpg").getImage());
 
@@ -21,7 +21,7 @@ public class Level4 extends World {
         frames.setResizable(false); frames.revalidate(); frames.setVisible(true); frames.setBackground(Color.BLACK);
 
         Character player = new Character(this);
-        player.setPosition(new Vec2(290f, 2));
+        player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0));
         player.setAngularVelocity(0);
         player.setAngle(0);
@@ -35,19 +35,29 @@ public class Level4 extends World {
         DeathShape deathShape = new DeathShape(this);
         deathShape.setPosition(new Vec2(-1, -100));
 
-        Shape platformShape = new BoxShape(7, 1);
+        Shape platformShape = new BoxShape(7, 2f);
         StaticBody platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(-2.75f, -4.5f));
-        platform.addImage(new BodyImage("data/platform_level3.png", 11.5f));
+        platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        platformShape = new BoxShape(7, 1);
+        platformShape = new BoxShape(7, 2f);
         platform = new StaticBody(this, platformShape);
         platform.setPosition(new Vec2(20, -4));
-        platform.addImage(new BodyImage("data/platform_level3.png", 11.5f));
+        platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
         Enemy npcGangsta1 = new Enemy(this, 73, 77,4);
         npcGangsta1.setPosition(new Vec2(74, -6));
         npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
+
+        Enemy_attack stave = new Enemy_attack(this);
+        stave.setPosition(new Vec2(15f, 100f)); stave.setAngle(0f); stave.setAngularVelocity(0f);
+        int x = 30; int y = 175;
+        for (int i = 0; i < 35; i++) {
+            x = x + 5; y = y + 190;
+            stave = new Enemy_attack(this);
+            stave.setPosition(new Vec2(x+ 7.5f, y + 200 ));
+        }
+
 
         Flag flagimage = new Flag(this);
         flagimage.setPosition(new Vec2(290, -10));
@@ -64,32 +74,65 @@ public class Level4 extends World {
         final Timer[] runTimer = {null};
 
         BodyImage[] runFrames = new BodyImage[]{ // Use of AI:idea of using array to store images.
-                new BodyImage("data/Shinobi/Run(1).png", 5.5f),
-                new BodyImage("data/Shinobi/Run(2).png", 5.5f),
-                new BodyImage("data/Shinobi/Run(3).png", 5.5f),
-                new BodyImage("data/Shinobi/Run(4).png", 5.5f),
-                new BodyImage("data/Shinobi/Run(5).png", 5.5f),
-                new BodyImage("data/Shinobi/Run(6).png", 5.5f),
-                new BodyImage("data/Shinobi/Run(7).png", 5.5f),
-                new BodyImage("data/Shinobi/Run(8).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(1).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(2).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(3).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(4).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(5).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(6).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(7).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(8).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(9).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Run(10).png", 5.5f),
         };
-
         BodyImage[] leftFrames = new BodyImage[]{
-                new BodyImage("data/Shinobi/LeftRun(1).png", 5.5f),
-                new BodyImage("data/Shinobi/LeftRun(2).png", 5.5f),
-                new BodyImage("data/Shinobi/LeftRun(3).png", 5.5f),
-                new BodyImage("data/Shinobi/LeftRun(4).png", 5.5f),
-                new BodyImage("data/Shinobi/LeftRun(5).png", 5.5f),
-                new BodyImage("data/Shinobi/LeftRun(6).png", 5.5f),
-                new BodyImage("data/Shinobi/LeftRun(7).png", 5.5f),
-                new BodyImage("data/Shinobi/LeftRun(8).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(1).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(2).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(3).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(4).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(5).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(6).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(7).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(8).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(9).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftRun(10).png", 5.5f),
+        };
+        BodyImage[] shotFrames = new BodyImage[]{
+                new BodyImage("data/Gangsters_3/Shot(1).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(2).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(3).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(4).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(5).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(6).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(7).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(8).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(9).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(10).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(11).png", 5.5f),
+                new BodyImage("data/Gangsters_3/Shot(12).png", 5.5f),
+        };
+        BodyImage[] LeftShotFrames = new BodyImage[]{
+                new BodyImage("data/Gangsters_3/LeftShot(1).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(2).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(3).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(4).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(5).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(6).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(7).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(8).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(9).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(10).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(11).png", 5.5f),
+                new BodyImage("data/Gangsters_3/LeftShot(12).png", 5.5f),
         };
         player.gainLife();
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
-        final boolean[] canDamage = { false };
+        final boolean[] shot = {false};
+        final boolean[] canShoot = {true};
         PlayerCollision listener = new PlayerCollision(player);
         player.addCollisionListener(listener);
+        Level4 world = this;
         frames.addKeyListener(new KeyAdapter() {
 
             public void keyPressed(KeyEvent e) {
@@ -113,7 +156,7 @@ public class Level4 extends World {
                     listener.setCanJump(false);
                     player.applyImpulse(new Vec2(0f, 110f));
                     player.removeAllImages();
-                    player.addImage( new BodyImage("data/Shinobi/Jump(1).png", 5.5f));
+                    player.addImage( new BodyImage("data/Gangsters_3/Jump(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
@@ -123,7 +166,7 @@ public class Level4 extends World {
                     listener.setShield(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Shinobi/Shield(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Gangsters_3/Shield.png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -134,11 +177,11 @@ public class Level4 extends World {
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
                     if (moveRight[0]){
-                        player.addImage(new BodyImage("data/Shinobi/Attack_1(4).png", 5.5f));}
+                        player.addImage(new BodyImage("data/Gangsters_3/Attack(3).png", 5.5f));}
                     else if (moveLeft[0]){
-                        player.addImage((new BodyImage("data/Shinobi/LeftAttack_1(4).png", 5.5f)));
+                        player.addImage((new BodyImage("data/Gangsters_3/LeftAttack(3).png", 5.5f)));
                     }else {
-                        player.addImage(new BodyImage("data/Shinobi/Attack_1(4).png", 5.5f));
+                        player.addImage(new BodyImage("data/Gangsters_3/Attack(3).png", 5.5f));
                     }
                 }
 
@@ -156,7 +199,34 @@ public class Level4 extends World {
                         });
                         runTimer[0].start();
                     }
-                } if(player.getPosition().x > 270){
+                } else if (e.getKeyCode() == KeyEvent.VK_SPACE && canShoot[0]) {
+                    canShoot[0] = false;
+                    bullet = new Character_attack(world);
+                    bullet.setPosition(new Vec2(player.getPosition().x + 1, (player.getPosition().y+2 + player.getPosition().y)/2));
+                    bullet.setAngle(0f); bullet.setAngularVelocity(0f); bullet.setLinearVelocity(new Vec2(20, 0));
+                    shot[0] = true;
+                    if(player.getPosition().x > 270){
+                        player.setLinearVelocity(new Vec2(0f, 0f));
+                    }
+                    if (runTimer[0] == null) {
+                        frameCounter[0] = 0;
+                        runTimer[0] = new Timer(75, ev -> {
+                            player.removeAllImages();
+                            if (moveRight[0]) {
+                            player.addImage(shotFrames[frameCounter[0] % shotFrames.length]);
+                            frameCounter[0] = (frameCounter[0] + 1) % shotFrames.length;}
+                            else if (moveLeft[0]) {
+                                player.addImage(LeftShotFrames[frameCounter[0] % LeftShotFrames.length]);
+                                frameCounter[0] = (frameCounter[0] + 1) % LeftShotFrames.length;
+                            } else {
+                                player.addImage(shotFrames[frameCounter[0] % shotFrames.length]);
+                                frameCounter[0] = (frameCounter[0] + 1) % shotFrames.length;
+                            }
+                        });
+                        runTimer[0].start();
+                        new Timer(1000, ev -> canShoot[0] = true).start();
+                }
+                }if(player.getPosition().x > 270){
 
                 } else if (e.getKeyCode() == KeyEvent.VK_M) {
 
@@ -176,24 +246,24 @@ public class Level4 extends World {
                         runTimer[0] = null;
                     }
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Gangsters_3/Idle(1).png", 5.5f));
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));}
 
                 else if (e.getKeyCode() == KeyEvent.VK_W) {
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Gangsters_3/Idle(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
                     listener.setShield(false);
                     player.removeAllImages();
-                    player.addImage( new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
+                    player.addImage( new BodyImage("data/Gangsters_3/Idle(1).png", 5.5f));
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    canDamage[0] = false;
+                else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    listener.setCanDamage(false);
                     player.removeAllImages();
-                    player.addImage( new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
+                    player.addImage( new BodyImage("data/Gangsters_3/Idle(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
@@ -203,8 +273,17 @@ public class Level4 extends World {
                         runTimer[0] = null;
                     }
                     player.removeAllImages();
-                    player.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
+                    player.addImage(new BodyImage("data/Gangsters_3/Idle(1).png", 5.5f));
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    shot[0] = false;
+                    if (runTimer[0] != null) {
+                        runTimer[0].stop();
+                        runTimer[0] = null;
+                    }
+                    player.removeAllImages();
+                    player.addImage( new BodyImage("data/Gangsters_3/Idle(1).png", 5.5f));
                 }
             }
         });
@@ -217,11 +296,8 @@ public class Level4 extends World {
                 player.loselife();
                 player.loselife();
                 player.loselife();
-                player.playerDeath();
+                player.playerDeath(); listener.setCanDamage(false);
                 player.setLinearVelocity(new Vec2(0f,0f));
-                destroyTimer = new Timer(1000, f -> {
-                    player.destroy();
-                });destroyTimer.start();
             }
         });
         levelTimer.start();
@@ -235,8 +311,8 @@ public class Level4 extends World {
                 else if (moveLeft[0] && !(player.getPosition().x >270)) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
-                npcGangsta.update_Level2(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
-                npcGangsta1.update_Level2(); npcGangsta1.setAngle(0f); npcGangsta1.setAngularVelocity(0f);
+                npcGangsta.update_Level4(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
+                npcGangsta1.update_Level4(); npcGangsta1.setAngle(0f); npcGangsta1.setAngularVelocity(0f);
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
 
             }

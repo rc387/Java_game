@@ -4,7 +4,7 @@ import city.cs.engine.UserView;
 import city.cs.engine.World;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+
 
 public class GameWorldBackground extends UserView {
     private final Image background;
@@ -14,7 +14,6 @@ public class GameWorldBackground extends UserView {
     public GameWorldBackground(World w, int width, int height, Image background) {
         super(w, width, height);
         this.background = background;
-        background = new ImageIcon("data/background(1).jpg").getImage();
         levelTimer = new Timer(1000, e -> { // Timer that's visible on screen.
             if (timeRemaining >= 0) {
                 timeRemaining--;

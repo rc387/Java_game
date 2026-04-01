@@ -11,8 +11,7 @@ public class Enemy extends Character implements CollisionListener {
     private int frameCounter = 0;
     private final float leftBound;
     private final float rightBound;
-    private int lives = 2;
-    private Boolean canAttack = false;
+    private int lives;
     private int attackTimer = 0;
 
     public Enemy(World world, float leftBound, float rightBound, int lives) {
@@ -22,7 +21,7 @@ public class Enemy extends Character implements CollisionListener {
         this.lives = lives;
         removeAllImages();
         addImage(image);
-        setFixedRotation(true);
+        setFixedRotation();
         setAngle(0f);
     }
     public void lose_Life(){
@@ -123,7 +122,52 @@ public class Enemy extends Character implements CollisionListener {
             new BodyImage("data/Zombie_Man/LeftAttack_2(3).png", 5.5f),
             new BodyImage("data/Zombie_Man/LeftAttack_2(4).png", 5.5f),
     };
-
+    BodyImage[] walkFrames4 = new BodyImage[]{
+            new BodyImage("data/Samurai_L4/Walk(1).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Walk(2).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Walk(3).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Walk(4).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Walk(5).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Walk(6).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Walk(7).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Walk(8).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Walk(9).png", 5.5f),
+    };
+    BodyImage[] LeftWalkFrames4 = new BodyImage[]{
+            new BodyImage("data/Samurai_L4/LeftWalk(1).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftWalk(2).png",5.5f),
+            new BodyImage("data/Samurai_L4/LeftWalk(3).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftWalk(4).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftWalk(5).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftWalk(6).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftWalk(7).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftWalk(8).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftWalk(9).png", 5.5f),
+    };
+    BodyImage[] HurtFrames4 = new BodyImage[]{
+            new BodyImage("data/Samurai_L4/Hurt(1).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Hurt(2).png",5.5f),
+            new BodyImage("data/Samurai_L4/Hurt(3).png", 5.5f),
+    };
+    BodyImage[] LeftHurtFrames4 = new BodyImage[]{
+            new BodyImage("data/Samurai_L4/LeftHurt(1).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftHurt(2).png",5.5f),
+            new BodyImage("data/Samurai_L4/LeftHurt(3).png", 5.5f),
+    };
+    BodyImage[] AttackFrames4 = new BodyImage[]{
+            new BodyImage("data/Samurai_L4/Attack_2(1).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Attack_2(2).png",5.5f),
+            new BodyImage("data/Samurai_L4/Attack_2(3).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Attack_2(4).png", 5.5f),
+            new BodyImage("data/Samurai_L4/Attack_2(5).png", 5.5f),
+    };
+    BodyImage[] LeftAttackFrames4 = new BodyImage[]{
+            new BodyImage("data/Samurai_L4/LeftAttack_2(1).png", 5.5f),
+            new BodyImage("data/Samurai_L4/LeftAttack_2(2).png",5.5f),
+            new BodyImage("data/Samurai_L4/LeftAttack_2(3).png",5.5f),
+            new BodyImage("data/Samurai_L4/LeftAttack_2(4).png",5.5f),
+            new BodyImage("data/Samurai_L4/LeftAttack_2(5).png",5.5f),
+    };
     private int animationTick = 0;
 
     public void update() {
@@ -187,7 +231,7 @@ public class Enemy extends Character implements CollisionListener {
     public void update_Level3(){
         float x = getPosition().x;
         attackTimer++;
-        canAttack = attackTimer % 28 == 0;
+        boolean canAttack = attackTimer % 28 == 0;
         if (x > rightBound) direction = -1;
         if (x < leftBound) direction = 1;
         if (lives < 3 && x > rightBound) direction = -0.1f;
@@ -231,13 +275,63 @@ public class Enemy extends Character implements CollisionListener {
         frameCounter = (frameCounter + 1) % walkFrames3.length;
     }
 
+    public void update_Level4(){
+        float x = getPosition().x;
+        attackTimer++;
+        boolean canAttack = attackTimer % 28 == 0;
+        if (x > rightBound) direction = -1;
+        if (x < leftBound) direction = 1;
+        if (lives < 3 && x > rightBound) direction = -0.1f;
+        if (lives < 3 && x < leftBound) direction = 0.1f;
+        if (x > rightBound && canAttack) direction = -0.9f;
+        if (x < leftBound && canAttack) direction = 0.9f;
+
+        setLinearVelocity(new Vec2(3 * direction, 0));
+        animationTick++; // Used to control the speed of the animation.
+        if (direction == 1 || direction == -1) {
+            if (animationTick % 10 == 0) { // Use of AI:animationTick, to control the speed of the animation using modulus.
+                animate_Level4();
+            }} else if (direction == 0.1f || direction == -0.1f) {
+            if (animationTick % 5 == 0) {
+                animate_Level4();
+            }}else if (direction == 0.9f ||  direction == -0.9f) {
+            if (animationTick % 7 == 0) {
+                animate_Level4();
+            }}
+    }
+
+    public void animate_Level4(){
+        removeAllImages();
+        if (direction == -1) {
+            addImage(LeftWalkFrames4[frameCounter % LeftWalkFrames4.length]);
+        } else if (direction == 1) {
+            addImage(walkFrames4[frameCounter % walkFrames4.length]);
+        } else if(direction == -0.1f) {
+            frameCounter = (frameCounter + 1) % HurtFrames4.length;
+            addImage(HurtFrames4[frameCounter % HurtFrames4.length]);
+        } else if (direction == 0.1f) {
+            frameCounter = (frameCounter + 1) % LeftHurtFrames4.length;
+            addImage(LeftHurtFrames4[frameCounter % LeftHurtFrames4.length]);
+        } else if (direction == -0.9f) {
+            frameCounter = (frameCounter + 1) % AttackFrames4.length;
+            addImage(AttackFrames4[frameCounter % AttackFrames4.length]);
+        } else if (direction == 0.9f) {
+            frameCounter = (frameCounter + 1) % LeftAttackFrames4.length;
+            addImage(LeftAttackFrames4[frameCounter % LeftAttackFrames4.length]);
+        }
+        frameCounter = (frameCounter + 1) % walkFrames4.length;
+    }
+
     @Override
         public void collide(CollisionEvent e) {
             if (e.getOtherBody() instanceof Enemy_attack enemy) {
                 lives--;
                 enemy.destroyed();
+            } else if (e.getOtherBody() instanceof  Character_attack character) {
+                lives--;
+                character.destroyed();
             }
     }
 
-    private void setFixedRotation(boolean b) {}
+    private void setFixedRotation() {}
 }
