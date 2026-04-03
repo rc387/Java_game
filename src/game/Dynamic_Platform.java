@@ -27,7 +27,6 @@ public class Dynamic_Platform extends DynamicBody {
         if (y < floorBound) direction = 1;
 
         setLinearVelocity(new Vec2(0, 5 * direction));
-
         }
 }
 

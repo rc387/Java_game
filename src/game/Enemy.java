@@ -328,7 +328,7 @@ public class Enemy extends Character implements CollisionListener {
             if (e.getOtherBody() instanceof Enemy_attack enemy) {
                 lose_Life();
                 enemy.destroyed();
-            } else if (e.getOtherBody() instanceof  Character_attack character) {
+            } else if (e.getOtherBody() instanceof Character_attack character) {
                 lose_Life();
                 character.destroyed();
             }

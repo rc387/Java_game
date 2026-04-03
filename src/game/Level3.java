@@ -3,7 +3,6 @@ package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -14,15 +13,15 @@ public class Level3 extends World {
     private Timer levelTimer;
     private SoundClip Level3SoundClip;
     public Level3(){
-        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level3.jpg").getImage());
+        Character player = new Character(this);
+        player.setPosition(new Vec2(260f, 2)); player.setLinearVelocity(new Vec2(0, 0));
+        player.setAngularVelocity(0); player.setAngle(0);
+
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level3.jpg").getImage(),player);
 
         final JFrame frames = new JFrame("Level3"); frames.add(views); frames.pack(); frames.repaint();
         frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frames.setLocationByPlatform(true);
         frames.setResizable(false); frames.revalidate(); frames.setVisible(true); frames.setBackground(Color.BLACK);
-
-        Character player = new Character(this);
-        player.setPosition(new Vec2(260f, 2)); player.setLinearVelocity(new Vec2(0, 0));
-        player.setAngularVelocity(0); player.setAngle(0);
 
         DeathShape deathShape = new DeathShape(this);
         deathShape.setPosition(new Vec2(-1, -100));
@@ -289,9 +288,9 @@ public class Level3 extends World {
                         runTimer[0].start();
                     }
                 } if (e.getKeyCode() == KeyEvent.VK_M) {
-                    Level3SoundClip.stop();
+                    Level3SoundClip.pause();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    Level3SoundClip.play();
+                    Level3SoundClip.resume();
                 }
                 if(player.getPosition().x > 250){
                     new Level4();

@@ -5,23 +5,22 @@ import city.cs.engine.World;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class GameWorldBackground extends UserView {
     private final Image background;
     private int timeRemaining = 180;
     private Timer levelTimer;
+    private final Character player;
 
-    public GameWorldBackground(World w, int width, int height, Image background) {
+    public GameWorldBackground(World w, int width, int height, Image background, Character player) {
         super(w, width, height);
         this.background = background;
+        this.player = player;
         levelTimer = new Timer(1000, e -> { // Timer that's visible on screen.
             if (timeRemaining >= 0) {
                 timeRemaining--;
             } else {
                 levelTimer.stop();
                 ((Timer)e.getSource()).stop();
-
-
             }
             repaint();
         });
@@ -51,7 +50,16 @@ public class GameWorldBackground extends UserView {
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("Time: " + getTimeRemaining(), 545, 20);
         g.setFont(new Font("Arial", Font.BOLD, 12));
-        g.drawString("W = jump, A = left, S = shield, D = right, Enter = attack",190,20);
+        g.drawString("W = jump, A = left, S = shield, D = right, Enter = attack, Level4: Space = shoot",150,50);
+        float playerX = player.getPosition().x;
+
+        g.setColor(Color.BLUE);
+        g.setFont(new Font("Arial", Font.BOLD, 18));
+
+        if (playerX > -5 && playerX < 15) {
+            g.drawString("As you progress in levels, expect some surprises", 150, 150);
+        }
+
     }
 }
 // Author: Jonathan Ross

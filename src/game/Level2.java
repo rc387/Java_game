@@ -3,7 +3,6 @@ package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -13,18 +12,17 @@ public class Level2 extends World {
     private int timeRemaining = 180;
     private Timer levelTimer;
     private SoundClip Level2SoundClip;
-    public Level2()
-    {
-        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level2.jpg").getImage());
+    public Level2() {
+        Character player = new Character(this);
+        player.setPosition(new Vec2(280f, 2));
+        player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
+
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level2.jpg").getImage(),player);
 
         final JFrame frames = new JFrame("Level 2");
         frames.add(views); frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frames.setLocationByPlatform(true);
         frames.setResizable(false); frames.pack(); frames.repaint(); frames.revalidate(); frames.setVisible(true);
         frames.setBackground(Color.BLACK);
-
-        Character player = new Character(this);
-        player.setPosition(new Vec2(280f, 2));
-        player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         Shape platformShape = new BoxShape(7, 1);
         StaticBody platform = new StaticBody(this, platformShape);
@@ -117,7 +115,8 @@ public class Level2 extends World {
         npcGangsta9.setPosition(new Vec2(160, -10f)); npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0);
 
         Enemy npcGangsta10 = new Enemy(this, 165, 170,2);
-        npcGangsta10.setPosition(new Vec2(168, -10f)); npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0);
+        npcGangsta10.setPosition(new Vec2(168, -10f));
+        npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0);
 
         Dynamic_Platform dynamicPlatform3 = new Dynamic_Platform(this,40,-20,new BodyImage("data/platform_level2.png",10f));
         dynamicPlatform3.setPosition(new Vec2(182, -12f));
@@ -189,7 +188,6 @@ public class Level2 extends World {
 
         DeathShape deathShape = new DeathShape(this); deathShape.setPosition(new Vec2(-1, -100));
 
-
         setGravity(9.8f);
 
         final int[] frameCounter = {0};
@@ -224,12 +222,9 @@ public class Level2 extends World {
         }
 
         player.gainLife();
-        final boolean[] moveRight = {false};
-        final boolean[] moveLeft = {false};
-        PlayerCollision listener = new PlayerCollision(player);
-        player.addCollisionListener(listener);
+        final boolean[] moveRight = {false}; final boolean[] moveLeft = {false};
+        PlayerCollision listener = new PlayerCollision(player); player.addCollisionListener(listener);
         frames.addKeyListener(new KeyAdapter() {
-
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                     moveRight[0] = !(player.getPosition().x > 285);
@@ -295,9 +290,9 @@ public class Level2 extends World {
                         runTimer[0].start();
                     }
                 } if (e.getKeyCode() == KeyEvent.VK_M) {
-                    Level2SoundClip.stop();
+                    Level2SoundClip.pause();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
-                    Level2SoundClip.play();
+                    Level2SoundClip.resume();
                 }
                 if(player.getPosition().x > 285){
                     new Level3();
@@ -357,8 +352,7 @@ public class Level2 extends World {
             } else {
                 levelTimer.stop();
                 ((Timer)e.getSource()).stop();
-                player.loselife(); player.loselife(); player.loselife();
-                player.playerDeath(); Level2SoundClip.close();
+                player.loselife(); player.loselife(); player.loselife(); player.playerDeath(); Level2SoundClip.close();
                 player.setLinearVelocity(new Vec2(0f,0f));
             }
         });

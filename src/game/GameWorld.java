@@ -1,4 +1,5 @@
 package game;
+
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
@@ -11,14 +12,13 @@ import city.cs.engine.BodyImage;
 public class GameWorld extends World {
     private int timeRemaining = 180;
     private Timer levelTimer;
-    private Timer destroyTimer;
     private SoundClip soundClip;
     public GameWorld() {
-        GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage()); //Initialises the width and height of object view.
-
         Character player = new Character(this); // Initialises the object player.
         player.setPosition(new Vec2(285f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
+
+        GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage(),player); //Initialises the width and height of object view.
 
         Enemy npcGangsta = new Enemy(this, 44,69,1); // Initialises the leftBound & rightBound of the object npcGangsta.
         npcGangsta.setPosition(new Vec2(68, -14));
@@ -216,9 +216,6 @@ public class GameWorld extends World {
         PlayerCollision listener = new PlayerCollision(player); // Initialises the object listener.
         player.addCollisionListener(listener); // Used to allow the player's collisions to have an effect with other objects in game.
         frame.addKeyListener(new KeyAdapter() { //Used to allow key inputs to affect the player image.
-
-
-
             public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_D) {
                 moveRight[0] = !(player.getPosition().x > 270); // Used to make moveRight false when player reaches the end of the level.
@@ -284,9 +281,9 @@ public class GameWorld extends World {
                     runTimer[0].start();
                 }
             } if (e.getKeyCode() == KeyEvent.VK_M) {
-                    soundClip.stop();
-            } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     soundClip.play();
+            } else if (e.getKeyCode() == KeyEvent.VK_U) {
+                    soundClip.resume();
             }
                     if(player.getPosition().x > 270){
                     new Level2();
@@ -341,11 +338,8 @@ public class GameWorld extends World {
             if (timeRemaining >= 0 && (player.getPosition().x < 270)) {
                 timeRemaining--;
             } else if (player.getPosition().x > 270) {
-                levelTimer.stop();
-                ((Timer) e.getSource()).stop();
-                moveRight[0] = false;
-                moveLeft[0] = false;
-                listener.setCanDamage(false);
+                levelTimer.stop(); ((Timer) e.getSource()).stop();
+                moveRight[0] = false; moveLeft[0] = false; listener.setCanDamage(false);
                 player.setLinearVelocity(new Vec2(0f, 0f));
             }  else {
                 levelTimer.stop(); // This timer actually affects the player if 0.
@@ -385,7 +379,6 @@ public class GameWorld extends World {
                 npcGangsta14.update(); npcGangsta14.setAngle(0f); npcGangsta14.setAngularVelocity(0f);
                 npcGangsta15.update(); npcGangsta15.setAngle(0f); npcGangsta15.setAngularVelocity(0f);
                 view.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
-
             }
 
             @Override

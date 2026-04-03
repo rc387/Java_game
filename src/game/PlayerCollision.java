@@ -70,8 +70,6 @@ public class PlayerCollision implements CollisionListener {
             player.playerDeath();
             destroyTimer = new Timer(1000, f -> player.destroy());
             destroyTimer.start();}
-
         }
-
     }
 // Author: Jonathan Ross
