@@ -59,6 +59,9 @@ public class PlayerCollision implements CollisionListener {
             player.loselife();
             canTakeDamage = false;
             enemyAttack.destroyed();
+        } else if (e.getOtherBody() instanceof Bullets bullet) {
+            player.gainShots();
+            bullet.destroy();
         }
         if (e.getOtherBody() instanceof DeathShape) {
             player.loselife(); // Called 3 times to clear all the hearts from the screen.

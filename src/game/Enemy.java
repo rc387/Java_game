@@ -19,6 +19,7 @@ public class Enemy extends Character implements CollisionListener {
         this.leftBound = leftBound;
         this.rightBound = rightBound;
         this.lives = lives;
+        addCollisionListener(this);
         removeAllImages();
         addImage(image);
         setFixedRotation();
@@ -325,10 +326,10 @@ public class Enemy extends Character implements CollisionListener {
     @Override
         public void collide(CollisionEvent e) {
             if (e.getOtherBody() instanceof Enemy_attack enemy) {
-                lives--;
+                lose_Life();
                 enemy.destroyed();
             } else if (e.getOtherBody() instanceof  Character_attack character) {
-                lives--;
+                lose_Life();
                 character.destroyed();
             }
     }

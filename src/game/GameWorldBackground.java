@@ -44,8 +44,9 @@ public class GameWorldBackground extends UserView {
     }
     @Override
     protected void paintForeground(Graphics2D g) {
-        Character.hearts(g);
         super.paintForeground(g);
+        Character.Shots(g);
+        Character.hearts(g);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("Time: " + getTimeRemaining(), 545, 20);

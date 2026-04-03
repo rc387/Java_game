@@ -282,7 +282,7 @@ public class Level3 extends World {
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, ev -> {
-                            player.removeAllImages();
+                            player.removeAllImages(); ev.paramString();
                             player.addImage(leftFrames[frameCounter[0] % leftFrames.length]);
                             frameCounter[0] = (frameCounter[0] + 1) % leftFrames.length;
                         });
