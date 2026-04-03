@@ -180,8 +180,29 @@ public class Level4 extends World {
         platform.setPosition(new Vec2(255, -14f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
+        platformShape = new BoxShape(8, 2f);
+        platform = new StaticBody(this, platformShape);
+        platform.setPosition(new Vec2(270, -1f));
+        platform.addImage(new BodyImage("data/snow_platform.png", 4f));
+
+        Shape characterShape = new BoxShape(1, 2f);
+        StaticBody character = new StaticBody(this, characterShape);
+        character.setPosition(new Vec2(271, 3.5f));
+        character.addImage(new BodyImage("data/Fighter/Idle(1).png", 5.5f));
+
+        characterShape = new BoxShape(1, 2f);
+        character = new StaticBody(this, characterShape);
+        character.setPosition(new Vec2(273, 3.5f));
+        character.addImage(new BodyImage("data/Samurai/Idle(1).png", 5.5f));
+
+        characterShape = new BoxShape(1, 2f);
+        character = new StaticBody(this, characterShape);
+        character.setPosition(new Vec2(275, 3.5f));
+        character.addImage(new BodyImage("data/Shinobi/Idle(1).png", 5.5f));
+
         Enemy_attack stave = new Enemy_attack(this);
         stave.setPosition(new Vec2(15f, 100f)); stave.setAngle(0f); stave.setAngularVelocity(0f);
+        stave.setLinearVelocity(new Vec2(5, 0));
         int x = 30; int y = 180;
         for (int i = 0; i < 35; i++) {
             x = x + 4; y = y + 190;
@@ -202,7 +223,7 @@ public class Level4 extends World {
         Bullet_L4.setPosition(new Vec2(20, 5.5f)); Bullet_L4.setAngle(0f); Bullet_L4.setAngularVelocity(0f);
         Bullet_L4.addImage(new BodyImage("data/4.png",2));
         int x1 = 30;
-        for (int i = 0; i < 22; i++) {
+        for (int i = 0; i < 20; i++) {
             x1 = x1 + 15;
             Bullet_L4 = new Bullets(this);
             Bullet_L4.setPosition(new Vec2(x1 + 20, 5.5f)); Bullet_L4.setAngle(0f); Bullet_L4.setAngularVelocity(0f);
@@ -381,7 +402,7 @@ public class Level4 extends World {
 
                 }
                 } if (e.getKeyCode() == KeyEvent.VK_M) {
-                    Level4SoundClip.stop();
+                    Level4SoundClip.pause();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     Level4SoundClip.play();
                 }
@@ -447,9 +468,7 @@ public class Level4 extends World {
             } else {
                 levelTimer.stop();
                 ((Timer)e.getSource()).stop();
-                player.loselife();
-                player.loselife();
-                player.loselife();
+                player.loselife(); player.loselife(); player.loselife();
                 player.playerDeath(); listener.setCanDamage(false);moveRight[0] = false; moveLeft[0] = false;
                 canShoot[0] = false;
                 player.setLinearVelocity(new Vec2(0f,0f));
@@ -459,6 +478,7 @@ public class Level4 extends World {
 
 
         Bullets finalBullet_L = Bullet_L4;
+        Enemy_attack finalStave = stave;
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
                 if (moveRight[0] && !(player.getPosition().x >270)) {
