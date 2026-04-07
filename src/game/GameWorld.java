@@ -15,7 +15,7 @@ public class GameWorld extends World {
     private SoundClip soundClip;
     public GameWorld() {
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(285f, 2));
+        player.setPosition(new Vec2(265f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage(),player); //Initialises the width and height of object view.
@@ -160,18 +160,18 @@ public class GameWorld extends World {
         npcGangsta15.setPosition(new Vec2(260, -12));
         npcGangsta15.setAngularVelocity(0); npcGangsta15.setAngle(0);
 
-        platformShape = new BoxShape(12, 1);
+        platformShape = new BoxShape(8, 1);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(287, -14));
+        platform.setPosition(new Vec2(280, -14));
         platform.addImage(new BodyImage("data/platform(2).png", 11.5f));
 
-        Flag flagimage = new Flag(this); // Initialises the object flagimage.
-        flagimage.setPosition(new Vec2(290, -10));
-        flagimage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
+        Flag flagImage = new Flag(this); // Initialises the object flagImage.
+        flagImage.setPosition(new Vec2(286, -10));
+        flagImage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
 
         Shape GoldCoin = new BoxShape(2,10); // Initialises the object GoldCoin.
         StaticBody GoldCoinBody = new StaticBody(this, GoldCoin); // Used to indicate end of level.
-        GoldCoinBody.setPosition(new Vec2(300, 2.5f));
+        GoldCoinBody.setPosition(new Vec2(286, 2.5f));
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
 
         setGravity(9.8f);
@@ -218,7 +218,7 @@ public class GameWorld extends World {
         frame.addKeyListener(new KeyAdapter() { //Used to allow key inputs to affect the player image.
             public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_D) {
-                moveRight[0] = !(player.getPosition().x > 270); // Used to make moveRight false when player reaches the end of the level.
+                moveRight[0] = true; // Used to make moveRight false when player reaches the end of the level.
                 if (runTimer[0] == null) { // Used to keep the animation running whilst the D key is pressed.
                     frameCounter[0] = 0;
                     runTimer[0] = new Timer(75, _ -> { // Used to make the animation speed look presentable.
@@ -230,10 +230,7 @@ public class GameWorld extends World {
                 } }
 
             else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
-                if(player.getPosition().x > 270){
-                    player.setLinearVelocity(new Vec2(0f, 0f));
-                    player.applyImpulse(new Vec2(0f, 0f));
-                }
+                player.applyImpulse(new Vec2(0f, 0f));
                 listener.setCanJump(false); // Used to prevent the player from jumping whilst already in the air.
                 player.applyImpulse(new Vec2(0f, 110f)); // Impulse is used as it's only applied once when the W key is pressed.
                 player.removeAllImages();
@@ -241,9 +238,6 @@ public class GameWorld extends World {
                }
 
             else if (e.getKeyCode() == KeyEvent.VK_S) {
-                if(player.getPosition().x > 270){
-                    player.setLinearVelocity(new Vec2(0f, 0f));
-                }
                 listener.setShield(true);
                 player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                 player.removeAllImages();
@@ -251,9 +245,6 @@ public class GameWorld extends World {
                 }
 
             else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                if(player.getPosition().x > 270){
-                    player.setLinearVelocity(new Vec2(0f, 0f));
-                }
                 listener.setCanDamage(true);
                 player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                 player.removeAllImages();
@@ -268,13 +259,10 @@ public class GameWorld extends World {
 
             else if (e.getKeyCode() == KeyEvent.VK_A) {
                 moveLeft[0] = true;
-                if(player.getPosition().x > 270){
-                    player.setLinearVelocity(new Vec2(0f, 0f));
-                }
                 if (runTimer[0] == null) {
                     frameCounter[0] = 0;
                     runTimer[0] = new Timer(75, ev -> {
-                        player.removeAllImages();
+                        player.removeAllImages(); ev.paramString();
                         player.addImage(leftFrames[frameCounter[0] % leftFrames.length]);
                         frameCounter[0] = (frameCounter[0] + 1) % leftFrames.length;
                     });
@@ -285,11 +273,7 @@ public class GameWorld extends World {
             } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     soundClip.resume();
             }
-                    if(player.getPosition().x > 270){
-                    new Level2();
-                    frame.getContentPane().removeAll();
-                    frame.setVisible(false);
-                    soundClip.close();}
+
 
                 }
 
@@ -335,17 +319,13 @@ public class GameWorld extends World {
         });
 
         levelTimer = new Timer(1000, e -> { // Mimics the same timer in Background class.
-            if (timeRemaining >= 0 && (player.getPosition().x < 270)) {
+            if (timeRemaining >= 0) {
                 timeRemaining--;
-            } else if (player.getPosition().x > 270) {
-                levelTimer.stop(); ((Timer) e.getSource()).stop();
-                moveRight[0] = false; moveLeft[0] = false; listener.setCanDamage(false);
-                player.setLinearVelocity(new Vec2(0f, 0f));
-            }  else {
+            } else {
                 levelTimer.stop(); // This timer actually affects the player if 0.
                 ((Timer)e.getSource()).stop();
-                player.loselife(); // Calls the method loselife in the Character class.
-                player.loselife(); player.loselife(); moveRight[0] = false; moveLeft[0] = false;
+                player.loseLife(); // Calls the method loseLife in the Character class.
+                player.loseLife(); player.loseLife(); moveRight[0] = false; moveLeft[0] = false;
                 listener.setCanDamage(false);
                 player.playerDeath(); // Calls the method playerDeath in the Character class.
                 player.setLinearVelocity(new Vec2(0f,0f)); soundClip.stop();
@@ -356,10 +336,10 @@ public class GameWorld extends World {
 
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) { // Used to handle all horizontal movement for a dynamic object.
-                if (moveRight[0] && !(player.getPosition().x >270)) {
+                if (moveRight[0]) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }
-                else if (moveLeft[0] && !(player.getPosition().x >270)) {
+                else if (moveLeft[0]) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
                 npcGangsta.update(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
@@ -379,6 +359,14 @@ public class GameWorld extends World {
                 npcGangsta14.update(); npcGangsta14.setAngle(0f); npcGangsta14.setAngularVelocity(0f);
                 npcGangsta15.update(); npcGangsta15.setAngle(0f); npcGangsta15.setAngularVelocity(0f);
                 view.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
+                if(player.getPosition().x > 275){
+                    GameWorld.this.stop();
+                    levelTimer.stop();
+                    soundClip.close();
+
+                    frame.dispose();
+                    Level2.main();
+                }
             }
 
             @Override

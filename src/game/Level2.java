@@ -177,9 +177,8 @@ public class Level2 extends World {
         platform.setPosition(new Vec2(295, -14f));
         platform.addImage(new BodyImage("data/platform_level2.png", 14f));
 
-        Flag flagimage = new Flag(this);
-        flagimage.setPosition(new Vec2(290, -10));
-        flagimage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
+        Flag flagImage = new Flag(this); flagImage.setPosition(new Vec2(290, -10));
+        flagImage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
 
         Shape GoldCoin = new BoxShape(2,10);
         StaticBody GoldCoinBody = new StaticBody(this, GoldCoin);
@@ -227,7 +226,7 @@ public class Level2 extends World {
         frames.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveRight[0] = !(player.getPosition().x > 285);
+                    moveRight[0] = true;
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, _ -> {
@@ -239,20 +238,12 @@ public class Level2 extends World {
                     } }
 
                 else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
-                    if(player.getPosition().x > 285){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                        player.applyImpulse(new Vec2(0f, 0f));
-                    }
-                    listener.setCanJump(false);
                     player.applyImpulse(new Vec2(0f, 110f));
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Samurai/Jump(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
-                    if(player.getPosition().x > 285){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     listener.setShield(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
@@ -260,9 +251,6 @@ public class Level2 extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(player.getPosition().x > 285){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     listener.setCanDamage(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
@@ -277,9 +265,6 @@ public class Level2 extends World {
 
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
                     moveLeft[0] = true;
-                    if(player.getPosition().x > 285){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, ev -> {
@@ -293,14 +278,7 @@ public class Level2 extends World {
                     Level2SoundClip.pause();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     Level2SoundClip.resume();
-                }
-                if(player.getPosition().x > 285){
-                    new Level3();
-                    frames.getContentPane().removeAll();
-                    frames.setVisible(false);
-                    Level2SoundClip.stop();Level2SoundClip.stop();}
-
-            }
+                }}
 
             public void keyReleased(KeyEvent e) {
                 if  (e.getKeyCode() == KeyEvent.VK_D) {
@@ -343,16 +321,12 @@ public class Level2 extends World {
             }
         });
         levelTimer = new Timer(1000, e -> {
-            if (timeRemaining >= 0 && (player.getPosition().x < 285)) {
+            if (timeRemaining >= 0) {
                 timeRemaining--;
-            } else if (player.getPosition().x > 285) {
-                levelTimer.stop();((Timer)e.getSource()).stop();
-                moveRight[0] = false; moveLeft[0] = false; listener.setCanDamage(false);
-                player.setLinearVelocity(new Vec2(0f,0f));
             } else {
                 levelTimer.stop();
                 ((Timer)e.getSource()).stop();
-                player.loselife(); player.loselife(); player.loselife(); player.playerDeath(); Level2SoundClip.close();
+                player.loseLife(); player.loseLife(); player.loseLife(); player.playerDeath(); Level2SoundClip.close();
                 player.setLinearVelocity(new Vec2(0f,0f));
             }
         });
@@ -361,10 +335,10 @@ public class Level2 extends World {
 
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
-                if (moveRight[0] && !(player.getPosition().x >285)) {
+                if (moveRight[0]) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }
-                else if (moveLeft[0] && !(player.getPosition().x >285)) {
+                else if (moveLeft[0]) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
                 npcGangsta.update_Level2(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
@@ -389,6 +363,14 @@ public class Level2 extends World {
                 dynamicPlatform.update(); dynamicPlatform.setAngle(0f); dynamicPlatform.setAngularVelocity(0f);
                 dynamicPlatform2.update(); dynamicPlatform2.setAngle(0f); dynamicPlatform2.setAngularVelocity(0f);
                 dynamicPlatform3.update(); dynamicPlatform3.setAngle(0f); dynamicPlatform3.setAngularVelocity(0f);
+                if(player.getPosition().x > 285){
+                    Level2.this.stop();
+                    levelTimer.stop();
+                    Level2SoundClip.close();
+
+                    frames.dispose();
+                    Level3.main();
+                }
             }
 
             @Override
@@ -397,5 +379,6 @@ public class Level2 extends World {
         this.start();
     }
     static void main() {
+        new Level2();
     }
 }

@@ -13,8 +13,6 @@ public class PlayerCollision implements CollisionListener {
     private boolean canTakeDamage = true;
     private final Character player;
 
-    private Timer destroyTimer;
-
     public PlayerCollision(Character player) {
         this.player = player;
     }
@@ -47,16 +45,16 @@ public class PlayerCollision implements CollisionListener {
             enemy.lose_Life();
             canDamage = false; // Used to make sure the enemy only takes damage once upon collision.
         } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage ) { // Used to allow the player is take damage when collision occurs.
-            player.loselife();
+            player.loseLife();
             canTakeDamage = false; // Used to make sure the player only takes damage once upon collision.
 
         } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage) {
-            player.loselife();
+            player.loseLife();
             canTakeDamage = false;
         } else if (e.getOtherBody() instanceof Enemy && shield) {
             Character.shieldLife();
         } else if (e.getOtherBody() instanceof Enemy_attack enemyAttack && !shield && !canDamage ) {
-            player.loselife();
+            player.loseLife();
             canTakeDamage = false;
             enemyAttack.destroyed();
         } else if (e.getOtherBody() instanceof Bullets bullet) {
@@ -64,12 +62,11 @@ public class PlayerCollision implements CollisionListener {
             bullet.destroy();
         }
         if (e.getOtherBody() instanceof DeathShape) {
-            player.loselife(); // Called 3 times to clear all the hearts from the screen.
-            player.loselife(); // Allows the player image to disappear upon collision.
-            player.loselife();
+            player.loseLife(); // Called 3 times to clear all the hearts from the screen.
+            player.loseLife(); // Allows the player image to disappear upon collision.
+            player.loseLife();
             player.playerDeath();
-            destroyTimer = new Timer(1000, f -> player.destroy());
-            destroyTimer.start();}
+           }
         }
     }
 // Author: Jonathan Ross

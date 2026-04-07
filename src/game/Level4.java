@@ -191,9 +191,8 @@ public class Level4 extends World {
             stave.setPosition(new Vec2(x+ 8f, y + 200 ));
         }
 
-        Flag flagimage = new Flag(this);
-        flagimage.setPosition(new Vec2(290, -10));
-        flagimage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
+        Flag flagImage = new Flag(this); flagImage.setPosition(new Vec2(290, -10));
+        flagImage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
 
         Shape GoldCoin = new BoxShape(2,10);
         StaticBody GoldCoinBody = new StaticBody(this, GoldCoin);
@@ -284,7 +283,7 @@ public class Level4 extends World {
         frames.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveRight[0] = !(player.getPosition().x > 260);
+                    moveRight[0] = true;
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, _ -> {
@@ -296,10 +295,6 @@ public class Level4 extends World {
                     } }
 
                 else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
-                    if(player.getPosition().x > 260){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                        player.applyImpulse(new Vec2(0f, 0f));
-                    }
                     listener.setCanJump(false);
                     player.applyImpulse(new Vec2(0f, 110f));
                     player.removeAllImages();
@@ -307,9 +302,6 @@ public class Level4 extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
-                    if(player.getPosition().x > 260){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     listener.setShield(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
@@ -317,9 +309,6 @@ public class Level4 extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(player.getPosition().x > 260){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     listener.setCanDamage(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
@@ -334,9 +323,6 @@ public class Level4 extends World {
 
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
                     moveLeft[0] = true;
-                    if(player.getPosition().x > 260){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, ev -> {
@@ -389,11 +375,6 @@ public class Level4 extends World {
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     Level4SoundClip.resume();
                 }
-                if(player.getPosition().x > 260){
-                    Level4SoundClip.stop();
-                    moveRight[0] = false; moveLeft[0] = false; canShoot[0] = false;
-                }
-
             }
 
             public void keyReleased(KeyEvent e) {
@@ -451,7 +432,7 @@ public class Level4 extends World {
             } else {
                 levelTimer.stop();
                 ((Timer)e.getSource()).stop();
-                player.loselife(); player.loselife(); player.loselife();
+                player.loseLife(); player.loseLife(); player.loseLife();
                 player.playerDeath(); listener.setCanDamage(false);
                 moveRight[0] = false; moveLeft[0] = false; canShoot[0] = false;
                 player.setLinearVelocity(new Vec2(0f,0f));
@@ -463,10 +444,10 @@ public class Level4 extends World {
         Bullets finalBullet_L = Bullet_L4;
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
-                if (moveRight[0] && !(player.getPosition().x >270)) {
+                if (moveRight[0]) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }
-                else if (moveLeft[0] && !(player.getPosition().x >270)) {
+                else if (moveLeft[0]) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
                 npcGangsta.update_Level4(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
@@ -496,7 +477,14 @@ public class Level4 extends World {
                 }
                 finalBullet_L.setAngle(0f); finalBullet_L.setAngularVelocity(0f);
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
-                System.out.println(player.getPosition().x);
+                if(player.getPosition().x > 260){
+                    Level4.this.stop();
+                    levelTimer.stop();
+                    Level4SoundClip.close();
+
+                    frames.dispose();
+
+                }
             }
 
             @Override
@@ -505,5 +493,6 @@ public class Level4 extends World {
         this.start();
     }
     static void main() {
+        new Level4();
     }
 }

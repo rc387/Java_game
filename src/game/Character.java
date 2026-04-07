@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Character extends DynamicBody  {
-    private static final Shape CharacterShape = new BoxShape(1,2.5f);
+    private static final Shape CharacterShape = new BoxShape(1f, 2.4f);
     private static final BodyImage image = new BodyImage("data/Fighter/Idle(1).png", 5.5f);
     private static final Image heart = new ImageIcon("data/PNG/Bronze/Bronze_11.png").getImage();
     private static final Image bullets = new ImageIcon("data/Shots_icon.png").getImage();
@@ -20,7 +20,7 @@ public class Character extends DynamicBody  {
         setAngle(0f);
     }
 
-    public void loselife() { // Used to deduct a life when method is called.
+    public void loseLife() { // Used to deduct a life when method is called.
         lives--;
         if (lives <= 0) {
         playerDeath();
@@ -75,7 +75,7 @@ public class Character extends DynamicBody  {
     public void loseShots(){
         shots--;
         if(shots <= 0){
-            loselife();
+            loseLife();
         }
     }
 

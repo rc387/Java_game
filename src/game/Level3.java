@@ -176,8 +176,8 @@ public class Level3 extends World {
             stave.setPosition(new Vec2(x+ 7.5f, y + 200 ));
         }
 
-        Flag flagimage = new Flag(this); flagimage.setPosition(new Vec2(250, -10));
-        flagimage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
+        Flag flagImage = new Flag(this); flagImage.setPosition(new Vec2(250, -10));
+        flagImage.addImage(new BodyImage("data/Flag(1).png", 5.5f));
 
         Shape GoldCoin = new BoxShape(2, 10);
         StaticBody GoldCoinBody = new StaticBody(this, GoldCoin);
@@ -225,7 +225,7 @@ public class Level3 extends World {
         frames.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveRight[0] = !(player.getPosition().x > 275);
+                    moveRight[0] = true;
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, _ -> {
@@ -237,20 +237,12 @@ public class Level3 extends World {
                     } }
 
                 else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
-                    if(player.getPosition().x > 275){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                        player.applyImpulse(new Vec2(0f, 0f));
-                    }
-                    listener.setCanJump(false);
                     player.applyImpulse(new Vec2(0f, 110f));
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Shinobi/Jump(1).png", 5.5f));
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_S) {
-                    if(player.getPosition().x > 275){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     listener.setShield(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
@@ -258,9 +250,6 @@ public class Level3 extends World {
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(player.getPosition().x > 275){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     listener.setCanDamage(true);
                     player.setLinearVelocity(new Vec2(player.getLinearVelocity().x, player.getLinearVelocity().y));
                     player.removeAllImages();
@@ -275,9 +264,6 @@ public class Level3 extends World {
 
                 else if (e.getKeyCode() == KeyEvent.VK_A) {
                     moveLeft[0] = true;
-                    if(player.getPosition().x > 275){
-                        player.setLinearVelocity(new Vec2(0f, 0f));
-                    }
                     if (runTimer[0] == null) {
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, ev -> {
@@ -292,11 +278,7 @@ public class Level3 extends World {
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     Level3SoundClip.resume();
                 }
-                if(player.getPosition().x > 250){
-                    new Level4();
-                    frames.getContentPane().removeAll();
-                    frames.setVisible(false);
-                    Level3SoundClip.close();}
+
 
             }
 
@@ -341,16 +323,12 @@ public class Level3 extends World {
             }
         });
         levelTimer = new Timer(1000, e -> {
-            if (timeRemaining >= 0 && (player.getPosition().x < 270)) {
+            if (timeRemaining >= 0) {
                 timeRemaining--;
-            } else if (player.getPosition().x > 270) {
-                levelTimer.stop();((Timer)e.getSource()).stop();
-                moveRight[0] = false; moveLeft[0] = false;  listener.setCanDamage(false);
-                player.setLinearVelocity(new Vec2(0f,0f));
             } else {
                 levelTimer.stop();
                 ((Timer)e.getSource()).stop();
-                player.loselife(); player.loselife(); player.loselife(); player.playerDeath();
+                player.loseLife(); player.loseLife(); player.loseLife(); player.playerDeath();
                 player.setLinearVelocity(new Vec2(0f,0f));
                 Level3SoundClip.close(); listener.setCanDamage(false);
             }
@@ -360,10 +338,10 @@ public class Level3 extends World {
         Enemy_attack finalStave = stave;
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
-                if (moveRight[0] && !(player.getPosition().x > 275)) {
+                if (moveRight[0]) {
                     player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
                 }
-                else if (moveLeft[0] && !(player.getPosition().x > 275)) {
+                else if (moveLeft[0]) {
                     player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
                 }
                 npcGangsta.update_Level3(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
@@ -402,6 +380,15 @@ public class Level3 extends World {
                     views.setZoom(33f);
                 }
 
+                if(player.getPosition().x > 250){
+                    Level3.this.stop();
+                    levelTimer.stop();
+                    Level3SoundClip.close();
+
+                    frames.dispose();
+                    Level4.main();
+                }
+
             }
 
             @Override
@@ -410,5 +397,6 @@ public class Level3 extends World {
         this.start();
     }
     static void main() {
+        new Level3();
     }
 }
