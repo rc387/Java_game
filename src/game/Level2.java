@@ -3,12 +3,16 @@ package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
-public class Level2 extends World {
+public class Level2 extends GameWorld {
     private int timeRemaining = 180;
     private Timer levelTimer;
     private SoundClip Level2SoundClip;
@@ -17,7 +21,7 @@ public class Level2 extends World {
         player.setPosition(new Vec2(280f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
-        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level2.jpg").getImage(),player);
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level2.jpg").getImage(),player,"Enemies now have multiple lives!!",false);
 
         final JFrame frames = new JFrame("Level 2");
         frames.add(views); frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frames.setLocationByPlatform(true);
@@ -220,9 +224,18 @@ public class Level2 extends World {
             e.printStackTrace();
         }
 
+        final double[] x = {1};
+        Level2SoundClip.setVolume(x[0]);
         player.gainLife();
         final boolean[] moveRight = {false}; final boolean[] moveLeft = {false};
         PlayerCollision listener = new PlayerCollision(player); player.addCollisionListener(listener);
+        SoundClip damage;
+        try {
+            damage = new SoundClip("data/damage1.wav");
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+        listener.setLevelSoundClip(damage);
         frames.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
@@ -238,6 +251,7 @@ public class Level2 extends World {
                     } }
 
                 else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
+                    listener.setCanJump(false);
                     player.applyImpulse(new Vec2(0f, 110f));
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Samurai/Jump(1).png", 5.5f));
@@ -278,6 +292,10 @@ public class Level2 extends World {
                     Level2SoundClip.pause();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     Level2SoundClip.resume();
+                }else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    Level2SoundClip.setVolume(x[0] += 0.1);
+                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    Level2SoundClip.setVolume(x[0] -= 0.1);
                 }}
 
             public void keyReleased(KeyEvent e) {

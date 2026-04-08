@@ -10,8 +10,8 @@ public class Character extends DynamicBody  {
     private static final BodyImage image = new BodyImage("data/Fighter/Idle(1).png", 5.5f);
     private static final Image heart = new ImageIcon("data/PNG/Bronze/Bronze_11.png").getImage();
     private static final Image bullets = new ImageIcon("data/Shots_icon.png").getImage();
-    private static int lives = 3;
-    private static int shots = 3;
+    private int lives = 3;
+    private int shots = 3;
 
     public Character(World world) {
         super(world, CharacterShape);
@@ -42,7 +42,7 @@ public class Character extends DynamicBody  {
 
     private void setFixedRotation() {}
 
-    public static void hearts(Graphics2D g) {
+    public void hearts(Graphics2D g) {
         for(int i = 0; i < lives; i++){
             g.drawImage(heart,i*50, i,50,50,null);
         }
@@ -58,7 +58,7 @@ public class Character extends DynamicBody  {
 
     }
 
-    public static void Shots(Graphics2D g){
+    public void Shots(Graphics2D g){
         int y = 55;
         for(int i = 0; i < shots; i++){
             g.drawImage(bullets,i*50,y,50,50,null);
@@ -78,6 +78,8 @@ public class Character extends DynamicBody  {
             loseLife();
         }
     }
+
+
 
 }
 // Author: Jonathan Ross

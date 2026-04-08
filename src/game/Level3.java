@@ -3,12 +3,16 @@ package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
-public class Level3 extends World {
+public class Level3 extends GameWorld {
     private int timeRemaining = 180;
     private Timer levelTimer;
     private SoundClip Level3SoundClip;
@@ -17,7 +21,7 @@ public class Level3 extends World {
         player.setPosition(new Vec2(260f, 2)); player.setLinearVelocity(new Vec2(0, 0));
         player.setAngularVelocity(0); player.setAngle(0);
 
-        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level3.jpg").getImage(),player);
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level3.jpg").getImage(),player,"Expect surprise zoom ins & screen rotations!!",false);
 
         final JFrame frames = new JFrame("Level3"); frames.add(views); frames.pack(); frames.repaint();
         frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frames.setLocationByPlatform(true);
@@ -171,9 +175,9 @@ public class Level3 extends World {
         stave.setPosition(new Vec2(15f, 100f)); stave.setAngle(0f); stave.setAngularVelocity(0f);
         int x = 30; int y = 175;
         for (int i = 0; i < 35; i++) {
-            x = x + 5; y = y + 190;
+            x = x + 5;
             stave = new Enemy_attack(this);
-            stave.setPosition(new Vec2(x+ 7.5f, y + 200 ));
+            stave.setPosition(new Vec2(x+ 7.5f, y + 50 ));
         }
 
         Flag flagImage = new Flag(this); flagImage.setPosition(new Vec2(250, -10));
@@ -217,11 +221,20 @@ public class Level3 extends World {
             e.printStackTrace();
         }
 
+        final double[] z = {1};
+        Level3SoundClip.setVolume(z[0]);
         player.gainLife();
         final boolean[] moveRight = {false};
         final boolean[] moveLeft = {false};
         PlayerCollision listener = new PlayerCollision(player);
         player.addCollisionListener(listener);
+        SoundClip damage;
+        try {
+            damage = new SoundClip("data/damage1.wav");
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+        listener.setLevelSoundClip(damage);
         frames.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
@@ -237,6 +250,7 @@ public class Level3 extends World {
                     } }
 
                 else if (e.getKeyCode() == KeyEvent.VK_W && listener.canJump()) {
+                    listener.setCanJump(false);
                     player.applyImpulse(new Vec2(0f, 110f));
                     player.removeAllImages();
                     player.addImage( new BodyImage("data/Shinobi/Jump(1).png", 5.5f));
@@ -277,6 +291,10 @@ public class Level3 extends World {
                     Level3SoundClip.pause();
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     Level3SoundClip.resume();
+                }else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    Level3SoundClip.setVolume(z[0] += 0.1);
+                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    Level3SoundClip.setVolume(z[0] -= 0.1);
                 }
 
 

@@ -2,6 +2,7 @@ package game;
 
 import city.cs.engine.CollisionEvent;
 import city.cs.engine.CollisionListener;
+import city.cs.engine.SoundClip;
 import city.cs.engine.StaticBody;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class PlayerCollision implements CollisionListener {
     private boolean shield = false;
     private boolean canTakeDamage = true;
     private final Character player;
+    private SoundClip DamageSoundClip;
 
     public PlayerCollision(Character player) {
         this.player = player;
@@ -35,6 +37,10 @@ public class PlayerCollision implements CollisionListener {
         this.canTakeDamage = value;
     }
 
+    public void setLevelSoundClip(SoundClip value) {
+       DamageSoundClip =  value;
+    }
+
     @Override
     public void collide(CollisionEvent e) {
         if (e.getOtherBody() instanceof StaticBody ) {
@@ -44,13 +50,12 @@ public class PlayerCollision implements CollisionListener {
         } else if (e.getOtherBody() instanceof Enemy enemy && canDamage) { // Used to allow the enemy is take damage when collision occurs.
             enemy.lose_Life();
             canDamage = false; // Used to make sure the enemy only takes damage once upon collision.
+            if (DamageSoundClip != null) {
+                DamageSoundClip.play();
+            }
         } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage ) { // Used to allow the player is take damage when collision occurs.
             player.loseLife();
             canTakeDamage = false; // Used to make sure the player only takes damage once upon collision.
-
-        } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage) {
-            player.loseLife();
-            canTakeDamage = false;
         } else if (e.getOtherBody() instanceof Enemy && shield) {
             Character.shieldLife();
         } else if (e.getOtherBody() instanceof Enemy_attack enemyAttack && !shield && !canDamage ) {
