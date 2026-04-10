@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Character extends DynamicBody  {
-    private static final Shape CharacterShape = new BoxShape(1f, 2.4f);
+    private static final Shape CharacterShape = new BoxShape(1f, 2.5f);
     private static final BodyImage image = new BodyImage("data/Fighter/Idle(1).png", 5.5f);
     private static final Image heart = new ImageIcon("data/PNG/Bronze/Bronze_11.png").getImage();
     private static final Image bullets = new ImageIcon("data/Shots_icon.png").getImage();

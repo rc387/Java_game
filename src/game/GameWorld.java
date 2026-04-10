@@ -5,7 +5,7 @@ import city.cs.engine.*;
 import javax.swing.*;
 
 
-public class GameWorld extends World {
+public abstract class GameWorld extends World {
     private static final Shape PlatformShape = new BoxShape(1f, 2f);
     private Timer levelTimer;
     private final boolean[] moveRight = {false}; // Boolean flag used to determine if the player can move right or not.
@@ -14,7 +14,7 @@ public class GameWorld extends World {
 
     }
     static void main(String[] args) {
-        new GameWorld();
+
     }
 }
 // Author: Jonathan Ross

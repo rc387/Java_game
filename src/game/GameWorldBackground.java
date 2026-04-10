@@ -10,11 +10,17 @@ public class GameWorldBackground extends UserView {
     private int timeRemaining = 180;
     private Timer levelTimer;
     private final Character player;
+    private final String text;
+    private final boolean shotsIcon;
+    private final boolean Enemies_left;
 
-    public GameWorldBackground(World w, int width, int height, Image background, Character player) {
+    public GameWorldBackground(World w, int width, int height, Image background, Character player, String text, Boolean shotsIcon, Boolean Enemies_left) {
         super(w, width, height);
         this.background = background;
         this.player = player;
+        this.text = text;
+        this.shotsIcon = shotsIcon;
+        this.Enemies_left = Enemies_left;
         levelTimer = new Timer(1000, e -> { // Timer that's visible on screen.
             if (timeRemaining >= 0) {
                 timeRemaining--;
@@ -44,13 +50,21 @@ public class GameWorldBackground extends UserView {
     @Override
     protected void paintForeground(Graphics2D g) {
         super.paintForeground(g);
-        Character.Shots(g);
-        Character.hearts(g);
+        if (shotsIcon) {
+        player.Shots(g);}
+        player.hearts(g);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("Time: " + getTimeRemaining(), 545, 20);
         g.setFont(new Font("Arial", Font.BOLD, 12));
-        g.drawString("W = jump, A = left, S = shield, D = right, Enter = attack, Level4: Space = shoot",150,50);
+        g.drawString(text,190,12);
+        if (Enemies_left) {
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.drawString(
+                    "Enemies left: " + Raider_Enemy.getEnemies_left_L2(),
+                    1,
+                    75);
+        }
         float playerX = player.getPosition().x;
 
         g.setColor(Color.BLUE);

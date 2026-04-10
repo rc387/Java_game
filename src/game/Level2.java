@@ -18,10 +18,10 @@ public class Level2 extends GameWorld {
     private SoundClip Level2SoundClip;
     public Level2() {
         Character player = new Character(this);
-        player.setPosition(new Vec2(280f, 2));
+        player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
-        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level2.jpg").getImage(),player,"Enemies now have multiple lives!!",false);
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level2.jpg").getImage(),player,"Enemies now have multiple lives!!" ,false,true);
 
         final JFrame frames = new JFrame("Level 2");
         frames.add(views); frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frames.setLocationByPlatform(true);
@@ -33,13 +33,13 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(-2.75f, -4.5f));
         platform.addImage(new BodyImage("data/platform_level2.png", 11.5f));
 
-        Enemy npcGangsta1 = new Enemy(this, 15, 19,2);
-        npcGangsta1.setPosition(new Vec2(16, -4));
-        npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
+        Raider_Enemy npcGangsta = new Raider_Enemy(this, 15, 19,2);
+        npcGangsta.setPosition(new Vec2(16, -4));
+        npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0);
 
-        Enemy npcGangsta = new Enemy(this, 20,28.5f,2);
-        npcGangsta.setPosition(new Vec2(24, -4));
-        npcGangsta.setLinearVelocity(new Vec2(0, 0)); npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0);
+        Raider_Enemy npcGangsta1 = new Raider_Enemy(this, 20,28.5f,2);
+        npcGangsta1.setPosition(new Vec2(24, -4));
+        npcGangsta1.setLinearVelocity(new Vec2(0, 0)); npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0);
 
         platformShape = new BoxShape(7, 1);
         platform = new StaticBody(this, platformShape);
@@ -56,11 +56,11 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(55, -10f));
         platform.addImage(new BodyImage("data/platform_level2.png", 12f));
 
-        Enemy npcGangsta2 = new Enemy(this, 50, 54,2);
+        Raider_Enemy npcGangsta2 = new Raider_Enemy(this, 50, 54,2);
         npcGangsta2.setPosition(new Vec2(51, -8f));
         npcGangsta2.setAngularVelocity(0); npcGangsta2.setAngle(0);
 
-        Enemy npcGangsta3 = new Enemy(this, 58.5f, 62.5f,2);
+        Raider_Enemy npcGangsta3 = new Raider_Enemy(this, 58.5f, 62.5f,2);
         npcGangsta3.setPosition(new Vec2(59, -8f));
         npcGangsta3.setAngularVelocity(0); npcGangsta3.setAngle(0);
 
@@ -74,7 +74,7 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(80, -2f));
         platform.addImage(new BodyImage("data/platform_level2.png", 10f));
 
-        Enemy npcGangsta4 = new Enemy(this, 75, 84,2);
+        Raider_Enemy npcGangsta4 = new Raider_Enemy(this, 75, 84,2);
         npcGangsta4.setPosition(new Vec2(79, 0f));
         npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0);
 
@@ -88,13 +88,13 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(115, 30f));
         platform.addImage(new BodyImage("data/platform_level2.png", 13f));
 
-        Enemy npcGangsta5 = new Enemy(this, 107, 110,2);
+        Raider_Enemy npcGangsta5 = new Raider_Enemy(this, 107, 110,2);
         npcGangsta5.setPosition(new Vec2(108, 32f)); npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0);
 
-        Enemy npcGangsta6 = new Enemy(this, 112, 116,2);
+        Raider_Enemy npcGangsta6 = new Raider_Enemy(this, 112, 116,2);
         npcGangsta6.setPosition(new Vec2(114, 32f)); npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0);
 
-        Enemy npcGangsta7 = new Enemy(this, 118, 122,2);
+        Raider_Enemy npcGangsta7 = new Raider_Enemy(this, 118, 122,2);
         npcGangsta7.setPosition(new Vec2(120, 32f)); npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0);
 
         platformShape = new BoxShape(5, 0.5f);
@@ -107,7 +107,7 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(145, -4f));
         platform.addImage(new BodyImage("data/platform_level2.png", 8f));
 
-        Enemy npcGangsta8 = new Enemy(this, 141, 149,2);
+        Raider_Enemy npcGangsta8 = new Raider_Enemy(this, 141, 149,2);
         npcGangsta8.setPosition(new Vec2(144, -2f)); npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0);
 
         platformShape = new BoxShape(8, 1);
@@ -115,10 +115,10 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(165, -13f));
         platform.addImage(new BodyImage("data/platform_level2.png", 12f));
 
-        Enemy npcGangsta9 = new Enemy(this, 158, 162,2);
+        Raider_Enemy npcGangsta9 = new Raider_Enemy(this, 158, 162,2);
         npcGangsta9.setPosition(new Vec2(160, -10f)); npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0);
 
-        Enemy npcGangsta10 = new Enemy(this, 165, 170,2);
+        Raider_Enemy npcGangsta10 = new Raider_Enemy(this, 165, 170,2);
         npcGangsta10.setPosition(new Vec2(168, -10f));
         npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0);
 
@@ -132,11 +132,11 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(200, -6f));
         platform.addImage(new BodyImage("data/platform_level2.png", 11f));
 
-        Enemy npcGangsta11 = new Enemy(this, 194, 198,2);
+        Raider_Enemy npcGangsta11 = new Raider_Enemy(this, 194, 198,2);
         npcGangsta11.setPosition(new Vec2(196, -4f));
         npcGangsta11.setAngularVelocity(0); npcGangsta11.setAngle(0);
 
-        Enemy npcGangsta12 = new Enemy(this, 200, 205,2);
+        Raider_Enemy npcGangsta12 = new Raider_Enemy(this, 200, 205,2);
         npcGangsta12.setPosition(new Vec2(203, -4f));
         npcGangsta12.setAngularVelocity(0); npcGangsta12.setAngle(0);
 
@@ -150,19 +150,19 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(240, -14f));
         platform.addImage(new BodyImage("data/platform_level2.png", 14f));
 
-        Enemy npcGangsta13 = new Enemy(this, 232, 233.75f,2);
+        Raider_Enemy npcGangsta13 = new Raider_Enemy(this, 232, 233.75f,2);
         npcGangsta13.setPosition(new Vec2(236, -12f));
         npcGangsta13.setAngularVelocity(0); npcGangsta13.setAngle(0);
 
-        Enemy npcGangsta14 = new Enemy(this, 236, 237.75f,2);
+        Raider_Enemy npcGangsta14 = new Raider_Enemy(this, 236, 237.75f,2);
         npcGangsta14.setPosition(new Vec2(239.3f, -12f));
         npcGangsta14.setAngularVelocity(0); npcGangsta14.setAngle(0);
 
-        Enemy npcGangsta15 = new Enemy(this, 240.85f, 242.5f,2);
+        Raider_Enemy npcGangsta15 = new Raider_Enemy(this, 240.85f, 242.5f,2);
         npcGangsta15.setPosition(new Vec2(242.6f, -12f));
         npcGangsta15.setAngularVelocity(0); npcGangsta15.setAngle(0);
 
-        Enemy npcGangsta16 = new Enemy(this, 245.1f, 246.85f,2);
+        Raider_Enemy npcGangsta16 = new Raider_Enemy(this, 245.1f, 246.85f,2);
         npcGangsta16.setPosition(new Vec2(246, -12f));
         npcGangsta16.setAngularVelocity(0); npcGangsta16.setAngle(0);
 
@@ -225,6 +225,7 @@ public class Level2 extends GameWorld {
         }
 
         final double[] x = {1};
+        Raider_Enemy.resetCount();
         Level2SoundClip.setVolume(x[0]);
         player.gainLife();
         final boolean[] moveRight = {false}; final boolean[] moveLeft = {false};
@@ -381,7 +382,7 @@ public class Level2 extends GameWorld {
                 dynamicPlatform.update(); dynamicPlatform.setAngle(0f); dynamicPlatform.setAngularVelocity(0f);
                 dynamicPlatform2.update(); dynamicPlatform2.setAngle(0f); dynamicPlatform2.setAngularVelocity(0f);
                 dynamicPlatform3.update(); dynamicPlatform3.setAngle(0f); dynamicPlatform3.setAngularVelocity(0f);
-                if(player.getPosition().x > 285){
+                if(player.getPosition().x > 285 && player.getPosition().y > -14.5f && Raider_Enemy.getEnemies_left_L2() == 0){
                     Level2.this.stop();
                     levelTimer.stop();
                     Level2SoundClip.close();

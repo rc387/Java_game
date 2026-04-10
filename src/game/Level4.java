@@ -22,7 +22,7 @@ public class Level4 extends GameWorld {
         Character player = new Character(this); player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
-        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level4.jpg").getImage(),player,"Shots allowed!! Shots = Enter",true);
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level4.jpg").getImage(),player,"Shots allowed!! Shots = Enter, shooting with 0 shots deducts a life",true, false);
 
         final JFrame frames = new JFrame("Level4"); frames.add(views); frames.pack(); frames.repaint();
         frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frames.setLocationByPlatform(true);
@@ -40,11 +40,11 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(20, -4));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta = new Enemy(this, 15, 18, 4);
+        Samurai_Enemy npcGangsta = new Samurai_Enemy(this, 15, 18, 4);
         npcGangsta.setPosition(new Vec2(16, -2f));
         npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0); npcGangsta.addCollisionListener(npcGangsta);
 
-        Enemy npcGangsta1 = new Enemy(this, 21, 24.5f, 4);
+        Samurai_Enemy npcGangsta1 = new Samurai_Enemy(this, 21, 24.5f, 4);
         npcGangsta1.setPosition(new Vec2(22, -2f));
         npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0); npcGangsta1.addCollisionListener(npcGangsta1);
 
@@ -57,11 +57,11 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(55, -12f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta2 = new Enemy(this, 50, 54f, 4);
+        Samurai_Enemy npcGangsta2 = new Samurai_Enemy(this, 50, 54f, 4);
         npcGangsta2.setPosition(new Vec2(51, -10f));
         npcGangsta2.setAngularVelocity(0); npcGangsta2.setAngle(0); npcGangsta2.addCollisionListener(npcGangsta2);
 
-        Enemy npcGangsta3 = new Enemy(this, 58f, 62f, 4);
+        Samurai_Enemy npcGangsta3 = new Samurai_Enemy(this, 58f, 62f, 4);
         npcGangsta3.setPosition(new Vec2(59f, -10f));
         npcGangsta3.setAngularVelocity(0); npcGangsta3.setAngle(0); npcGangsta3.addCollisionListener(npcGangsta3);
 
@@ -70,11 +70,11 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(75, -5f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta4 = new Enemy(this, 70, 74f, 4);
+        Samurai_Enemy npcGangsta4 = new Samurai_Enemy(this, 70, 74f, 4);
         npcGangsta4.setPosition(new Vec2(71f, -3f));
         npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0); npcGangsta4.addCollisionListener(npcGangsta4);
 
-        Enemy npcGangsta5 = new Enemy(this, 77f, 81f, 4);
+        Samurai_Enemy npcGangsta5 = new Samurai_Enemy(this, 77f, 81f, 4);
         npcGangsta5.setPosition(new Vec2(76f, -3f));
         npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0); npcGangsta5.addCollisionListener(npcGangsta5);
 
@@ -88,11 +88,11 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(113, -14f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta6 = new Enemy(this, 108, 112, 4);
+        Samurai_Enemy npcGangsta6 = new Samurai_Enemy(this, 108, 112, 4);
         npcGangsta6.setPosition(new Vec2(109f, -12f));
         npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0); npcGangsta6.addCollisionListener(npcGangsta6);
 
-        Enemy npcGangsta7 = new Enemy(this, 115f, 118f, 4);
+        Samurai_Enemy npcGangsta7 = new Samurai_Enemy(this, 115f, 118f, 4);
         npcGangsta7.setPosition(new Vec2(116f, -12f));
         npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0); npcGangsta7.addCollisionListener(npcGangsta7);
 
@@ -101,11 +101,11 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(141, -13f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta8 = new Enemy(this, 136, 140f, 4);
+        Samurai_Enemy npcGangsta8 = new Samurai_Enemy(this, 136, 140f, 4);
         npcGangsta8.setPosition(new Vec2(137f, -11f));
         npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0); npcGangsta8.addCollisionListener(npcGangsta8);
 
-        Enemy npcGangsta9 = new Enemy(this, 142f, 146f, 4);
+        Samurai_Enemy npcGangsta9 = new Samurai_Enemy(this, 142f, 146f, 4);
         npcGangsta9.setPosition(new Vec2(143f, -11f));
         npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0); npcGangsta9.addCollisionListener(npcGangsta9);
 
@@ -119,7 +119,7 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(173, -6f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta10 = new Enemy(this, 167, 170, 4);
+        Samurai_Enemy npcGangsta10 = new Samurai_Enemy(this, 167, 170, 4);
         npcGangsta10.setPosition(new Vec2(168.5f, -4f));
         npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0); npcGangsta10.addCollisionListener(npcGangsta10);
 
@@ -133,11 +133,11 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(215, -14f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta11 = new Enemy(this, 211.5f, 213.2f, 4);
+        Samurai_Enemy npcGangsta11 = new Samurai_Enemy(this, 211.5f, 213.2f, 4);
         npcGangsta11.setPosition(new Vec2(212.5f, -12f));
         npcGangsta11.setAngularVelocity(0); npcGangsta11.setAngle(0); npcGangsta11.addCollisionListener(npcGangsta11);
 
-        Enemy npcGangsta12 = new Enemy(this, 216f, 220f, 4);
+        Samurai_Enemy npcGangsta12 = new Samurai_Enemy(this, 216f, 220f, 4);
         npcGangsta12.setPosition(new Vec2(217f, -12f));
         npcGangsta12.setAngularVelocity(0); npcGangsta12.setAngle(0); npcGangsta12.addCollisionListener(npcGangsta12);
 
@@ -146,7 +146,7 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(232, -8f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta13 = new Enemy(this, 229f, 233f, 4);
+        Samurai_Enemy npcGangsta13 = new Samurai_Enemy(this, 229f, 233f, 4);
         npcGangsta13.setPosition(new Vec2(231f, -6f));
         npcGangsta13.setAngularVelocity(0); npcGangsta13.setAngle(0); npcGangsta13.addCollisionListener(npcGangsta13);
 
@@ -155,7 +155,7 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(242, -3f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Enemy npcGangsta14 = new Enemy(this, 241.5f, 245.5f, 4);
+        Samurai_Enemy npcGangsta14 = new Samurai_Enemy(this, 241.5f, 245.5f, 4);
         npcGangsta14.setPosition(new Vec2(242.5f, -1f));
         npcGangsta14.setAngularVelocity(0); npcGangsta14.setAngle(0); npcGangsta14.addCollisionListener(npcGangsta14);
 
@@ -494,7 +494,7 @@ public class Level4 extends GameWorld {
                 }
                 finalBullet_L.setAngle(0f); finalBullet_L.setAngularVelocity(0f);
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
-                if(player.getPosition().x > 260){
+                if(player.getPosition().x > 260 && player.getPosition().y > -14.5f){
                     Level4.this.stop();
                     levelTimer.stop();
                     Level4SoundClip.close();
