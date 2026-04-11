@@ -41,10 +41,8 @@ public class Raider_Enemy extends Enemy{
 
     public void update_Level2(){
         float x = getPosition().x;
-        if (x > rightBound) direction = -1;
-        if (x < leftBound) direction = 1;
-        if (lives == 1 && x > rightBound) direction = -0.1f;
-        if (lives == 1 && x < leftBound) direction = 0.1f;
+        if (x > rightBound) direction = -1; if (x < leftBound) direction = 1;
+        if (lives == 1 && x > rightBound) direction = -0.1f; if (lives == 1 && x < leftBound) direction = 0.1f;
 
         setLinearVelocity(new Vec2(3 * direction, 0));
         animationTick++; // Used to control the speed of the animation.
@@ -60,11 +58,9 @@ public class Raider_Enemy extends Enemy{
 }
     public void animate_Level2(){
         removeAllImages();
-        if (direction == -1) {
-            addImage(leftWalkFrames2[frameCounter % leftWalkFrames2.length]);
-        } else if (direction == 1) {
-            addImage(walkFrames2[frameCounter % walkFrames2.length]);
-        }else if(direction == -0.1f) {
+        if (direction == -1) { addImage(leftWalkFrames2[frameCounter % leftWalkFrames2.length]);}
+        else if (direction == 1) { addImage(walkFrames2[frameCounter % walkFrames2.length]);}
+        else if(direction == -0.1f) {
             frameCounter = (frameCounter + 1) % hurtFrames2.length;
             addImage(hurtFrames2[frameCounter % hurtFrames2.length]);
         } else if (direction == 0.1f) {
@@ -75,18 +71,15 @@ public class Raider_Enemy extends Enemy{
     }
 
     @Override
-    protected void lose_enemy(){
+    protected void lose_enemy(){ // Deducted when an enemy is defeated.
         enemies_left_L2--;
     }
 
-    public static void resetCount() {
+    public static void resetCount() { // Resets the counter when Level 2 starts.
         enemies_left_L2 = 17;
     }
 
-    public static int getEnemies_left_L2() {
+    public static int getEnemies_left_L2() { // Method called to show on screen the counter.
         return enemies_left_L2;
     }
-
-
-
 }

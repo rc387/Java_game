@@ -38,8 +38,7 @@ public class Gangster_Enemy extends Enemy {
 
     public void update() {
         float x = getPosition().x;
-        if (x > rightBound) direction = -1;
-        if (x < leftBound) direction = 1;
+        if (x > rightBound) direction = -1; if (x < leftBound) direction = 1;
 
         setLinearVelocity(new Vec2(3 * direction, 0));
 
@@ -51,11 +50,8 @@ public class Gangster_Enemy extends Enemy {
 
     public void animate() {
         removeAllImages();
-        if (direction == -1) {
-            addImage(leftWalkFrames[frameCounter % leftWalkFrames.length]);
-        } else {
-            addImage(walkFrames[frameCounter % walkFrames.length]);
-        }
+        if (direction == -1) { addImage(leftWalkFrames[frameCounter % leftWalkFrames.length]);}
+        else { addImage(walkFrames[frameCounter % walkFrames.length]);}
         frameCounter = (frameCounter + 1) % walkFrames.length;
     }
 }

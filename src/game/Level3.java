@@ -188,6 +188,17 @@ public class Level3 extends GameWorld {
         GoldCoinBody.setPosition(new Vec2(255, 2.5f));
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
 
+        Hearts heart = new Hearts(this);
+        heart.setPosition(new Vec2(20, -4));
+        heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
+        int x1 = 30;
+        for (int i = 0; i < 15; i++) {
+            x1 = x1 + 15;
+            heart = new Hearts(this);
+            heart.setPosition(new Vec2(x1 + 40, 5.5f)); heart.setAngle(0f); heart.setAngularVelocity(0f);
+            heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
+        }
+
         setGravity(9.8f);
 
         final int[] frameCounter = {0};
@@ -305,7 +316,13 @@ public class Level3 extends GameWorld {
                         pauseState[0] = false;
                         views.setPaused(false);
                         Level3SoundClip.resume();
-                    }}
+                    }} else if (e.getKeyCode() == KeyEvent.VK_R) {
+                    Level3.this.stop();
+                    levelTimer.stop();
+                    Level3SoundClip.close();
+                    frames.dispose();
+                    new Level3();
+                }
 
 
             }
@@ -355,8 +372,7 @@ public class Level3 extends GameWorld {
             if (timeRemaining >= 0) {
                 timeRemaining--;
             } else {
-                levelTimer.stop();
-                ((Timer)e.getSource()).stop();
+                levelTimer.stop(); ((Timer)e.getSource()).stop();
                 player.loseLife(); player.loseLife(); player.loseLife(); player.playerDeath();
                 player.setLinearVelocity(new Vec2(0f,0f));
                 Level3SoundClip.close(); listener.setCanDamage(false);
@@ -365,14 +381,11 @@ public class Level3 extends GameWorld {
         levelTimer.start();
 
         Enemy_attack finalStave = stave;
+        Hearts finalHeart = heart;
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
-                if (moveRight[0]) {
-                    player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
-                }
-                else if (moveLeft[0]) {
-                    player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
-                }
+                if (moveRight[0]) { player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));}
+                else if (moveLeft[0]) { player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));}
                 npcGangsta.update_Level3(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
                 npcGangsta1.update_Level3(); npcGangsta1.setAngle(0f); npcGangsta1.setAngularVelocity(0f);
                 npcGangsta2.update_Level3(); npcGangsta2.setAngle(0f); npcGangsta2.setAngularVelocity(0f);
@@ -393,31 +406,23 @@ public class Level3 extends GameWorld {
                 dynamicPlatform3.update(); dynamicPlatform3.setAngle(0f); dynamicPlatform3.setAngularVelocity(0f);
                 dynamicPlatform4.update(); dynamicPlatform4.setAngle(0f); dynamicPlatform4.setAngularVelocity(0f);
                 finalStave.setAngle(0f); finalStave.setAngularVelocity(0f);
+                finalHeart.setAngle(0); finalHeart.setAngularVelocity(0f);
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
                 views.setZoom(10f);
-                if(player.getPosition().x > 30 && player.getPosition().x < 50){
-                    views.setZoom(30f);
-                } else if (player.getPosition().x > 152 && player.getPosition().x < 165) {
-                    views.setZoom(-23f);
-                } else if (player.getPosition().x > 177 && player.getPosition().x < 197) {
-                    views.setZoom(17f);
-                } else if (player.getPosition().x > 214 && player.getPosition().x < 233) {
-                    views.setZoom(-41f);
-                } else if (player.getPosition().x > 242 && player.getPosition().x < 252) {
-                    views.setZoom(6f);
-                } else if (player.getPosition().x > 266 && player.getPosition().x < 274) {
-                    views.setZoom(33f);
-                }
 
+                if(player.getPosition().x > 30 && player.getPosition().x < 50){ views.setZoom(30f);}
+                else if (player.getPosition().x > 152 && player.getPosition().x < 165) { views.setZoom(-23f);}
+                else if (player.getPosition().x > 177 && player.getPosition().x < 197) { views.setZoom(17f);}
+                else if (player.getPosition().x > 214 && player.getPosition().x < 233) { views.setZoom(-41f);}
+                else if (player.getPosition().x > 242 && player.getPosition().x < 252) { views.setZoom(6f);}
+                else if (player.getPosition().x > 266 && player.getPosition().x < 274) { views.setZoom(33f);}
                 if(player.getPosition().x > 250 && player.getPosition().y > -14.5f){
                     Level3.this.stop();
                     levelTimer.stop();
                     Level3SoundClip.close();
-
                     frames.dispose();
                     Level4.main();
                 }
-
             }
 
             @Override

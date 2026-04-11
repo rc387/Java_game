@@ -46,11 +46,8 @@ public class Zombie_Enemy extends Enemy {
 
     public void update_Level3(){
         float x = getPosition().x;
-        if (x > rightBound) direction = -1;
-        if (x < leftBound) direction = 1;
-        if (lives < 3 && x > rightBound) direction = -0.1f;
-        if (lives < 3 && x < leftBound) direction = 0.1f;
-
+        if (x > rightBound) direction = -1; if (x < leftBound) direction = 1;
+        if (lives < 3 && x > rightBound) direction = -0.1f; if (lives < 3 && x < leftBound) direction = 0.1f;
 
         setLinearVelocity(new Vec2(3 * direction, 0));
         animationTick++; // Used to control the speed of the animation.
@@ -60,19 +57,14 @@ public class Zombie_Enemy extends Enemy {
             }} else if (direction == 0.1f || direction == -0.1f) {
             if (animationTick % 5 == 0) {
                 animate_Level3();
-            }}else if (direction == 0.9f ||  direction == -0.9f) {
-            if (animationTick % 7 == 0) {
-                animate_Level3();
             }}
     }
 
     public void animate_Level3(){
         removeAllImages();
-        if (direction == -1) {
-            addImage(leftWalkFrames3[frameCounter % leftWalkFrames3.length]);
-        } else if (direction == 1) {
-            addImage(walkFrames3[frameCounter % walkFrames3.length]);
-        } else if(direction == -0.1f) {
+        if (direction == -1) { addImage(leftWalkFrames3[frameCounter % leftWalkFrames3.length]);}
+        else if (direction == 1) { addImage(walkFrames3[frameCounter % walkFrames3.length]);}
+        else if(direction == -0.1f) {
             frameCounter = (frameCounter + 1) % hurtFrames3.length;
             addImage(hurtFrames3[frameCounter % hurtFrames3.length]);
         } else if (direction == 0.1f) {
@@ -81,5 +73,4 @@ public class Zombie_Enemy extends Enemy {
         }
         frameCounter = (frameCounter + 1) % walkFrames3.length;
     }
-
 }

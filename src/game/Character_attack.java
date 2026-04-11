@@ -10,8 +10,5 @@ public class Character_attack extends DynamicBody {
         addImage(Bullet);
     }
 
-    public void destroyed() {
-        destroy();
-    }
-
+    public void destroyed() {destroy();}
 }

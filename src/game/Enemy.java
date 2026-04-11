@@ -20,27 +20,16 @@ public abstract class Enemy extends DynamicBody implements CollisionListener {
         setAngle(0f);
     }
 
-    public void lose_Life(){
+    public void lose_Life(){ // Used to deduct a life when method is called.
         lives--;
-        if(lives <= 0){
-            lose_enemy();
-            destroy();
+        if(lives <= 0){ lose_enemy(); destroy();}}
 
-        }
-    }
-
-    protected void lose_enemy(){}
+    protected void lose_enemy(){} // Use of AI:Instantiated to be overridden in Raider_Enemy.
 
     @Override
         public void collide(CollisionEvent e) {
-            if (e.getOtherBody() instanceof Enemy_attack enemy) {
-                lose_Life();
-                enemy.destroyed();
-            } else if (e.getOtherBody() instanceof Character_attack character) {
-                lose_Life();
-                character.destroyed();
-            }
-    }
+            if (e.getOtherBody() instanceof Enemy_attack enemy) { lose_Life(); enemy.destroyed();}
+            else if (e.getOtherBody() instanceof Character_attack character) { lose_Life(); character.destroyed();}}
 
     private void setFixedRotation() {}
 }

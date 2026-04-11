@@ -36,9 +36,7 @@ public class GameWorldBackground extends UserView {
         });
         levelTimer.start();}
 
-    public int getTimeRemaining() {
-        return timeRemaining;
-    }
+    public int getTimeRemaining() { return timeRemaining;}
 
     protected void paintBackground(Graphics2D g) {
         g.setRenderingHint(
@@ -47,20 +45,16 @@ public class GameWorldBackground extends UserView {
         );
         g.drawImage(background,0,0,getWidth(), getHeight(),null);
     }
-    @Override
-    public void setBackground(Color bgColor) {
-        super.setBackground(Color.black);
-    }
 
-    public void setPaused(boolean paused) {
-        this.paused = paused;
-    }
+    @Override
+    public void setBackground(Color bgColor) { super.setBackground(Color.black);}
+
+    public void setPaused(boolean paused) {this.paused = paused;}
 
     @Override
     protected void paintForeground(Graphics2D g) {
         super.paintForeground(g);
-        if (shotsIcon) {
-        player.Shots(g);}
+        if (shotsIcon) { player.Shots(g);}
         if (paused) {
             g.setColor(Color.white);
             g.setFont(new Font("Arial", Font.BOLD, 30));
@@ -74,10 +68,7 @@ public class GameWorldBackground extends UserView {
         g.drawString(text,190,12);
         if (Enemies_left) {
             g.setFont(new Font("Arial", Font.BOLD, 20));
-            g.drawString(
-                    "Enemies left: " + Raider_Enemy.getEnemies_left_L2(),
-                    1,
-                    75);
+            g.drawString("Enemies left: " + Raider_Enemy.getEnemies_left_L2(), 1, 75);
         }
         float playerX = player.getPosition().x;
 
@@ -85,7 +76,7 @@ public class GameWorldBackground extends UserView {
         g.setFont(new Font("Arial", Font.PLAIN, 18));
 
         if (playerX > -5 && playerX < 15) {
-            g.drawString("As you progress in levels, expect some surprises, P = pause", 150, 150);
+            g.drawString("As you progress in levels, expect some surprises", 125, 150);
         }
 
     }

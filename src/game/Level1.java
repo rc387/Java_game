@@ -22,7 +22,7 @@ public class Level1 extends GameWorld {
         player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
-        GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage(),player,"W = jump, A = left, S = shield, D = right, Enter = attack",false,false); //Initialises the width and height of object view.
+        GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage(),player,"As you progress in levels, expect some surprises",false,false); //Initialises the width and height of object view.
 
         Gangster_Enemy npcGangsta = new Gangster_Enemy(this, 44,69,1); // Initialises the leftBound & rightBound of the object npcGangsta.
         npcGangsta.setPosition(new Vec2(68, -14));
@@ -48,7 +48,7 @@ public class Level1 extends GameWorld {
 
         platformShape = new BoxShape(5.5f, 0.5f);
         platform = new StaticBody(this, platformShape);
-        platform.setPosition(new Vec2(32.5f, -10.5f));
+        platform.setPosition(new Vec2(33.5f, -10.5f));
         platform.addImage(new BodyImage("data/platform(1).png", 9));
 
         platformShape = new BoxShape(7.5f, 1);
@@ -178,11 +178,23 @@ public class Level1 extends GameWorld {
         GoldCoinBody.setPosition(new Vec2(286, 2.5f));
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
 
+        Hearts heart = new Hearts(this);
+        heart.setPosition(new Vec2(20, -4));
+        heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
+        int x1 = 30;
+        for (int i = 0; i < 15; i++) {
+            x1 = x1 + 15;
+            heart = new Hearts(this);
+            heart.setPosition(new Vec2(x1 + 40, 5.5f)); heart.setAngle(0f); heart.setAngularVelocity(0f);
+            heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
+        }
+
         setGravity(9.8f);
 
         final JFrame frame = new JFrame("Level 1");
         frame.add(view); frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frame.setLocationByPlatform(true);
         frame.setResizable(false); frame.pack(); frame.setVisible(true); frame.setBackground(Color.BLACK);
+        frame.repaint(); frame.revalidate();
         final int[] frameCounter = {0}; // Initialises the array of integers used for frameCounter.
         final Timer[] runTimer = {null}; // Initialises the array of integers used for runTimer.
 
@@ -284,10 +296,8 @@ public class Level1 extends GameWorld {
                     }
                 } if (e.getKeyCode() == KeyEvent.VK_M) {
                     soundClip.pause();
-
                 } else if (e.getKeyCode() == KeyEvent.VK_U) {
                     soundClip.resume();
-
                 } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                     soundClip.setVolume(x[0] += 0.1);
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -298,16 +308,19 @@ public class Level1 extends GameWorld {
                     pauseState[0] = true;
                     view.setPaused(true);
                     soundClip.pause();
-
                     } else {
                         Level1.this.start();
                         pauseState[0] = false;
                         view.setPaused(false);
                         soundClip.resume();
                     }
+                } else if (e.getKeyCode() == KeyEvent.VK_R) {
+                        Level1.this.stop();
+                        levelTimer.stop();
+                        soundClip.close();
+                        frame.dispose();
+                        new Level1();
                 }
-
-
             }
 
             public void keyReleased(KeyEvent e) {
@@ -353,9 +366,8 @@ public class Level1 extends GameWorld {
 
         levelTimer = new Timer(1000, e -> { // Mimics the same timer in Background class.
             if(!pauseState[0]){
-            if (timeRemaining >= 0) {
-                timeRemaining--;
-            } else {
+            if (timeRemaining >= 0) {timeRemaining--;}
+            else {
                 levelTimer.stop(); // This timer actually affects the player if 0.
                 ((Timer)e.getSource()).stop();
                 player.loseLife(); // Calls the method loseLife in the Character class.
@@ -368,14 +380,11 @@ public class Level1 extends GameWorld {
         levelTimer.start();
 
 
+        Hearts finalHeart = heart;
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) { // Used to handle all horizontal movement for a dynamic object.
-                if (moveRight[0]) {
-                    player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
-                }
-                else if (moveLeft[0]) {
-                    player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
-                }
+                if (moveRight[0]) {player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));}
+                else if (moveLeft[0]) { player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));}
                 npcGangsta.update(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
                 npcGangsta1.update(); npcGangsta1.setAngle(0f); npcGangsta1.setAngularVelocity(0f);
                 npcGangsta2.update(); npcGangsta2.setAngle(0f); npcGangsta2.setAngularVelocity(0f);
@@ -392,12 +401,12 @@ public class Level1 extends GameWorld {
                 npcGangsta13.update(); npcGangsta13.setAngle(0f); npcGangsta13.setAngularVelocity(0f);
                 npcGangsta14.update(); npcGangsta14.setAngle(0f); npcGangsta14.setAngularVelocity(0f);
                 npcGangsta15.update(); npcGangsta15.setAngle(0f); npcGangsta15.setAngularVelocity(0f);
+                finalHeart.setAngle(0f); finalHeart.setAngularVelocity(0f);
                 view.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
                 if(player.getPosition().x > 275 && player.getPosition().y > -14.5f){
                     Level1.this.stop();
                     levelTimer.stop();
                     soundClip.close();
-
                     frame.dispose();
                     Level2.main();
                 }
@@ -408,8 +417,8 @@ public class Level1 extends GameWorld {
         });
         this.start();
     }
-    static void main(String[] args) {
+    static void main() {
         new Level1();
     }
-    }
+}
 

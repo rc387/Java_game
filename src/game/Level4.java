@@ -22,7 +22,7 @@ public class Level4 extends GameWorld {
         Character player = new Character(this); player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
-        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level4.jpg").getImage(),player,"Shots allowed!! Shots = Enter, shooting with 0 shots deducts a life",true, false);
+        GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level4.jpg").getImage(),player,"Shots allowed!! Shooting with 0 shots deducts a life",true, false);
 
         final JFrame frames = new JFrame("Level4"); frames.add(views); frames.pack(); frames.repaint();
         frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frames.setLocationByPlatform(true);
@@ -212,6 +212,18 @@ public class Level4 extends GameWorld {
             Bullet_L4.setPosition(new Vec2(x1 + 20, 5.5f)); Bullet_L4.setAngle(0f); Bullet_L4.setAngularVelocity(0f);
             Bullet_L4.addImage(new BodyImage("data/4.png",2));
         }
+
+        Hearts heart = new Hearts(this);
+        heart.setPosition(new Vec2(20, -4));
+        heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
+        int x2 = 30;
+        for (int i = 0; i < 15; i++) {
+            x2 = x2 + 15;
+            heart = new Hearts(this);
+            heart.setPosition(new Vec2(x2 + 40, 5.5f)); heart.setAngle(0f); heart.setAngularVelocity(0f);
+            heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
+        }
+
         setGravity(9.8f);
 
         final int[] frameCounter = {0};
@@ -400,7 +412,13 @@ public class Level4 extends GameWorld {
                         pauseState[0] = false;
                         views.setPaused(false);
                         Level4SoundClip.resume();
-                    }}
+                    }} else if (e.getKeyCode() == KeyEvent.VK_R) {
+                    Level4.this.stop();
+                    levelTimer.stop();
+                    Level4SoundClip.close();
+                    frames.dispose();
+                    new Level4();
+                }
             }
 
             public void keyReleased(KeyEvent e) {
@@ -457,26 +475,20 @@ public class Level4 extends GameWorld {
             if (timeRemaining >= 0) {
                 timeRemaining--;
             } else {
-                levelTimer.stop();
-                ((Timer)e.getSource()).stop();
-                player.loseLife(); player.loseLife(); player.loseLife();
-                player.playerDeath(); listener.setCanDamage(false);
+                levelTimer.stop(); ((Timer)e.getSource()).stop(); listener.setCanDamage(false);
+                player.loseLife(); player.loseLife(); player.loseLife(); player.playerDeath();
                 moveRight[0] = false; moveLeft[0] = false; canShoot[0] = false;
                 player.setLinearVelocity(new Vec2(0f,0f));
             }
         }});
         levelTimer.start();
 
-
         Bullets finalBullet_L = Bullet_L4;
+        Hearts finalHeart = heart;
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
-                if (moveRight[0]) {
-                    player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
-                }
-                else if (moveLeft[0]) {
-                    player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
-                }
+                if (moveRight[0]) { player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));}
+                else if (moveLeft[0]) { player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));}
                 npcGangsta.update_Level4(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
                 npcGangsta1.update_Level4(); npcGangsta1.setAngle(0f); npcGangsta1.setAngularVelocity(0f);
                 npcGangsta2.update_Level4(); npcGangsta2.setAngle(0f); npcGangsta2.setAngularVelocity(0f);
@@ -496,11 +508,9 @@ public class Level4 extends GameWorld {
                 dynamicPlatform2.update(); dynamicPlatform2.setAngle(0f); dynamicPlatform2.setAngularVelocity(0f);
                 dynamicPlatform3.update(); dynamicPlatform3.setAngle(0f); dynamicPlatform3.setAngularVelocity(0f);
                 dynamicPlatform4.update(); dynamicPlatform4.setAngle(0f); dynamicPlatform4.setAngularVelocity(0f);
+                finalHeart.setAngle(0); finalHeart.setAngularVelocity(0f);
                 if (bullet != null) {
-                    if (bullet.getPosition().x >= player.getPosition().x + 30) {
-                        bullet.destroyed();
-                        bullet = null;
-                    }
+                    if (bullet.getPosition().x >= player.getPosition().x + 30) { bullet.destroyed(); bullet = null;}
                 }
                 finalBullet_L.setAngle(0f); finalBullet_L.setAngularVelocity(0f);
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
@@ -508,9 +518,7 @@ public class Level4 extends GameWorld {
                     Level4.this.stop();
                     levelTimer.stop();
                     Level4SoundClip.close();
-
                     frames.dispose();
-
                 }
             }
 

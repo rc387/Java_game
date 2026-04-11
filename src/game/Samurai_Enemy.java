@@ -48,10 +48,8 @@ public class Samurai_Enemy extends Enemy {
 
     public void update_Level4(){
         float x = getPosition().x;
-        if (x > rightBound) direction = -1;
-        if (x < leftBound) direction = 1;
-        if (lives < 3 && x > rightBound) direction = -0.1f;
-        if (lives < 3 && x < leftBound) direction = 0.1f;
+        if (x > rightBound) direction = -1; if (x < leftBound) direction = 1;
+        if (lives < 3 && x > rightBound) direction = -0.1f; if (lives < 3 && x < leftBound) direction = 0.1f;
 
         setLinearVelocity(new Vec2(3 * direction, 0));
         animationTick++;
@@ -66,11 +64,9 @@ public class Samurai_Enemy extends Enemy {
 
     public void animate_Level4(){
         removeAllImages();
-        if (direction == -1) {
-            addImage(LeftWalkFrames4[frameCounter % LeftWalkFrames4.length]);
-        } else if (direction == 1) {
-            addImage(walkFrames4[frameCounter % walkFrames4.length]);
-        } else if(direction == -0.1f) {
+        if (direction == -1) { addImage(LeftWalkFrames4[frameCounter % LeftWalkFrames4.length]);}
+        else if (direction == 1) { addImage(walkFrames4[frameCounter % walkFrames4.length]);}
+        else if(direction == -0.1f) {
             frameCounter = (frameCounter + 1) % HurtFrames4.length;
             addImage(HurtFrames4[frameCounter % HurtFrames4.length]);
         } else if (direction == 0.1f) {

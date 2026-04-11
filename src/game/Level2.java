@@ -191,6 +191,17 @@ public class Level2 extends GameWorld {
 
         DeathShape deathShape = new DeathShape(this); deathShape.setPosition(new Vec2(-1, -100));
 
+        Hearts heart = new Hearts(this);
+        heart.setPosition(new Vec2(20, -4));
+        heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
+        int x1 = 30;
+        for (int i = 0; i < 15; i++) {
+            x1 = x1 + 15;
+            heart = new Hearts(this);
+            heart.setPosition(new Vec2(x1 + 40, 5.5f)); heart.setAngle(0f); heart.setAngularVelocity(0f);
+            heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
+        }
+
         setGravity(9.8f);
 
         final int[] frameCounter = {0};
@@ -308,7 +319,14 @@ public class Level2 extends GameWorld {
                         pauseState[0] = false;
                         views.setPaused(false);
                         Level2SoundClip.resume();
-                    }}}
+                    }
+                }else if (e.getKeyCode() == KeyEvent.VK_R) {
+                    Level2.this.stop();
+                    levelTimer.stop();
+                    Level2SoundClip.close();
+                    frames.dispose();
+                    new Level2();
+                }}
 
             public void keyReleased(KeyEvent e) {
                 if  (e.getKeyCode() == KeyEvent.VK_D) {
@@ -352,11 +370,9 @@ public class Level2 extends GameWorld {
         });
         levelTimer = new Timer(1000, e -> {
             if(!pauseState[0]) {
-            if (timeRemaining >= 0) {
-                timeRemaining--;
-            } else {
-                levelTimer.stop();
-                ((Timer)e.getSource()).stop();
+            if (timeRemaining >= 0) { timeRemaining--;}
+            else {
+                levelTimer.stop(); ((Timer)e.getSource()).stop();
                 player.loseLife(); player.loseLife(); player.loseLife(); player.playerDeath(); Level2SoundClip.close();
                 player.setLinearVelocity(new Vec2(0f,0f));
             }
@@ -364,14 +380,11 @@ public class Level2 extends GameWorld {
         levelTimer.start();
 
 
+        Hearts finalHeart = heart;
         this.addStepListener(new StepListener() {
             public void preStep(StepEvent e) {
-                if (moveRight[0]) {
-                    player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));
-                }
-                else if (moveLeft[0]) {
-                    player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));
-                }
+                if (moveRight[0]) { player.setLinearVelocity(new Vec2(10, player.getLinearVelocity().y));}
+                else if (moveLeft[0]) { player.setLinearVelocity(new Vec2(-10, player.getLinearVelocity().y));}
                 npcGangsta.update_Level2(); npcGangsta.setAngle(0f); npcGangsta.setAngularVelocity(0f);
                 npcGangsta1.update_Level2(); npcGangsta1.setAngle(0f); npcGangsta1.setAngularVelocity(0f);
                 npcGangsta2.update_Level2(); npcGangsta2.setAngle(0f); npcGangsta2.setAngularVelocity(0f);
@@ -394,11 +407,11 @@ public class Level2 extends GameWorld {
                 dynamicPlatform.update(); dynamicPlatform.setAngle(0f); dynamicPlatform.setAngularVelocity(0f);
                 dynamicPlatform2.update(); dynamicPlatform2.setAngle(0f); dynamicPlatform2.setAngularVelocity(0f);
                 dynamicPlatform3.update(); dynamicPlatform3.setAngle(0f); dynamicPlatform3.setAngularVelocity(0f);
+                finalHeart.setAngle(0); finalHeart.setAngularVelocity(0f);
                 if(player.getPosition().x > 285 && player.getPosition().y > -14.5f && Raider_Enemy.getEnemies_left_L2() == 0){
                     Level2.this.stop();
                     levelTimer.stop();
                     Level2SoundClip.close();
-
                     frames.dispose();
                     Level3.main();
                 }

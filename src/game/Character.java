@@ -22,17 +22,14 @@ public class Character extends DynamicBody  {
 
     public void loseLife() { // Used to deduct a life when method is called.
         lives--;
-        if (lives <= 0) {
-        playerDeath();
-        }
+        if (lives <= 0) { playerDeath();}
     }
 
-    public void gainLife(){
-        if (lives < 3){
-        lives++;}
+    public void gainLife(){ // Used to add a life when method is called.
+        if (lives < 3){ lives++;}
     }
 
-    public void gainLife_L4(){
+    public void gainLife_L4(){ // Called when the player has 5 shots available in Level4.
         lives++;
     }
 
@@ -42,44 +39,23 @@ public class Character extends DynamicBody  {
 
     private void setFixedRotation() {}
 
-    public void hearts(Graphics2D g) {
-        for(int i = 0; i < lives; i++){
-            g.drawImage(heart,i*50, i,50,50,null);
-        }
-    }
+    public void hearts(Graphics2D g) { // Used to show how many lives the player has.
+        for(int i = 0; i < lives; i++){ g.drawImage(heart,i*50, i,50,50,null);}}
 
     public void playerDeath(){ // Used to destroy the player.
         removeAllImages();
-        if(lives == 0){
-            destroy();
+        if(lives == 0){ destroy();}}
 
-
-        }
-
-    }
-
-    public void Shots(Graphics2D g){
+    public void Shots(Graphics2D g){ // Used to show how many shots the player has.
         int y = 55;
-        for(int i = 0; i < shots; i++){
-            g.drawImage(bullets,i*50,y,50,50,null);
-        }
-    }
+        for(int i = 0; i < shots; i++){ g.drawImage(bullets,i*50,y,50,50,null);}}
 
-    public void gainShots(){
+    public void gainShots(){ // Called when player makes contact with a shot icon.
         shots++;
-        if (shots % 5 == 0){
-            gainLife_L4();
-        }
-    }
+        if (shots % 5 == 0){ gainLife_L4();}}
 
-    public void loseShots(){
+    public void loseShots(){ // Called when the player shoots a shot.
         shots--;
-        if(shots <= 0){
-            loseLife();
-        }
-    }
-
-
-
+        if(shots <= 0){ loseLife();}}
 }
 // Author: Jonathan Ross
