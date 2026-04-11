@@ -19,7 +19,7 @@ public class Level1 extends GameWorld {
     public Level1()
     {
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(280f, 2));
+        player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage(),player,"W = jump, A = left, S = shield, D = right, Enter = attack",false,false); //Initialises the width and height of object view.
@@ -219,6 +219,7 @@ public class Level1 extends GameWorld {
         soundClip.setVolume(x[0]);
         final boolean[] moveRight = {false}; // Boolean flag used to determine if the player can move right or not.
         final boolean[] moveLeft = {false}; // Boolean flag used to determine if the player can move left or not.
+        final boolean[] pauseState = {false};
         PlayerCollision listener = new PlayerCollision(player); // Initialises the object listener.
         player.addCollisionListener(listener); // Used to allow the player's collisions to have an effect with other objects in game.
         SoundClip damage;
@@ -291,6 +292,19 @@ public class Level1 extends GameWorld {
                     soundClip.setVolume(x[0] += 0.1);
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     soundClip.setVolume(x[0] -= 0.1);
+                } else if (e.getKeyCode() == KeyEvent.VK_P) {
+                    if(!pauseState[0]) {
+                    Level1.this.stop();
+                    pauseState[0] = true;
+                    view.setPaused(true);
+                    soundClip.pause();
+
+                    } else {
+                        Level1.this.start();
+                        pauseState[0] = false;
+                        view.setPaused(false);
+                        soundClip.resume();
+                    }
                 }
 
 
@@ -338,6 +352,7 @@ public class Level1 extends GameWorld {
         });
 
         levelTimer = new Timer(1000, e -> { // Mimics the same timer in Background class.
+            if(!pauseState[0]){
             if (timeRemaining >= 0) {
                 timeRemaining--;
             } else {
@@ -349,7 +364,7 @@ public class Level1 extends GameWorld {
                 player.playerDeath(); // Calls the method playerDeath in the Character class.
                 player.setLinearVelocity(new Vec2(0f,0f)); soundClip.stop();
             }
-        });
+        }});
         levelTimer.start();
 
 

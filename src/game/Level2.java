@@ -228,7 +228,7 @@ public class Level2 extends GameWorld {
         Raider_Enemy.resetCount();
         Level2SoundClip.setVolume(x[0]);
         player.gainLife();
-        final boolean[] moveRight = {false}; final boolean[] moveLeft = {false};
+        final boolean[] moveRight = {false}; final boolean[] moveLeft = {false}; final boolean[] pauseState = {false};
         PlayerCollision listener = new PlayerCollision(player); player.addCollisionListener(listener);
         SoundClip damage;
         try {
@@ -297,7 +297,18 @@ public class Level2 extends GameWorld {
                     Level2SoundClip.setVolume(x[0] += 0.1);
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     Level2SoundClip.setVolume(x[0] -= 0.1);
-                }}
+                }else if (e.getKeyCode() == KeyEvent.VK_P) {
+                    if(!pauseState[0]) {
+                        Level2.this.stop();
+                        pauseState[0] = true;
+                        views.setPaused(true);
+                        Level2SoundClip.pause();
+                    } else {
+                        Level2.this.start();
+                        pauseState[0] = false;
+                        views.setPaused(false);
+                        Level2SoundClip.resume();
+                    }}}
 
             public void keyReleased(KeyEvent e) {
                 if  (e.getKeyCode() == KeyEvent.VK_D) {
@@ -340,6 +351,7 @@ public class Level2 extends GameWorld {
             }
         });
         levelTimer = new Timer(1000, e -> {
+            if(!pauseState[0]) {
             if (timeRemaining >= 0) {
                 timeRemaining--;
             } else {
@@ -348,7 +360,7 @@ public class Level2 extends GameWorld {
                 player.loseLife(); player.loseLife(); player.loseLife(); player.playerDeath(); Level2SoundClip.close();
                 player.setLinearVelocity(new Vec2(0f,0f));
             }
-        });
+        }});
         levelTimer.start();
 
 

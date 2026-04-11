@@ -224,8 +224,7 @@ public class Level3 extends GameWorld {
         final double[] z = {1};
         Level3SoundClip.setVolume(z[0]);
         player.gainLife();
-        final boolean[] moveRight = {false};
-        final boolean[] moveLeft = {false};
+        final boolean[] moveRight = {false}; final boolean[] moveLeft = {false}; final boolean[] pauseState = {false};
         PlayerCollision listener = new PlayerCollision(player);
         player.addCollisionListener(listener);
         SoundClip damage;
@@ -295,7 +294,18 @@ public class Level3 extends GameWorld {
                     Level3SoundClip.setVolume(z[0] += 0.1);
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     Level3SoundClip.setVolume(z[0] -= 0.1);
-                }
+                } else if (e.getKeyCode() == KeyEvent.VK_P) {
+                    if(!pauseState[0]) {
+                        Level3.this.stop();
+                        pauseState[0] = true;
+                        views.setPaused(true);
+                        Level3SoundClip.pause();
+                    } else {
+                        Level3.this.start();
+                        pauseState[0] = false;
+                        views.setPaused(false);
+                        Level3SoundClip.resume();
+                    }}
 
 
             }
@@ -341,6 +351,7 @@ public class Level3 extends GameWorld {
             }
         });
         levelTimer = new Timer(1000, e -> {
+            if(!pauseState[0]) {
             if (timeRemaining >= 0) {
                 timeRemaining--;
             } else {
@@ -350,7 +361,7 @@ public class Level3 extends GameWorld {
                 player.setLinearVelocity(new Vec2(0f,0f));
                 Level3SoundClip.close(); listener.setCanDamage(false);
             }
-        });
+        }});
         levelTimer.start();
 
         Enemy_attack finalStave = stave;

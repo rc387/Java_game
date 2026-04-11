@@ -13,6 +13,7 @@ public class GameWorldBackground extends UserView {
     private final String text;
     private final boolean shotsIcon;
     private final boolean Enemies_left;
+    private boolean paused = false;
 
     public GameWorldBackground(World w, int width, int height, Image background, Character player, String text, Boolean shotsIcon, Boolean Enemies_left) {
         super(w, width, height);
@@ -21,12 +22,15 @@ public class GameWorldBackground extends UserView {
         this.text = text;
         this.shotsIcon = shotsIcon;
         this.Enemies_left = Enemies_left;
+
         levelTimer = new Timer(1000, e -> { // Timer that's visible on screen.
-            if (timeRemaining >= 0) {
-                timeRemaining--;
-            } else {
-                levelTimer.stop();
-                ((Timer)e.getSource()).stop();
+            if (!paused) {
+                if (timeRemaining >= 0) {
+                    timeRemaining--;
+                } else {
+                    levelTimer.stop();
+                    ((Timer) e.getSource()).stop();
+                }
             }
             repaint();
         });
@@ -47,11 +51,21 @@ public class GameWorldBackground extends UserView {
     public void setBackground(Color bgColor) {
         super.setBackground(Color.black);
     }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
     @Override
     protected void paintForeground(Graphics2D g) {
         super.paintForeground(g);
         if (shotsIcon) {
         player.Shots(g);}
+        if (paused) {
+            g.setColor(Color.white);
+            g.setFont(new Font("Arial", Font.BOLD, 30));
+            g.drawString("Paused", 300, 150);
+        }
         player.hearts(g);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
@@ -68,10 +82,10 @@ public class GameWorldBackground extends UserView {
         float playerX = player.getPosition().x;
 
         g.setColor(Color.BLUE);
-        g.setFont(new Font("Arial", Font.BOLD, 18));
+        g.setFont(new Font("Arial", Font.PLAIN, 18));
 
         if (playerX > -5 && playerX < 15) {
-            g.drawString("As you progress in levels, expect some surprises", 150, 150);
+            g.drawString("As you progress in levels, expect some surprises, P = pause", 150, 150);
         }
 
     }
