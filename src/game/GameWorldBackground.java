@@ -54,7 +54,7 @@ public class GameWorldBackground extends UserView {
     @Override
     protected void paintForeground(Graphics2D g) {
         super.paintForeground(g);
-        if (shotsIcon) { player.Shots(g);}
+        if (shotsIcon) { player.Shots(g);} // Only visible in Level4.
         if (paused) {
             g.setColor(Color.white);
             g.setFont(new Font("Arial", Font.BOLD, 30));
@@ -66,19 +66,10 @@ public class GameWorldBackground extends UserView {
         g.drawString("Time: " + getTimeRemaining(), 545, 20);
         g.setFont(new Font("Arial", Font.BOLD, 12));
         g.drawString(text,190,12);
-        if (Enemies_left) {
+        if (Enemies_left) { // Only visible in Level2.
             g.setFont(new Font("Arial", Font.BOLD, 20));
             g.drawString("Enemies left: " + Raider_Enemy.getEnemies_left_L2(), 1, 75);
         }
-        float playerX = player.getPosition().x;
-
-        g.setColor(Color.BLUE);
-        g.setFont(new Font("Arial", Font.PLAIN, 18));
-
-        if (playerX > -5 && playerX < 15) {
-            g.drawString("As you progress in levels, expect some surprises", 125, 150);
-        }
-
     }
 }
 // Author: Jonathan Ross

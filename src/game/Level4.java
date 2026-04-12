@@ -169,7 +169,7 @@ public class Level4 extends GameWorld {
         platform.setPosition(new Vec2(270, -1f));
         platform.addImage(new BodyImage("data/snow_platform.png", 4f));
 
-        Shape characterShape = new BoxShape(1, 2f);
+        Shape characterShape = new BoxShape(1, 2f); // Appear at the end of the level for the game ending.
         StaticBody character = new StaticBody(this, characterShape);
         character.setPosition(new Vec2(271, 3.5f));
         character.addImage(new BodyImage("data/Fighter/Idle(1).png", 5.5f));
@@ -356,7 +356,7 @@ public class Level4 extends GameWorld {
                         runTimer[0].start();
                     }
                 } else if (e.getKeyCode() == KeyEvent.VK_SPACE && canShoot[0] && bullet == null) {
-                    canShoot[0] = false;
+                    canShoot[0] = false; // Used to make sure only 1 shot is fired at a time.
                     bullet = new Character_attack(world);
                     if (moveRight[0]){
                     bullet.setPosition(new Vec2(player.getPosition().x + 1, (player.getPosition().y+2 + player.getPosition().y)/2));
@@ -370,8 +370,8 @@ public class Level4 extends GameWorld {
                         bullet.setAngle(0f); bullet.setAngularVelocity(0f);
                         bullet.setLinearVelocity(new Vec2(15, 0));
                     }
-                    shot[0] = true;
-                    player.loseShots();
+                    shot[0] = true; // Allows the shot to be fired.
+                    player.loseShots(); // Calls that method so that the player will lose a shot.
                     player.setLinearVelocity(new Vec2(0f, 0f));
 
                     if (runTimer[0] == null) {
@@ -389,7 +389,7 @@ public class Level4 extends GameWorld {
                                 frameCounter[0] = (frameCounter[0] + 1) % shotFrames.length;
                             }
                         });
-                        runTimer[0].start();canShoot[0] = true;
+                        runTimer[0].start();canShoot[0] = true; // Allows another shot to whilst P key is still being pressed, after a delay.
                         new Timer(1000, ev -> canShoot[0] = true).start();
 
                 }
@@ -418,6 +418,8 @@ public class Level4 extends GameWorld {
                     Level4SoundClip.close();
                     frames.dispose();
                     new Level4();
+                } else if (e.getKeyCode() == KeyEvent.VK_Q) {
+                    MainMenu.main(new String[]{""});
                 }
             }
 
@@ -460,7 +462,7 @@ public class Level4 extends GameWorld {
                     player.setLinearVelocity(new Vec2(0, player.getLinearVelocity().y));
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    shot[0] = false;
+                    shot[0] = false; // Disallows a shot to be fired.
                     if (runTimer[0] != null) {
                         runTimer[0].stop();
                         runTimer[0] = null;

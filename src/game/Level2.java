@@ -46,7 +46,7 @@ public class Level2 extends GameWorld {
         platform.setPosition(new Vec2(20, -4.5f));
         platform.addImage(new BodyImage("data/platform_level2.png", 11.5f));
 
-        Dynamic_Platform dynamicPlatform = new Dynamic_Platform(this,40 ,-20,new BodyImage("data/platform_level2.png",10));
+        Dynamic_Platform dynamicPlatform = new Dynamic_Platform(this,40 ,-20,new BodyImage("data/platform_level2.png",10)); // Initialises the dynamicPlatform object.
         dynamicPlatform.setPosition(new Vec2(35, -5f));
         dynamicPlatform.setLinearVelocity(new Vec2(0, 0));
         dynamicPlatform.setAngularVelocity(0); dynamicPlatform.setAngle(0);
@@ -326,6 +326,8 @@ public class Level2 extends GameWorld {
                     Level2SoundClip.close();
                     frames.dispose();
                     new Level2();
+                }else if (e.getKeyCode() == KeyEvent.VK_Q) {
+                    MainMenu.main(new String[]{""});
                 }}
 
             public void keyReleased(KeyEvent e) {
@@ -408,7 +410,7 @@ public class Level2 extends GameWorld {
                 dynamicPlatform2.update(); dynamicPlatform2.setAngle(0f); dynamicPlatform2.setAngularVelocity(0f);
                 dynamicPlatform3.update(); dynamicPlatform3.setAngle(0f); dynamicPlatform3.setAngularVelocity(0f);
                 finalHeart.setAngle(0); finalHeart.setAngularVelocity(0f);
-                if(player.getPosition().x > 285 && player.getPosition().y > -14.5f && Raider_Enemy.getEnemies_left_L2() == 0){
+                if(player.getPosition().x > 285 && player.getPosition().y > -14.5f && Raider_Enemy.getEnemies_left_L2() == 0){ // Done so that every enemy has to be defeated before the level can be completed.
                     Level2.this.stop();
                     levelTimer.stop();
                     Level2SoundClip.close();

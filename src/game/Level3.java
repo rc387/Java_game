@@ -18,7 +18,7 @@ public class Level3 extends GameWorld {
     private SoundClip Level3SoundClip;
     public Level3(){
         Character player = new Character(this);
-        player.setPosition(new Vec2(260f, 2)); player.setLinearVelocity(new Vec2(0, 0));
+        player.setPosition(new Vec2(-7.25f, 2)); player.setLinearVelocity(new Vec2(0, 0));
         player.setAngularVelocity(0); player.setAngle(0);
 
         GameWorldBackground views = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1)_level3.jpg").getImage(),player,"Expect surprise zoom ins & screen rotations!!",false,false);
@@ -322,6 +322,8 @@ public class Level3 extends GameWorld {
                     Level3SoundClip.close();
                     frames.dispose();
                     new Level3();
+                } else if (e.getKeyCode() == KeyEvent.VK_Q) {
+                    MainMenu.main(new String[]{""});
                 }
 
 
@@ -410,7 +412,7 @@ public class Level3 extends GameWorld {
                 views.setCentre(player.getPosition()); player.setAngle(0f); player.setAngularVelocity(0f);
                 views.setZoom(10f);
 
-                if(player.getPosition().x > 30 && player.getPosition().x < 50){ views.setZoom(30f);}
+                if(player.getPosition().x > 30 && player.getPosition().x < 50){ views.setZoom(30f);} // Used to zoom the view on the character depending on their x.pos.
                 else if (player.getPosition().x > 152 && player.getPosition().x < 165) { views.setZoom(-23f);}
                 else if (player.getPosition().x > 177 && player.getPosition().x < 197) { views.setZoom(17f);}
                 else if (player.getPosition().x > 214 && player.getPosition().x < 233) { views.setZoom(-41f);}

@@ -178,7 +178,7 @@ public class Level1 extends GameWorld {
         GoldCoinBody.setPosition(new Vec2(286, 2.5f));
         GoldCoinBody.addImage(new BodyImage("data/PNG/Gold/Gold_21.png", 5));
 
-        Hearts heart = new Hearts(this);
+        Hearts heart = new Hearts(this); // Initialises the object heart.
         heart.setPosition(new Vec2(20, -4));
         heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
         int x1 = 30;
@@ -231,7 +231,7 @@ public class Level1 extends GameWorld {
         soundClip.setVolume(x[0]);
         final boolean[] moveRight = {false}; // Boolean flag used to determine if the player can move right or not.
         final boolean[] moveLeft = {false}; // Boolean flag used to determine if the player can move left or not.
-        final boolean[] pauseState = {false};
+        final boolean[] pauseState = {false}; // Boolean flag used to determine if the game has been paused or not.
         PlayerCollision listener = new PlayerCollision(player); // Initialises the object listener.
         player.addCollisionListener(listener); // Used to allow the player's collisions to have an effect with other objects in game.
         SoundClip damage;
@@ -241,10 +241,10 @@ public class Level1 extends GameWorld {
             throw new RuntimeException(e);
         }
         listener.setLevelSoundClip(damage);
-        frame.addKeyListener(new KeyAdapter() { //Used to allow key inputs to affect the player image.
+        frame.addKeyListener(new  KeyAdapter() { //Used to allow key inputs to affect the player image.
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveRight[0] = true; // Used to make moveRight false when player reaches the end of the level.
+                    moveRight[0] = true;
                     if (runTimer[0] == null) { // Used to keep the animation running whilst the D key is pressed.
                         frameCounter[0] = 0;
                         runTimer[0] = new Timer(75, _ -> { // Used to make the animation speed look presentable.
@@ -320,6 +320,8 @@ public class Level1 extends GameWorld {
                         soundClip.close();
                         frame.dispose();
                         new Level1();
+                } else if (e.getKeyCode() == KeyEvent.VK_Q) {
+                    MainMenu.main(new String[]{""}); // Used to call the main menu class.
                 }
             }
 
@@ -365,7 +367,7 @@ public class Level1 extends GameWorld {
         });
 
         levelTimer = new Timer(1000, e -> { // Mimics the same timer in Background class.
-            if(!pauseState[0]){
+            if(!pauseState[0]){ // Used to stop the timer if the game is paused.
             if (timeRemaining >= 0) {timeRemaining--;}
             else {
                 levelTimer.stop(); // This timer actually affects the player if 0.
