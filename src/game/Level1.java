@@ -19,7 +19,7 @@ public class Level1 extends GameWorld {
     public Level1()
     {
         Character player = new Character(this); // Initialises the object player.
-        player.setPosition(new Vec2(280f, 2));
+        player.setPosition(new Vec2(-7.25f, 2));
         player.setLinearVelocity(new Vec2(0, 0)); player.setAngularVelocity(0); player.setAngle(0);
 
         GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage(),player,"As you progress in levels, expect some surprises",false,false); //Initialises the width and height of object view.
