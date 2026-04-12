@@ -24,8 +24,8 @@ public class Level1 extends GameWorld {
 
         GameWorldBackground view = new GameWorldBackground(this,640,595,new ImageIcon("data/background(1).jpg").getImage(),player,"As you progress in levels, expect some surprises",false,false); //Initialises the width and height of object view.
 
-        Gangster_Enemy npcGangsta = new Gangster_Enemy(this, 44,69,1); // Initialises the leftBound & rightBound of the object npcGangsta.
-        npcGangsta.setPosition(new Vec2(68, -14));
+        Gangster_Enemy npcGangsta = new Gangster_Enemy(this, 44,68,1); // Initialises the leftBound & rightBound of the object npcGangsta.
+        npcGangsta.setPosition(new Vec2(67, -14));
         npcGangsta.setLinearVelocity(new Vec2(0, 0)); npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0);
 
         DeathShape deathShape = new DeathShape(this); // Initialises the object deathShape.
