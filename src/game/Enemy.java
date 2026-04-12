@@ -2,7 +2,7 @@ package game;
 import city.cs.engine.*;
 
 public abstract class Enemy extends DynamicBody implements CollisionListener {
-    private static final Shape CharacterShape = new BoxShape(1f, 2.5f);
+    private static final Shape CharacterShape = new BoxShape(0.7f, 2.5f);
     private static final BodyImage image = new BodyImage("data/Gangsters_2/Idle(1).png", 5.5f);
     protected float leftBound;
     protected float rightBound;

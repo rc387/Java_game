@@ -26,11 +26,7 @@ public class Character extends DynamicBody  {
     }
 
     public void gainLife(){ // Used to add a life when method is called.
-        if (lives < 3){ lives++;}
-    }
-
-    public void gainLife_L4(){ // Called when the player has 5 shots available in Level4.
-        lives++;
+         lives++;
     }
 
     public static void shieldLife(){
@@ -52,7 +48,7 @@ public class Character extends DynamicBody  {
 
     public void gainShots(){ // Called when player makes contact with a shot icon.
         shots++;
-        if (shots % 5 == 0){ gainLife_L4();}}
+        if (shots % 5 == 0){ gainLife();}}
 
     public void loseShots(){ // Called when the player shoots a shot.
         shots--;

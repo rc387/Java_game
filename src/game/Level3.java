@@ -39,11 +39,11 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(20, -4f));
         platform.addImage(new BodyImage("data/platform_level3.png", 11.5f));
 
-        Zombie_Enemy npcGangsta = new Zombie_Enemy(this, 15, 18,3);
+        Zombie_Enemy npcGangsta = new Zombie_Enemy(this, 15, 18,2);
         npcGangsta.setPosition(new Vec2(16, -2f));
         npcGangsta.setAngularVelocity(0); npcGangsta.setAngle(0); npcGangsta.addCollisionListener(npcGangsta);
 
-        Zombie_Enemy npcGangsta1 = new Zombie_Enemy(this, 21, 24.5f,3);
+        Zombie_Enemy npcGangsta1 = new Zombie_Enemy(this, 21, 24.5f,2);
         npcGangsta1.setPosition(new Vec2(22, -2f));
         npcGangsta1.setAngularVelocity(0); npcGangsta1.setAngle(0); npcGangsta1.addCollisionListener(npcGangsta);
 
@@ -56,11 +56,11 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(55, -12f));
         platform.addImage(new BodyImage("data/platform_level3.png", 12f));
 
-        Zombie_Enemy npcGangsta2 = new Zombie_Enemy(this, 50, 54f,3);
+        Zombie_Enemy npcGangsta2 = new Zombie_Enemy(this, 50, 54f,2);
         npcGangsta2.setPosition(new Vec2(51, -10f));
         npcGangsta2.setAngularVelocity(0); npcGangsta2.setAngle(0); npcGangsta2.addCollisionListener(npcGangsta);
 
-        Zombie_Enemy npcGangsta3 = new Zombie_Enemy(this, 58f, 62f,3);
+        Zombie_Enemy npcGangsta3 = new Zombie_Enemy(this, 58f, 62f,2);
         npcGangsta3.setPosition(new Vec2(59f, -10f));
         npcGangsta3.setAngularVelocity(0); npcGangsta3.setAngle(0); npcGangsta3.addCollisionListener(npcGangsta);
 
@@ -72,11 +72,11 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(83, -3f));
         platform.addImage(new BodyImage("data/platform_level3.png", 10f));
 
-        Zombie_Enemy npcGangsta4 = new Zombie_Enemy(this, 78, 82f,3);
+        Zombie_Enemy npcGangsta4 = new Zombie_Enemy(this, 78, 82f,2);
         npcGangsta4.setPosition(new Vec2(79.5f, -1f));
         npcGangsta4.setAngularVelocity(0); npcGangsta4.setAngle(0); npcGangsta4.addCollisionListener(npcGangsta);
 
-        Zombie_Enemy npcGangsta5 = new Zombie_Enemy(this, 85f, 89f,3);
+        Zombie_Enemy npcGangsta5 = new Zombie_Enemy(this, 85f, 89f,2);
         npcGangsta5.setPosition(new Vec2(85f, -1f));
         npcGangsta5.setAngularVelocity(0); npcGangsta5.setAngle(0); npcGangsta5.addCollisionListener(npcGangsta);
 
@@ -89,11 +89,11 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(113, -14f));
         platform.addImage(new BodyImage("data/platform_level3.png", 13f));
 
-        Zombie_Enemy npcGangsta6 = new Zombie_Enemy(this, 105, 109,3);
+        Zombie_Enemy npcGangsta6 = new Zombie_Enemy(this, 105, 109,2);
         npcGangsta6.setPosition(new Vec2(106f, -12f));
         npcGangsta6.setAngularVelocity(0); npcGangsta6.setAngle(0); npcGangsta6.addCollisionListener(npcGangsta);
 
-        Zombie_Enemy npcGangsta7 = new Zombie_Enemy(this, 111f, 115f,3);
+        Zombie_Enemy npcGangsta7 = new Zombie_Enemy(this, 111f, 115f,2);
         npcGangsta7.setPosition(new Vec2(112f, -12f));
         npcGangsta7.setAngularVelocity(0); npcGangsta7.setAngle(0); npcGangsta7.addCollisionListener(npcGangsta);
 
@@ -101,7 +101,7 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(125, -9f));
         platform.addImage(new BodyImage("data/platform_level3.png", 7.5f));
 
-        Zombie_Enemy npcGangsta8 = new Zombie_Enemy(this, 121.5f, 125f,3);
+        Zombie_Enemy npcGangsta8 = new Zombie_Enemy(this, 121.5f, 125f,2);
         npcGangsta8.setPosition(new Vec2(120f, -7f));
         npcGangsta8.setAngularVelocity(0); npcGangsta8.setAngle(0); npcGangsta8.addCollisionListener(npcGangsta);
 
@@ -109,7 +109,7 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(135, -4f));
         platform.addImage(new BodyImage("data/platform_level3.png", 7.5f));
 
-        Zombie_Enemy npcGangsta9 = new Zombie_Enemy(this, 134.5f, 140f,3);
+        Zombie_Enemy npcGangsta9 = new Zombie_Enemy(this, 134.5f, 140f,2);
         npcGangsta9.setPosition(new Vec2(134f, -2f));
         npcGangsta9.setAngularVelocity(0); npcGangsta9.setAngle(0); npcGangsta9.addCollisionListener(npcGangsta);
 
@@ -117,11 +117,11 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(143, -13f));
         platform.addImage(new BodyImage("data/platform_level3.png", 12f));
 
-        Zombie_Enemy npcGangsta10 = new Zombie_Enemy(this, 138, 142f,3);
+        Zombie_Enemy npcGangsta10 = new Zombie_Enemy(this, 138, 142f,2);
         npcGangsta10.setPosition(new Vec2(139f, -11f));
         npcGangsta10.setAngularVelocity(0); npcGangsta10.setAngle(0); npcGangsta10.addCollisionListener(npcGangsta);
 
-        Zombie_Enemy npcGangsta11 = new Zombie_Enemy(this, 144f, 148f,3);
+        Zombie_Enemy npcGangsta11 = new Zombie_Enemy(this, 144f, 148f,2);
         npcGangsta11.setPosition(new Vec2(145f, -11f));
         npcGangsta11.setAngularVelocity(0); npcGangsta11.setAngle(0); npcGangsta11.addCollisionListener(npcGangsta);
 
@@ -134,7 +134,7 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(173, -6f));
         platform.addImage(new BodyImage("data/platform_level3.png", 11f));
 
-        Zombie_Enemy npcGangsta12 = new Zombie_Enemy(this, 167, 170,3);
+        Zombie_Enemy npcGangsta12 = new Zombie_Enemy(this, 167, 170,2);
         npcGangsta12.setPosition(new Vec2(168.5f, -4f));
         npcGangsta12.setAngularVelocity(0); npcGangsta12.setAngle(0); npcGangsta12.addCollisionListener(npcGangsta);
 
@@ -151,11 +151,11 @@ public class Level3 extends GameWorld {
         platform = new StaticBody(this, platformShape); platform.setPosition(new Vec2(215, -14f));
         platform.addImage(new BodyImage("data/platform_level3.png", 14f));
 
-        Zombie_Enemy npcGangsta13 = new Zombie_Enemy(this, 206.5f, 208.2f,3);
+        Zombie_Enemy npcGangsta13 = new Zombie_Enemy(this, 206.5f, 208.2f,2);
         npcGangsta13.setPosition(new Vec2(207.5f, -12f));
         npcGangsta13.setAngularVelocity(0); npcGangsta13.setAngle(0); npcGangsta13.addCollisionListener(npcGangsta);
 
-        Zombie_Enemy npcGangsta14 = new Zombie_Enemy(this, 218.5f, 220.5f,3);
+        Zombie_Enemy npcGangsta14 = new Zombie_Enemy(this, 218.5f, 220.5f,2);
         npcGangsta14.setPosition(new Vec2(219.5f, -12f));
         npcGangsta14.setAngularVelocity(0); npcGangsta14.setAngle(0); npcGangsta14.addCollisionListener(npcGangsta);
 
@@ -174,10 +174,10 @@ public class Level3 extends GameWorld {
         Enemy_attack stave = new Enemy_attack(this);
         stave.setPosition(new Vec2(15f, 100f)); stave.setAngle(0f); stave.setAngularVelocity(0f);
         int x = 30; int y = 175;
-        for (int i = 0; i < 35; i++) {
-            x = x + 5;
+        for (int i = 0; i < 30; i++) {
+            x = x + 15;
             stave = new Enemy_attack(this);
-            stave.setPosition(new Vec2(x+ 7.5f, y + 50 ));
+            stave.setPosition(new Vec2(x+ 17.5f, y + 50 ));
         }
 
         Flag flagImage = new Flag(this); flagImage.setPosition(new Vec2(250, -10));

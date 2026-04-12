@@ -218,9 +218,9 @@ public class Level4 extends GameWorld {
         heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
         int x2 = 30;
         for (int i = 0; i < 15; i++) {
-            x2 = x2 + 15;
+            x2 = x2 + 10;
             heart = new Hearts(this);
-            heart.setPosition(new Vec2(x2 + 40, 5.5f)); heart.setAngle(0f); heart.setAngularVelocity(0f);
+            heart.setPosition(new Vec2(x2 + 30, 5.5f)); heart.setAngle(0f); heart.setAngularVelocity(0f);
             heart.addImage(new BodyImage("data/PNG/Bronze/Bronze_11.png",1.5f));
         }
 

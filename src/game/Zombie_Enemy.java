@@ -47,14 +47,14 @@ public class Zombie_Enemy extends Enemy {
     public void update_Level3(){
         float x = getPosition().x;
         if (x > rightBound) direction = -1; if (x < leftBound) direction = 1;
-        if (lives < 3 && x > rightBound) direction = -0.1f; if (lives < 3 && x < leftBound) direction = 0.1f;
+        if (lives == 1 && x > rightBound) direction = -0f; if (lives == 1 && x < leftBound) direction = 0f;
 
-        setLinearVelocity(new Vec2(3 * direction, 0));
+        setLinearVelocity(new Vec2(2f * direction, 0));
         animationTick++; // Used to control the speed of the animation.
         if (direction == 1 || direction == -1) {
             if (animationTick % 10 == 0) { // Use of AI:animationTick, to control the speed of the animation using modulus.
                 animate_Level3();
-            }} else if (direction == 0.1f || direction == -0.1f) {
+            }} else if (direction == 0f || direction == -0f) {
             if (animationTick % 5 == 0) {
                 animate_Level3();
             }}
@@ -64,10 +64,10 @@ public class Zombie_Enemy extends Enemy {
         removeAllImages();
         if (direction == -1) { addImage(leftWalkFrames3[frameCounter % leftWalkFrames3.length]);}
         else if (direction == 1) { addImage(walkFrames3[frameCounter % walkFrames3.length]);}
-        else if(direction == -0.1f) {
+        else if(direction == -0f) {
             frameCounter = (frameCounter + 1) % hurtFrames3.length;
             addImage(hurtFrames3[frameCounter % hurtFrames3.length]);
-        } else if (direction == 0.1f) {
+        } else if (direction == 0f) {
             frameCounter = (frameCounter + 1) % leftHurtFrames3.length;
             addImage(leftHurtFrames3[frameCounter % leftHurtFrames3.length]);
         }

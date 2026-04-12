@@ -49,14 +49,14 @@ public class Samurai_Enemy extends Enemy {
     public void update_Level4(){
         float x = getPosition().x;
         if (x > rightBound) direction = -1; if (x < leftBound) direction = 1;
-        if (lives < 3 && x > rightBound) direction = -0.1f; if (lives < 3 && x < leftBound) direction = 0.1f;
+        if (lives < 3 && x > rightBound) direction = -0f; if (lives < 3 && x < leftBound) direction = 0f;
 
-        setLinearVelocity(new Vec2(3 * direction, 0));
+        setLinearVelocity(new Vec2(2f * direction, 0));
         animationTick++;
         if (direction == 1 || direction == -1) {
             if (animationTick % 10 == 0) { // Use of AI:animationTick, to control the speed of the animation using modulus.
                 animate_Level4();
-            }} else if (direction == 0.1f || direction == -0.1f) {
+            }} else if (direction == 0f || direction == -0f) {
             if (animationTick % 5 == 0) {
                 animate_Level4();
             }}
@@ -66,10 +66,10 @@ public class Samurai_Enemy extends Enemy {
         removeAllImages();
         if (direction == -1) { addImage(LeftWalkFrames4[frameCounter % LeftWalkFrames4.length]);}
         else if (direction == 1) { addImage(walkFrames4[frameCounter % walkFrames4.length]);}
-        else if(direction == -0.1f) {
+        else if(direction == -0f) {
             frameCounter = (frameCounter + 1) % HurtFrames4.length;
             addImage(HurtFrames4[frameCounter % HurtFrames4.length]);
-        } else if (direction == 0.1f) {
+        } else if (direction == 0f) {
             frameCounter = (frameCounter + 1) % LeftHurtFrames4.length;
             addImage(LeftHurtFrames4[frameCounter % LeftHurtFrames4.length]);
         }

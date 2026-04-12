@@ -46,23 +46,24 @@ public class PlayerCollision implements CollisionListener {
             canJump = true; // Allows the player to only jump whilst being in contact with a platform.
         } else if (e.getOtherBody() instanceof Dynamic_Platform) {
             canJump = true;
-        } else if (e.getOtherBody() instanceof Enemy enemy) { // Used to allow the enemy is take damage when collision occurs.
-            if (canDamage){
+        } else if (e.getOtherBody() instanceof Enemy enemy && canDamage ) { // Used to allow the enemy is take damage when collision occurs.
             enemy.lose_Life();
             canDamage = false; // Used to make sure the enemy only takes damage once upon collision.
             if (DamageSoundClip != null) { // Played when an enemy takes damage.
                 DamageSoundClip.play();
-            }}
+            }
             if (shield){
                 Character.shieldLife();
             }
-        } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage ) {// Used to allow the player is take damage when collision occurs.
+        } else if (e.getOtherBody() instanceof Enemy && !shield && !canDamage && canTakeDamage ) {// Used to allow the player is take damage when collision occurs.
             player.loseLife();
             canTakeDamage = false; // Used to make sure the player only takes damage once upon collision.
-        } else if (e.getOtherBody() instanceof Enemy_attack enemyAttack && !shield && !canDamage ) {
+            new Timer(1000, ev -> canTakeDamage = true).start();
+        } else if (e.getOtherBody() instanceof Enemy_attack enemyAttack && !shield && !canDamage && canTakeDamage ) {
             player.loseLife();
             canTakeDamage = false;
             enemyAttack.destroyed();
+            new Timer(1000, ev -> canTakeDamage = true).start();
         } else if (e.getOtherBody() instanceof Bullets bullet) {
             player.gainShots();
             bullet.destroy();
